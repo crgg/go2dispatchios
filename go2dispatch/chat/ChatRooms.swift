@@ -16,10 +16,12 @@ struct ChatRooms: View {
     @State var isNewChat = false
     @State var isOpenChat =  false
     @State var chatNew : Chat = Chat.sampleChat[0]
-    
+    @State var showOverlay : Bool  = false
     var body: some View {
+       
         NavigationView {
             VStack {
+                
                 HStack {
                     SearchBar(text: $query)
                 }
@@ -59,21 +61,20 @@ struct ChatRooms: View {
             
             .navigationTitle("Chats")
             .navigationBarItems(trailing : Button(action: {
+                
                 self.isNewChat =  true
             })  {
                 Image(systemName: "square.and.pencil")
             }).sheet(isPresented: $isNewChat) {
                 NewChatView(isNewChat: $isNewChat,chatNew: $chatNew, isOpenChat: $isOpenChat).environmentObject(viewmodel)
-            }
-            
-         
-               
-             
+            }.overlay(overlayView: Banner.init(data: Banner.BannerDataModel(title: "Title", detail: "your message", type: .success), show: $showOverlay)
+                      , show: $showOverlay)
             
         }
         .onAppear {
             print("Entramos a View")
             viewmodel.fetchUsers()
+            self.showOverlay =  viewmodel.getIsNewMessage()
            
         }
     }

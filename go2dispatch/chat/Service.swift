@@ -17,7 +17,9 @@ final class Service : ObservableObject {
                                                  .extraHeaders(["Authorization":"VhCxBC3c1a9jSmoJAdhtvGj6lBtKfPGoXVGSTCMoYOzeEAkchbzjmvHxBQx6"])])
     @Published var messages = [String]()
     @Published var online = [String]()
-   
+    @Published var isNewMessage = false
+    @Published var message_txt = false
+    
     var socket: SocketIOClient?
     
     init() {
@@ -67,17 +69,17 @@ final class Service : ObservableObject {
         
         socket?.on("newIdMessage") {  data , ack in
             
-            
             if let dict  = data[0] as? [String : Any] {
                 if let user = dict["user"] as? String {
                     if let message = dict["message"]  as? String {
                         
                        print("🇨🇱 user \(user) Message \(message)")
+                        self.isNewMessage =  true
 
                     }
                 }
             }
-//            }
+
         }
         
         
@@ -99,7 +101,7 @@ final class Service : ObservableObject {
         print("\(Date()) 🎯 connected")
         
         let param2 = ["username" : "RAMON",
-                      "type" : "dispatcher"]
+                      "type" : "dispatch"]
         print( "\(Date()) 🎯 chatRoom: emit set user")
         socket?.emit("setUser", param2,"s");
         

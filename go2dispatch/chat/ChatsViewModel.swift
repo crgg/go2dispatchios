@@ -13,7 +13,8 @@ class ChatsViewModel: ObservableObject {
     
     @Published var chats = [Chat]()
     @Published var chatsDriverAll = [Chat]()
-    
+    @Published var isNewMessage = true
+    @Published var message_txt = ""
     
     @ObservedObject var service = Service()
     
@@ -188,6 +189,10 @@ class ChatsViewModel: ObservableObject {
             return message
         }
         return nil
+    }
+    
+    func getIsNewMessage() -> Bool {
+        return isNewMessage
     }
     
 }
