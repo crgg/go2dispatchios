@@ -34,6 +34,8 @@
 		9B2C9ABF26D9877B00D80185 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C9ABE26D9877B00D80185 /* Extensions.swift */; };
 		9B3B333926FEA59C0051511D /* MyAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3B333826FEA59C0051511D /* MyAppDelegate.swift */; };
 		9B7FBB7E271E6254004629A7 /* AlertToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7FBB7D271E6254004629A7 /* AlertToast.swift */; };
+		9BB878DD272A459700B7D95B /* GetLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB878DC272A459700B7D95B /* GetLocation.swift */; };
+		9BB878DF272A45F000B7D95B /* TimeClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB878DE272A45F000B7D95B /* TimeClockView.swift */; };
 		9BBE74B5270293BD009F85D2 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 9BBE74B4270293BD009F85D2 /* iPhoneNumberField */; };
 		9BBE74B7270299D0009F85D2 /* CodeVerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE74B6270299D0009F85D2 /* CodeVerifyView.swift */; };
 		9BBE74B927039AA0009F85D2 /* TextFieldManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE74B827039AA0009F85D2 /* TextFieldManager.swift */; };
@@ -78,6 +80,8 @@
 		9B3B333726FEA4A60051511D /* go2dispatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = go2dispatch.entitlements; sourceTree = "<group>"; };
 		9B3B333826FEA59C0051511D /* MyAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppDelegate.swift; sourceTree = "<group>"; };
 		9B7FBB7D271E6254004629A7 /* AlertToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertToast.swift; sourceTree = "<group>"; };
+		9BB878DC272A459700B7D95B /* GetLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLocation.swift; sourceTree = "<group>"; };
+		9BB878DE272A45F000B7D95B /* TimeClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeClockView.swift; sourceTree = "<group>"; };
 		9BBE74B6270299D0009F85D2 /* CodeVerifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeVerifyView.swift; sourceTree = "<group>"; };
 		9BBE74B827039AA0009F85D2 /* TextFieldManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldManager.swift; sourceTree = "<group>"; };
 		9BBE74BA2703F1A7009F85D2 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
@@ -196,6 +200,15 @@
 			path = camera;
 			sourceTree = "<group>";
 		};
+		9BB878DB272A453D00B7D95B /* timeclock */ = {
+			isa = PBXGroup;
+			children = (
+				9BB878DC272A459700B7D95B /* GetLocation.swift */,
+				9BB878DE272A45F000B7D95B /* TimeClockView.swift */,
+			);
+			path = timeclock;
+			sourceTree = "<group>";
+		};
 		9BBE74C027052813009F85D2 /* chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +247,7 @@
 		9BF040D526B8A95200A08890 /* go2dispatch */ = {
 			isa = PBXGroup;
 			children = (
+				9BB878DB272A453D00B7D95B /* timeclock */,
 				9BBE74C027052813009F85D2 /* chat */,
 				9B2C9ABD26D9875800D80185 /* extension */,
 				9B3B333826FEA59C0051511D /* MyAppDelegate.swift */,
@@ -360,6 +374,7 @@
 				9BBE74C427053237009F85D2 /*  Date+Helpers.swift in Sources */,
 				9B2C9AAB26D7407500D80185 /* ProfilView.swift in Sources */,
 				9B2C9A9126D6BAF500D80185 /* ChatRooms.swift in Sources */,
+				9BB878DF272A45F000B7D95B /* TimeClockView.swift in Sources */,
 				9B2C9A9726D6CE8800D80185 /* ViewModel.swift in Sources */,
 				9B2C9A9F26D6E70D00D80185 /* GameView.swift in Sources */,
 				9B2C9AB526D811BB00D80185 /* LoginView.swift in Sources */,
@@ -374,6 +389,7 @@
 				9BBE74BB2703F1A7009F85D2 /* Tools.swift in Sources */,
 				9BBE74B7270299D0009F85D2 /* CodeVerifyView.swift in Sources */,
 				9B2C9ABA26D8136E00D80185 /* UserModel.swift in Sources */,
+				9BB878DD272A459700B7D95B /* GetLocation.swift in Sources */,
 				9BBE74BF2705280A009F85D2 /* ChatRow.swift in Sources */,
 				9B2C9AA526D72CFF00D80185 /* SearchGame.swift in Sources */,
 				9BF040D726B8A95200A08890 /* go2dispatchApp.swift in Sources */,
