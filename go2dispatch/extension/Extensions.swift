@@ -33,6 +33,13 @@ extension UserDefaults {
         //synchronize()
     }
     
+    func getLoggedIn() -> Bool {
+        return object(forKey:  UserDefaultsKeys.isLoggedIn.rawValue) as? Bool ?? false
+        //synchronize()
+    }
+    
+    
+    
     func setVeryCode(_ value : Bool) {
         set(value, forKey: UserDefaultsKeys.isVeryCode.rawValue)
     }
@@ -124,5 +131,26 @@ extension View {
             self
         }
     }
+}
+
+extension URLRequest {
+    
+    init(_ urlctm: URL) {
+               self.init(url: urlctm)
+               self.setValue("application/json", forHTTPHeaderField: "Content-Type")
+               self.setValue("application/json", forHTTPHeaderField: "Accept")
+               
+        
+           }
+    
+    
+    init(_ url: URL, apiToken: String) {
+               self.init(url: url)
+               self.setValue("application/json", forHTTPHeaderField: "Content-Type")
+               self.setValue("application/json", forHTTPHeaderField: "Accept")
+               self.setValue("Bearer \(apiToken)", forHTTPHeaderField:"Authorization" )
+        
+           }
+    
 }
 

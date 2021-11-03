@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
-
+import CoreData
 @main
 struct go2dispatchApp: App {
     @Environment (\.scenePhase) var scenePhase
-    
+    let persistenceContainer = PersistenceController.shared 
     @UIApplicationDelegateAdaptor(MyAppDelegate.self) private var appDelegate
 
     init() {
@@ -23,10 +23,20 @@ struct go2dispatchApp: App {
          
             let veryCode = UserDefaults.standard.getVeryCode()
             if veryCode {
-                CodeVerifyView()
+                CodeVerifyView().environment(\.managedObjectContext, persistenceContainer.container.viewContext) // <- and here <-
+
             } else {
-//             ContentView()
-                ChatRooms()
+                
+                if UserDefaults.standard.getLoggedIn() {
+                    Home().environment(\.managedObjectContext, persistenceContainer.container.viewContext) // <- and here <-
+
+                     
+                } else {
+                      ContentView().environment(\.managedObjectContext, persistenceContainer.container.viewContext) // <- and here <-
+
+                }
+//                ChatRooms()
+//                TimeClockView()
             }
         }.onChange(of: scenePhase) { phase in
             print(phase)

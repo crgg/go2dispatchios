@@ -24,7 +24,7 @@ class ApiChat {
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("e66a4017339c1a3339c309c8605ee169", forHTTPHeaderField: "Authorization")
+        request.setValue(apiToken ?? "", forHTTPHeaderField: "Authorization")
  
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -34,6 +34,11 @@ class ApiChat {
                     let decodeData = try JSONDecoder().decode(DriverUsers.self , from : jsonData)
                     print(decodeData.data.first ?? "")
                     handler(true, "success", decodeData.data)
+                    let s = Chata_data()
+                    DispatchQueue.main.async {
+                        s.save_users(driver_users: decodeData.data)
+                    }
+                    
                     return
                 }
             } catch let err {
@@ -73,7 +78,7 @@ class ApiChat {
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("e66a4017339c1a3339c309c8605ee169", forHTTPHeaderField: "Authorization")
+        request.setValue(apiToken ?? "", forHTTPHeaderField: "Authorization")
  
         URLSession.shared.dataTask(with: request) { data, response, error in
             

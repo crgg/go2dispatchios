@@ -53,5 +53,11 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>this app uses your Microphone to allow Voice over IP communication with the Program Admin system</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>this app uses your Microphone to allow Voice over IP communication with the Program Admin system</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>this app uses your Microphone to allow Voice over IP communication with the Program Admin system</string>
 </dict>
 </plist>

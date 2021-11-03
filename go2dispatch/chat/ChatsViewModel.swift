@@ -17,7 +17,7 @@ class ChatsViewModel: ObservableObject {
     @Published var message_txt = ""
     
     @ObservedObject var service = Service()
-    
+ 
     init() {
 //        fetchUsers()
     }

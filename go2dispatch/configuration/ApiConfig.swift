@@ -29,5 +29,13 @@ class ApiConfig {
     
     public static let URL_CODE_RESEND : String = "resend_code"
     
+    // Time clock urls
+    public static let LAST_TIME_CLOCK : String = "last_time_clock"
+    
+    public static let GET_LATEST_CLOCK_IN : String = "get_latest_clock_in"
+    
+    public static let DISPATCHER_CLOCK : String = "dispatcher_clock"
+    
+    
     
 }

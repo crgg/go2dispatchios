@@ -9,7 +9,7 @@ import SwiftUI
 import SocketIO
 
 struct ChatRooms: View {
-    
+   
     let chats = Chat.sampleChat
     @StateObject var viewmodel = ChatsViewModel()
     @State private var query = ""
@@ -17,34 +17,57 @@ struct ChatRooms: View {
     @State var isOpenChat =  false
     @State var chatNew : Chat = Chat.sampleChat[0]
     @State var showOverlay : Bool  = false
+    
+    init(){
+            UITableView.appearance().backgroundColor = .clear
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor(.white)]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor : UIColor(.white)]
+        }
+    
+    
     var body: some View {
        
+      
         NavigationView {
+            
+            ZStack {
+                Color("Marine").ignoresSafeArea()
+                    
             VStack {
-                
+               
                 HStack {
                     SearchBar(text: $query)
                 }
-                List {
-                    
-                    ForEach (viewmodel.getSortedFilteredChats(query: query)) { chat in
-                        //  HACK to hide the disclosure Arrow!
-                        ZStack {
-                            ChatRow(chat: chat)
-                            NavigationLink(
-                                destination: {
-                                    ChatView(chat: chat)
-                                        .environmentObject(viewmodel)
-                                })
-                            {
-                                EmptyView()
-                            }.buttonStyle(PlainButtonStyle())
-                                .frame(width: 0)
-                                .opacity(0)
-                            
+                    List {
+                        
+                        ForEach (viewmodel.getSortedFilteredChats(query: query)) { chat in
+                            //  HACK to hide the disclosure Arrow!
+                            ZStack {
+                               
+                                ChatRow(chat: chat)
+                                
+                                NavigationLink(
+                                    destination: {
+                                        ChatView(chat: chat)
+                                            .environmentObject(viewmodel)
+                                    })
+                                {
+                                    EmptyView()
+                                }.buttonStyle(PlainButtonStyle())
+                                    .frame(width: 0)
+                                    .opacity(0)
+                                  
+                                
+                            }
+                            .listRowInsets(EdgeInsets())
+                                
+                                
                         }
-                    }
-                }.listStyle(PlainListStyle())
+                    }.listStyle(PlainListStyle())
+                    
+                
+                    
+                     
                 NavigationLink(destination:
                        
                             ChatView(chat:  self.chatNew)
@@ -58,8 +81,9 @@ struct ChatRooms: View {
                     .frame(width: 0)
                     .opacity(0)
             }
-            
-            .navigationTitle("Chats")
+            }
+            .navigationBarTitle("Chats")
+            .navigationBarHidden(false)
             .navigationBarItems(trailing : Button(action: {
                 
                 self.isNewChat =  true
@@ -72,12 +96,18 @@ struct ChatRooms: View {
             
         }
         .onAppear {
+           
+            UITableView.appearance().backgroundColor = UIColor(named: "Marine")
             print("Entramos a View")
             viewmodel.fetchUsers()
-            self.showOverlay =  viewmodel.getIsNewMessage()
+//            self.showOverlay =  viewmodel.getIsNewMessage()
            
         }
     }
+    
+    
+
+    
 }
 
 struct chatRoom_Previews: PreviewProvider {

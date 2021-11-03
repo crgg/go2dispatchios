@@ -8,42 +8,113 @@
 import SwiftUI
 import AVKit
 struct Home: View {
-    @State var tabSelected : Int = 1
+    
+   
+    
+    @State var tabSelected : Int = 2
+    let tabBarImageNames = ["person", "message", "house",  "clock"]
+    @State var shouldShowModal = false
     var body: some View {
-        TabView (selection: $tabSelected) {
-            
-            ProfilView()
-                .tabItem {
-                    Image(systemName: "person")
-                    Text("Perfil")
-                }.tag(0)
-            
-            GamesView()
-                .tabItem {
-                    Image(systemName: "gamecontroller")
-                    Text("Game")
-                }.tag(2)
-            
-            ViewHome().tabItem {
-                Image(systemName: "house")
-                Text("Home")
-            }.tag(1)
-            
-            FavoritesView()
-                .tabItem {
-                    Image(systemName: "heart")
-                    Text("Favorites")
-                }.tag(0)
-            
-           
-            
-        }.accentColor(.white)
+            TabView (selection: $tabSelected) {
         
+                ProfilView()
+                    .tabItem {
+                        Label("Perfil", systemImage: "person")
+        
+                    }.tag(0)
+        
+                ViewHome().tabItem {
+                    Image(systemName: "house")
+                    Text("Home")
+                }.tag(1)
+                ChatRooms()
+                    .tabItem {
+                        Image(systemName: "message")
+                        Text("Chat")
+                    }.tag(2)
+        
+
+        
+                TimeClockView()
+                    .tabItem {
+                        Image(systemName: "clock")
+                        Text("Time Clock")
+                    }.tag(3)
+        
+        
+        
+            }.accentColor(.white)
+        //custum tabbar
+//        VStack {
+//            ZStack {
+//                Spacer().fullScreenCover(isPresented: $shouldShowModal,
+//                    content: {
+//                    Button {
+//                        shouldShowModal.toggle()
+//                    } label: {
+//                        Text("Fullscreen cover")
+//                    }
+//
+//
+//                })
+//
+//                switch tabSelected {
+//                case 0:
+//                    ProfilView()
+//                case 1:
+//                    ChatRooms()
+//
+//                case 2:
+//                    ScrollView {
+//                        Text("Test")
+//                    }
+//                case 3:
+//                    TimeClockView()
+//                default:
+//                    Text("Remaning tabs")
+//                }
+//            }
+//
+//            Spacer()
+//            Divider()
+//                .padding(.bottom, 8)
+//
+//
+//            HStack {
+//                ForEach(0..<4) { num in
+//                    Button(action: {
+//                        if num == 2 {
+//                            shouldShowModal.toggle()
+//                            return
+//                        }
+//                        tabSelected = num
+//                    } , label: {
+//                        Spacer()
+//                        if num == 2 {
+//                            Image(systemName: tabBarImageNames[num])
+//                               .font(.system(size: 24, weight: .bold))
+//                               .foregroundColor(.red)
+//                        } else {
+//                         Image(systemName: tabBarImageNames[num])
+//                            .font(.system(size: 24, weight: .bold))
+//                            .foregroundColor(tabSelected == num ? Color(.black) :  .init(white: 0.8))
+//                        }
+//                        Spacer()
+//
+//                    })
+//                }
+//            }
+//        }
+//
         
     }
+    
+    
+
+    
     init() {
         UITabBar.appearance().barTintColor = UIColor(Color("tabbarcolor"))
-        UITabBar.appearance().isTranslucent = true
+//        UITabBar.appearance().isTranslucent = true
          
         
 //        57,63,83

@@ -33,9 +33,19 @@
 		9B2C9ABC26D8266700D80185 /* SUImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C9ABB26D8266700D80185 /* SUImagePickerView.swift */; };
 		9B2C9ABF26D9877B00D80185 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C9ABE26D9877B00D80185 /* Extensions.swift */; };
 		9B3B333926FEA59C0051511D /* MyAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3B333826FEA59C0051511D /* MyAppDelegate.swift */; };
+		9B74F3A82730DF5100457043 /* MultimodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B74F3A72730DF5100457043 /* MultimodeView.swift */; };
+		9B74F3AB2731CDD800457043 /* Chat_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B74F3AA2731CDD800457043 /* Chat_data.swift */; };
 		9B7FBB7E271E6254004629A7 /* AlertToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7FBB7D271E6254004629A7 /* AlertToast.swift */; };
 		9BB878DD272A459700B7D95B /* GetLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB878DC272A459700B7D95B /* GetLocation.swift */; };
 		9BB878DF272A45F000B7D95B /* TimeClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB878DE272A45F000B7D95B /* TimeClockView.swift */; };
+		9BB878E6272B3B3A00B7D95B /* TimeClockHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB878E5272B3B3900B7D95B /* TimeClockHeader.swift */; };
+		9BB878E8272B3B6F00B7D95B /* TimeClockFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB878E7272B3B6F00B7D95B /* TimeClockFooter.swift */; };
+		9BB878EA272B3B9200B7D95B /* TimeClockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB878E9272B3B9200B7D95B /* TimeClockRow.swift */; };
+		9BB878ED272B3CA400B7D95B /* TimeClockViemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB878EC272B3CA400B7D95B /* TimeClockViemModel.swift */; };
+		9BB878EF272B3D3F00B7D95B /* ApiTimeClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB878EE272B3D3F00B7D95B /* ApiTimeClock.swift */; };
+		9BB878F2272B3D7000B7D95B /* TimeClockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB878F1272B3D7000B7D95B /* TimeClockModel.swift */; };
+		9BB878F5272B5EA600B7D95B /* CurentGps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB878F4272B5EA600B7D95B /* CurentGps.swift */; };
+		9BB87904272B797100B7D95B /* SwiftLocation in Frameworks */ = {isa = PBXBuildFile; productRef = 9BB87903272B797100B7D95B /* SwiftLocation */; };
 		9BBE74B5270293BD009F85D2 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 9BBE74B4270293BD009F85D2 /* iPhoneNumberField */; };
 		9BBE74B7270299D0009F85D2 /* CodeVerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE74B6270299D0009F85D2 /* CodeVerifyView.swift */; };
 		9BBE74B927039AA0009F85D2 /* TextFieldManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE74B827039AA0009F85D2 /* TextFieldManager.swift */; };
@@ -52,6 +62,19 @@
 		9BF040DE26B8A95400A08890 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BF040DD26B8A95400A08890 /* Preview Assets.xcassets */; };
 		9BF040E626B902B000A08890 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF040E526B902AF00A08890 /* Home.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9BB87901272B76DB00B7D95B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9B1BEC212707ACFA00370896 /* go2dispatch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = go2dispatch.xcdatamodel; sourceTree = "<group>"; };
@@ -79,9 +102,18 @@
 		9B2C9ABE26D9877B00D80185 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9B3B333726FEA4A60051511D /* go2dispatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = go2dispatch.entitlements; sourceTree = "<group>"; };
 		9B3B333826FEA59C0051511D /* MyAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppDelegate.swift; sourceTree = "<group>"; };
+		9B74F3A72730DF5100457043 /* MultimodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimodeView.swift; sourceTree = "<group>"; };
+		9B74F3AA2731CDD800457043 /* Chat_data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat_data.swift; sourceTree = "<group>"; };
 		9B7FBB7D271E6254004629A7 /* AlertToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertToast.swift; sourceTree = "<group>"; };
 		9BB878DC272A459700B7D95B /* GetLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLocation.swift; sourceTree = "<group>"; };
 		9BB878DE272A45F000B7D95B /* TimeClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeClockView.swift; sourceTree = "<group>"; };
+		9BB878E5272B3B3900B7D95B /* TimeClockHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeClockHeader.swift; sourceTree = "<group>"; };
+		9BB878E7272B3B6F00B7D95B /* TimeClockFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeClockFooter.swift; sourceTree = "<group>"; };
+		9BB878E9272B3B9200B7D95B /* TimeClockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeClockRow.swift; sourceTree = "<group>"; };
+		9BB878EC272B3CA400B7D95B /* TimeClockViemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeClockViemModel.swift; sourceTree = "<group>"; };
+		9BB878EE272B3D3F00B7D95B /* ApiTimeClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTimeClock.swift; sourceTree = "<group>"; };
+		9BB878F1272B3D7000B7D95B /* TimeClockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeClockModel.swift; sourceTree = "<group>"; };
+		9BB878F4272B5EA600B7D95B /* CurentGps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurentGps.swift; sourceTree = "<group>"; };
 		9BBE74B6270299D0009F85D2 /* CodeVerifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeVerifyView.swift; sourceTree = "<group>"; };
 		9BBE74B827039AA0009F85D2 /* TextFieldManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldManager.swift; sourceTree = "<group>"; };
 		9BBE74BA2703F1A7009F85D2 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
@@ -108,6 +140,7 @@
 				9B2C9A9C26D6E0F000D80185 /* Kingfisher in Frameworks */,
 				9BBE74B5270293BD009F85D2 /* iPhoneNumberField in Frameworks */,
 				9B1BEC30270FC91100370896 /* SocketIO in Frameworks */,
+				9BB87904272B797100B7D95B /* SwiftLocation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +150,7 @@
 		9B1BEC232707C75F00370896 /* datacore */ = {
 			isa = PBXGroup;
 			children = (
+				9B74F3A92731CDBD00457043 /* chat_coredata */,
 				9B1BEC202707ACFA00370896 /* go2dispatch.xcdatamodeld */,
 				9B1BEC242707C77A00370896 /* Persistence.swift */,
 			);
@@ -200,13 +234,67 @@
 			path = camera;
 			sourceTree = "<group>";
 		};
+		9B74F3A62730DF2B00457043 /* board */ = {
+			isa = PBXGroup;
+			children = (
+				9B74F3A72730DF5100457043 /* MultimodeView.swift */,
+			);
+			path = board;
+			sourceTree = "<group>";
+		};
+		9B74F3A92731CDBD00457043 /* chat_coredata */ = {
+			isa = PBXGroup;
+			children = (
+				9B74F3AA2731CDD800457043 /* Chat_data.swift */,
+			);
+			path = chat_coredata;
+			sourceTree = "<group>";
+		};
+		9B74F3AC2731D8FE00457043 /* database */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = database;
+			sourceTree = "<group>";
+		};
 		9BB878DB272A453D00B7D95B /* timeclock */ = {
 			isa = PBXGroup;
 			children = (
+				9BB878F3272B5E9400B7D95B /* gps */,
+				9BB878EB272B3C8B00B7D95B /* viemmodel */,
 				9BB878DC272A459700B7D95B /* GetLocation.swift */,
 				9BB878DE272A45F000B7D95B /* TimeClockView.swift */,
+				9BB878E5272B3B3900B7D95B /* TimeClockHeader.swift */,
+				9BB878E7272B3B6F00B7D95B /* TimeClockFooter.swift */,
+				9BB878E9272B3B9200B7D95B /* TimeClockRow.swift */,
 			);
 			path = timeclock;
+			sourceTree = "<group>";
+		};
+		9BB878EB272B3C8B00B7D95B /* viemmodel */ = {
+			isa = PBXGroup;
+			children = (
+				9BB878F0272B3D5900B7D95B /* model */,
+				9BB878EC272B3CA400B7D95B /* TimeClockViemModel.swift */,
+				9BB878EE272B3D3F00B7D95B /* ApiTimeClock.swift */,
+			);
+			path = viemmodel;
+			sourceTree = "<group>";
+		};
+		9BB878F0272B3D5900B7D95B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				9BB878F1272B3D7000B7D95B /* TimeClockModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		9BB878F3272B5E9400B7D95B /* gps */ = {
+			isa = PBXGroup;
+			children = (
+				9BB878F4272B5EA600B7D95B /* CurentGps.swift */,
+			);
+			path = gps;
 			sourceTree = "<group>";
 		};
 		9BBE74C027052813009F85D2 /* chat */ = {
@@ -247,6 +335,8 @@
 		9BF040D526B8A95200A08890 /* go2dispatch */ = {
 			isa = PBXGroup;
 			children = (
+				9B74F3AC2731D8FE00457043 /* database */,
+				9B74F3A62730DF2B00457043 /* board */,
 				9BB878DB272A453D00B7D95B /* timeclock */,
 				9BBE74C027052813009F85D2 /* chat */,
 				9B2C9ABD26D9875800D80185 /* extension */,
@@ -286,6 +376,7 @@
 				9BF040CF26B8A95200A08890 /* Sources */,
 				9BF040D026B8A95200A08890 /* Frameworks */,
 				9BF040D126B8A95200A08890 /* Resources */,
+				9BB87901272B76DB00B7D95B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -296,6 +387,7 @@
 				9B2C9A9B26D6E0F000D80185 /* Kingfisher */,
 				9BBE74B4270293BD009F85D2 /* iPhoneNumberField */,
 				9B1BEC2F270FC91100370896 /* SocketIO */,
+				9BB87903272B797100B7D95B /* SwiftLocation */,
 			);
 			productName = go2dispatch;
 			productReference = 9BF040D326B8A95200A08890 /* go2dispatch.app */;
@@ -328,6 +420,7 @@
 				9B2C9A9A26D6E0F000D80185 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				9BBE74B3270293BD009F85D2 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
 				9B1BEC2E270FC91100370896 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				9BB87902272B797100B7D95B /* XCRemoteSwiftPackageReference "SwiftLocation" */,
 			);
 			productRefGroup = 9BF040D426B8A95200A08890 /* Products */;
 			projectDirPath = "";
@@ -358,13 +451,17 @@
 				9B7FBB7E271E6254004629A7 /* AlertToast.swift in Sources */,
 				9B1BEC252707C77A00370896 /* Persistence.swift in Sources */,
 				9B1BEC322710981700370896 /* NewChatView.swift in Sources */,
+				9B74F3AB2731CDD800457043 /* Chat_data.swift in Sources */,
 				9BBE74C827061901009F85D2 /* ChatsViewModel.swift in Sources */,
 				9B2C9AAD26D7DBAC00D80185 /* EditProfileView.swift in Sources */,
 				9B2C9A9426D6CC5400D80185 /* Driver.swift in Sources */,
 				9B3B333926FEA59C0051511D /* MyAppDelegate.swift in Sources */,
+				9BB878E8272B3B6F00B7D95B /* TimeClockFooter.swift in Sources */,
 				9B2C9ABC26D8266700D80185 /* SUImagePickerView.swift in Sources */,
 				9B1BEC272707CA6900370896 /* ApiChat.swift in Sources */,
+				9BB878EF272B3D3F00B7D95B /* ApiTimeClock.swift in Sources */,
 				9B2C9AA126D70E3200D80185 /* Gallery.swift in Sources */,
+				9B74F3A82730DF5100457043 /* MultimodeView.swift in Sources */,
 				9BBE74B927039AA0009F85D2 /* TextFieldManager.swift in Sources */,
 				9BF040D926B8A95200A08890 /* ContentView.swift in Sources */,
 				9B1BEC222707ACFB00370896 /* go2dispatch.xcdatamodeld in Sources */,
@@ -372,15 +469,20 @@
 				9BBE74C227052B9E009F85D2 /* ChatModel.swift in Sources */,
 				9BF040E626B902B000A08890 /* Home.swift in Sources */,
 				9BBE74C427053237009F85D2 /*  Date+Helpers.swift in Sources */,
+				9BB878F2272B3D7000B7D95B /* TimeClockModel.swift in Sources */,
 				9B2C9AAB26D7407500D80185 /* ProfilView.swift in Sources */,
+				9BB878ED272B3CA400B7D95B /* TimeClockViemModel.swift in Sources */,
 				9B2C9A9126D6BAF500D80185 /* ChatRooms.swift in Sources */,
 				9BB878DF272A45F000B7D95B /* TimeClockView.swift in Sources */,
+				9BB878E6272B3B3A00B7D95B /* TimeClockHeader.swift in Sources */,
 				9B2C9A9726D6CE8800D80185 /* ViewModel.swift in Sources */,
 				9B2C9A9F26D6E70D00D80185 /* GameView.swift in Sources */,
+				9BB878F5272B5EA600B7D95B /* CurentGps.swift in Sources */,
 				9B2C9AB526D811BB00D80185 /* LoginView.swift in Sources */,
 				9B2C9AB226D810C300D80185 /* ApiConfig.swift in Sources */,
 				9B2C9ABF26D9877B00D80185 /* Extensions.swift in Sources */,
 				9B1BEC2D270BD76000370896 /* Service.swift in Sources */,
+				9BB878EA272B3B9200B7D95B /* TimeClockRow.swift in Sources */,
 				9BBE74C627055565009F85D2 /* SearchBar.swift in Sources */,
 				9BBE74CA27064591009F85D2 /* ChatView.swift in Sources */,
 				9B2C9AA726D73C4D00D80185 /* FavoritesView.swift in Sources */,
@@ -602,6 +704,14 @@
 				minimumVersion = 6.3.1;
 			};
 		};
+		9BB87902272B797100B7D95B /* XCRemoteSwiftPackageReference "SwiftLocation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/SwiftLocation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		9BBE74B3270293BD009F85D2 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField.git";
@@ -622,6 +732,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9B2C9A9A26D6E0F000D80185 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		9BB87903272B797100B7D95B /* SwiftLocation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BB87902272B797100B7D95B /* XCRemoteSwiftPackageReference "SwiftLocation" */;
+			productName = SwiftLocation;
 		};
 		9BBE74B4270293BD009F85D2 /* iPhoneNumberField */ = {
 			isa = XCSwiftPackageProductDependency;

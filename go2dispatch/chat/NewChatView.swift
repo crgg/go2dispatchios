@@ -20,47 +20,51 @@ struct NewChatView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                HStack {
-                    SearchBar(text: $query)
-                }
-                List {
-                    
-                    ForEach (viewmodel.getSortedFilteredChatsAllDrivers(query: query)) { chat in
-                        //  HACK to hide the disclosure Arrow!
-                        ZStack {
-//
-                            Button(action: {
-                                self.isNewChat =  false
-                                self.isOpenChat = true
-                                self.chatNew = chat
-                            }) {
-                                ChatRow(chat: chat)
-                            }
-                            
-                           
-                            
-                            
-//                            NavigationLink(
-//                                destination:
-//                                    ChatView(chat: chat).environmentObject(viewmodel)
-//                                 , isActive: $isOpenChat)
-//                            {
-//                                EmptyView()
-//                            }.buttonStyle(PlainButtonStyle())
-//                                .frame(width: 0)
-//                                .opacity(0)
-                        }
+            ZStack {
+                Color("Marine").ignoresSafeArea()
+                VStack {
+                    HStack {
+                        SearchBar(text: $query)
                     }
-                }.listStyle(PlainListStyle())
+                    List {
+                        
+                        ForEach (viewmodel.getSortedFilteredChatsAllDrivers(query: query)) { chat in
+                            //  HACK to hide the disclosure Arrow!
+                            ZStack {
+                                //
+                                Button(action: {
+                                    self.isNewChat =  false
+                                    self.isOpenChat = true
+                                    self.chatNew = chat
+                                }) {
+                                    ChatRow(chat: chat)
+                                }
+                                
+                                
+                                
+                                
+                                //                            NavigationLink(
+                                //                                destination:
+                                //                                    ChatView(chat: chat).environmentObject(viewmodel)
+                                //                                 , isActive: $isOpenChat)
+                                //                            {
+                                //                                EmptyView()
+                                //                            }.buttonStyle(PlainButtonStyle())
+                                //                                .frame(width: 0)
+                                //                                .opacity(0)
+                            }.listRowInsets(EdgeInsets())
+                        }
+                    }.listStyle(PlainListStyle())
+                }
+                .navigationTitle("New Chat")
+                .navigationBarItems(trailing : Button(action: {
+                    self.isNewChat = false
+                    
+                })  {
+                    Text("Cancel")
+                })
             }
-            .navigationTitle("New Chat")
-            .navigationBarItems(trailing : Button(action: {
-                self.isNewChat = false
-                
-            })  {
-               Text("Cancel")
-            })
+            
         }
         .onAppear {
             print("Entramos a View New Chat")

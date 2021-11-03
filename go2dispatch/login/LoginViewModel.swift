@@ -14,15 +14,26 @@ class LoginViewModel   {
         
         let url = URL(string: urlString)!
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url)
         
         request.httpMethod = "POST"
         
-        let deviceToken =  UserDefaults.standard.getDeviceToken()
+        var deviceToken =  UserDefaults.standard.getDeviceToken()
         
-        let postString = "email=\(email)&password=\(password)&device_token=\(deviceToken)"
+        if deviceToken.isEmpty {
+            deviceToken = "none"
+            
+        }
+   
+        let param =  ["email" : email, "password" : password, "device_token" : deviceToken ]
+        guard let jsonParam = try? JSONEncoder().encode(param) else {
+            print("error the parameters")
+            return
+        }
         
-        request.httpBody =  postString.data(using: String.Encoding.utf8)
+//        let postString = "PHONE_DATETIME=\(dateString)&LOCATION=\(location_address)"
+        
+        request.httpBody =  jsonParam
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -30,7 +41,9 @@ class LoginViewModel   {
                                
                 if let jsonData = data {
                     let decodeData = try JSONDecoder().decode(UserModel.self , from : jsonData)
+                    UserDefaults.standard.setLoggedIn(true)
                     UserDefaults.standard.setUserData(decodeData)
+                    
                     handler(true, "success")
                     return
                 }

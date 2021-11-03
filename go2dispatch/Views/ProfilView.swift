@@ -15,80 +15,87 @@ struct moduleAjuste : View {
     @State var isLogOut =  false
    
     var body: some View {
-        VStack(spacing: 3) {
-            
-//            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-//                
-//                
-//                HStack {
-//                    
-//                    Text("Account").foregroundColor(.white)
-//                    Spacer()
-//                    Text(">").foregroundColor(.white)
-//                    
-//                }.padding()
-//                
-//            })
-//              .background(Color("Blue-Gray"))
-//            .clipShape(RoundedRectangle(cornerRadius: 1.0))
-             
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+        
+        
+            VStack(spacing: 3) {
                 
+                //            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                //
+                //
+                //                HStack {
+                //
+                //                    Text("Account").foregroundColor(.white)
+                //                    Spacer()
+                //                    Text(">").foregroundColor(.white)
+                //
+                //                }.padding()
+                //
+                //            })
+                //              .background(Color("Blue-Gray"))
+                //            .clipShape(RoundedRectangle(cornerRadius: 1.0))
                 
-                HStack {
-                    Text("Notificationes").foregroundColor(.white)
-                    Spacer()
-                    Toggle("",isOn: $isToggleOn)
+                //            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                //
+                //
+                //                HStack {
+                //                    Text("Notificationes").foregroundColor(.white)
+                //                    Spacer()
+                //                    Toggle("",isOn: $isToggleOn)
+                //
+                //                }.padding()
+                //
+                //            })
+                //              .background(Color("Blue-Gray"))
+                //            .clipShape(RoundedRectangle(cornerRadius: 1.0))
+                
+                Button(action: {
+                    isEditProfileViewActive = true
                     
-                }.padding()
-                
-            })
-              .background(Color("Blue-Gray"))
-            .clipShape(RoundedRectangle(cornerRadius: 1.0))
-            
-            Button(action: {
-                isEditProfileViewActive = true
-                
-            }
-                   , label: {
-                
-                
-                HStack {
-                    
-                    Text("Edit Perfil").foregroundColor(.white)
-                    Spacer()
-                    Text(">").foregroundColor(.white)
-                    
-                }.padding()
-                
-            })
-              .background(Color("Blue-Gray"))
-            .clipShape(RoundedRectangle(cornerRadius: 1.0))
-            
-            Button(action: logout, label: {
-                
-                
-                HStack {
-                    
-                    Text("Log out").foregroundColor(.white)
-                    Spacer()
-                    Text(">").foregroundColor(.white)
-                    
-                }.padding()
-              
-            })
-              .background(Color("Blue-Gray"))
-            .clipShape(RoundedRectangle(cornerRadius: 1.0))
-            .fullScreenCover(isPresented: $isLogOut) {
-                  ContentView()
                 }
-            NavigationLink(
-                destination: EditProfileView(),
-                isActive : $isEditProfileViewActive,
-                label: {
-                    EmptyView()
+                       , label: {
+                    
+                    
+                    HStack {
+                        
+                        Text("Edit Account ").foregroundColor(.white)
+                        Spacer()
+                        Text(">").foregroundColor(.white)
+                        
+                    }.padding()
+                    
                 })
-        }
+                    .background(Color("Blue-Gray"))
+                    .clipShape(RoundedRectangle(cornerRadius: 1.0))
+                
+                Button(action: logout, label: {
+                    
+                    
+                    HStack {
+                        
+                        Text("Log out").foregroundColor(.white)
+                        Spacer()
+                        Text(">").foregroundColor(.white)
+                        
+                    }.padding()
+                    
+                })
+                    .background(Color("Blue-Gray"))
+                    .clipShape(RoundedRectangle(cornerRadius: 1.0))
+//                    .fullScreenCover(isPresented: $isLogOut) {
+//                        ContentView()
+//                    }
+                
+                NavigationLink(
+                    destination: EditProfileView(),
+                    isActive : $isEditProfileViewActive,
+                    label: {
+                        EmptyView()
+                    })
+            }
+        
+//            .fullScreenCover(isPresented: $isEditProfileViewActive, onDismiss: nil) {
+//                EditProfileView().ignoresSafeArea()
+//            }
     }
     func logout() {
         isLogOut = true
@@ -100,6 +107,7 @@ struct ProfilView: View {
     @State var imagePerfil : UIImage =  UIImage(named: "profile_sample")!
     
     var body: some View {
+        NavigationView {
         ZStack {
             Color("Marine").ignoresSafeArea()
                 .navigationBarHidden(true)
@@ -121,7 +129,7 @@ struct ProfilView: View {
                     .padding(.bottom, 32)
                 
                 
-                Text("AJUSTES")
+                Text("Account")
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .frame(minWidth: 0, idealWidth: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, maxWidth: .infinity, alignment: .leading).padding(.leading, 18)
@@ -149,6 +157,8 @@ struct ProfilView: View {
                 print("Disapper the vista")
             }
         )
+        }.navigationTitle("")
+            .navigationBarHidden(true)
     }
     
     func returnUiImage(named : String) -> UIImage? {

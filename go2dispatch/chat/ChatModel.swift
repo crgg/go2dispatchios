@@ -158,6 +158,17 @@ struct LastMessage: Codable {
         case uuid, type
         case tripNumber = "trip_number"
     }
+    
+    func returnDic() -> [String : Any] {
+        return [CodingKeys.id.rawValue : id,
+                CodingKeys.content.rawValue : content,
+                CodingKeys.sessionID.rawValue : sessionID,
+                CodingKeys.createdAt.rawValue : createdAt,
+                CodingKeys.updatedAt.rawValue  : updatedAt,
+                CodingKeys.uuid.rawValue  : uuid as Any,
+                CodingKeys.type.rawValue  : type,
+                CodingKeys.tripNumber.rawValue  : tripNumber ]
+    }
 }
 
 enum TypeEnum: String, Codable {
