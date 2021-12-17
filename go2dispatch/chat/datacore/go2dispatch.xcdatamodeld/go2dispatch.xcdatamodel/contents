@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ChatMessages" representedClassName=".ChatMessages" syncable="YES" codeGenerationType="class">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="message" optional="YES" attributeType="String"/>
+        <attribute name="read_at" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="read_at_date" optional="YES" attributeType="String"/>
+        <attribute name="send_date" optional="YES" attributeType="String"/>
+        <attribute name="session_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="user" optional="YES" attributeType="String"/>
+        <attribute name="user_name" optional="YES" attributeType="String"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
     <entity name="ChatUsers" representedClassName=".ChatUsers" syncable="YES" codeGenerationType="class">
         <attribute name="chatcount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="driver_id" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="last_message" optional="YES" attributeType="String" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String:Any]"/>
+        <attribute name="last_message_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="last_message_type" optional="YES" attributeType="String"/>
+        <attribute name="last_message_user_of_chat" optional="YES" attributeType="String"/>
+        <attribute name="last_message_uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="online" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="session_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="status" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="user_image_profile" optional="YES" attributeType="String"/>
         <attribute name="user_name" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="ChatUsers" positionX="-63" positionY="-18" width="128" height="164"/>
+        <element name="ChatUsers" positionX="-63" positionY="-18" width="128" height="239"/>
+        <element name="ChatMessages" positionX="-63" positionY="90" width="128" height="194"/>
     </elements>
 </model>

@@ -59,6 +59,15 @@ struct TimeLogHistory : Codable {
         
     }
     
+    init() {
+         SHIFT_ID  = 1
+        SHIFT_DATE = "02/05/2021"
+         data =  [TimeLogModelHistory()]
+         TOTALHOURS = "45.0"
+    
+         TOTALHOURS_TIME_FORMAT = "78.57"
+    }
+    
     init(from decoder : Decoder) throws {
     
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -87,6 +96,8 @@ struct TimeLogHistory : Codable {
         }
     }
 }
+
+
 
 
 struct TimeLogModelHistory : Codable {
@@ -139,11 +150,32 @@ struct TimeLogModelHistory : Codable {
          
         
     }
+  
     init() {
-        
+        ID = 0
+        SHIFT_ID = 0
+        SHIFT_DATE = "03/25/2021"
+        SHIFT_TYPE = "Regular"
+        RES_TYPE = "D"
+        RES_ID = "D"
+        PAY_TYPE = ""
+        START_DATE = "03/25/2021 03:01:45"
+        START_LOC = ""
+        END_DATE = "03/25/2021 03:20:45"
+        END_LOC = ""
+        APPROVED = ""
+        APPROVED_BY = ""
+        APPROVED_DATE = ""
+        CREATED_BY = ""
+        HRS = ""
+        UPDATED_BY = ""
+        FORMATED_SHIFT_DATE = ""
+        FORMATED_START_DATE = ""
+        FORMATED_END_DATE = ""
+        FORMATED_APPROVED_DATE = ""
     }
     
-    init(from decoder : Decoder) throws {
+ init(from decoder : Decoder) throws {
     
         let values = try decoder.container(keyedBy: CodingKeys.self)
         ID = try? values.decode(Int.self, forKey: .ID)

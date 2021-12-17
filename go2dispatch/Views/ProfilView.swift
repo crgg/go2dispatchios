@@ -13,7 +13,7 @@ struct moduleAjuste : View {
     @State var isToggleOn =  true
     @State var isEditProfileViewActive  = false
     @State var isLogOut =  false
-   
+    @EnvironmentObject var vm: UserStateViewModel
     var body: some View {
         
         
@@ -98,7 +98,8 @@ struct moduleAjuste : View {
 //            }
     }
     func logout() {
-        isLogOut = true
+     
+        vm.signOut()
     }
 }
 

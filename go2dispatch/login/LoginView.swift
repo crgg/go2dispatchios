@@ -15,7 +15,7 @@ struct LoginView : View {
     @State var isErrorField  = false
     @State var isLoading = false
     @State var messageError = ""
-  
+    @EnvironmentObject var vm: UserStateViewModel
     
     var body: some View {
         
@@ -99,12 +99,12 @@ struct LoginView : View {
                 
             }.padding(.horizontal, 77.0)
             
-            NavigationLink(
-                destination: Home(),
-                isActive: $isActiveHomeView,
-                label : {
-                    EmptyView()
-                })
+//            NavigationLink(
+//                destination: Home(),
+//                isActive: $isActiveHomeView,
+//                label : {
+//                    EmptyView()
+//                })
         }// end Scrolview
         
     }
@@ -131,7 +131,7 @@ struct LoginView : View {
             if status  {
                  
                 isLoading = false
-                self.isActiveHomeView = true
+                vm.signIn()
                 return
             }
             

@@ -12,7 +12,9 @@ struct go2dispatchApp: App {
     @Environment (\.scenePhase) var scenePhase
     let persistenceContainer = PersistenceController.shared 
     @UIApplicationDelegateAdaptor(MyAppDelegate.self) private var appDelegate
-
+    @StateObject var userStateViewModel = UserStateViewModel()
+    
+    
     init() {
         // inicio de vida de la app es cuando la application se inicia
         print("inicia la app")
@@ -20,24 +22,12 @@ struct go2dispatchApp: App {
     }
     var body: some Scene {
         WindowGroup {
-         
-            let veryCode = UserDefaults.standard.getVeryCode()
-            if veryCode {
-                CodeVerifyView().environment(\.managedObjectContext, persistenceContainer.container.viewContext) // <- and here <-
-
-            } else {
-                
-                if UserDefaults.standard.getLoggedIn() {
-                    Home().environment(\.managedObjectContext, persistenceContainer.container.viewContext) // <- and here <-
-
-                     
-                } else {
-                      ContentView().environment(\.managedObjectContext, persistenceContainer.container.viewContext) // <- and here <-
-
-                }
-//                ChatRooms()
-//                TimeClockView()
-            }
+            NavigationView {
+                ApplicationSwitcher()
+            }.navigationViewStyle(.stack)
+                .environment(\.managedObjectContext, persistenceContainer.container.viewContext)
+                .environmentObject(userStateViewModel)
+          
         }.onChange(of: scenePhase) { phase in
             print(phase)
             // Cycle the life the application
@@ -50,4 +40,32 @@ struct go2dispatchApp: App {
             
         }
     }
+}
+
+
+struct ApplicationSwitcher : View {
+    
+    @EnvironmentObject var vm: UserStateViewModel
+    
+    let persistenceContainer = PersistenceController.shared
+    var body: some View {
+        let veryCode = UserDefaults.standard.getVeryCode()
+        if veryCode {
+            CodeVerifyView().environment(\.managedObjectContext, persistenceContainer.container.viewContext) // <- and here <-
+
+        } else {
+            
+            if UserDefaults.standard.getLoggedIn() || vm.isLoggedIn {
+                Home().environment(\.managedObjectContext, persistenceContainer.container.viewContext) // <- and here <-
+
+                 
+            } else {
+                  ContentView().environment(\.managedObjectContext, persistenceContainer.container.viewContext) // <- and here <-
+
+            }
+//                ChatRooms()
+//                TimeClockView()
+        }
+    }
+    
 }

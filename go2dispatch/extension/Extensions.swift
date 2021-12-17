@@ -48,7 +48,7 @@ extension UserDefaults {
         return object(forKey: UserDefaultsKeys.isVeryCode.rawValue) as? Bool ?? false
     }
     
-    func setUserData(_ value: UserModel) {
+    func setUserData(_ value: UserModel?) {
         UserDefaults.standard.set(try? PropertyListEncoder().encode(value), forKey: UserDefaultsKeys.userData.rawValue)
     }
     

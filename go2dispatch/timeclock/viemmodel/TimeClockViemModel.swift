@@ -19,7 +19,7 @@ class TimeClockViewModel : ObservableObject {
     
     @Published var isLoading = false
     
-    @Published var timeLogHistory : [TimeLogHistory] = []
+    @Published var timeLogHistory : [TimeLogHistory] = [TimeLogHistory()]
     
     @Published var clockInLocationLabel  = ""
     var secounds = 60

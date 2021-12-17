@@ -23,7 +23,7 @@ struct Home: View {
         
                     }.tag(0)
         
-                ViewHome().tabItem {
+                Trip_ListView().tabItem {
                     Image(systemName: "house")
                     Text("Home")
                 }.tag(1)
@@ -40,6 +40,7 @@ struct Home: View {
                         Image(systemName: "clock")
                         Text("Time Clock")
                     }.tag(3)
+                   
         
         
         
@@ -266,7 +267,7 @@ struct SubModuloHome : View {
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color("Blue-Gray"))
                                 .frame(width: 160, height: 90)
-                            Image("rpg_icon")
+                            Image(systemName: "photo")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 42, height: 42)

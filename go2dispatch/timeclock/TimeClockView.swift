@@ -15,17 +15,22 @@ struct TimeClockView: View {
     @State var timeLogHistory : [TimeLogHistory] = []
     
     @State var isError  = false
- 
     
+     @State var textColor  = Color.white
+//    init() {
+//        UITableView.appearance().backgroundColor = .clear
+//        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor(.white)]
+//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor : UIColor(.white)]
+//    }
+//    
     var body: some View {
         ZStack {
-            Color("time_clock_bg")
+            Color("Marine")
                 .ignoresSafeArea()
-            
             
             VStack(alignment: .leading, spacing : 5) {
                 
-                Text(viewmodel.timeStart).font(.title).frame(maxWidth:.infinity, alignment: .center)
+                Text(viewmodel.timeStart).font(.title).frame(maxWidth:.infinity, alignment: .center).foregroundColor(textColor)
                 
                 
                 if  viewmodel.isLoading {
@@ -54,45 +59,61 @@ struct TimeClockView: View {
                         .scaledToFill()
                         .frame(width: 20, height: 20)
                         .clipped()
-                    Text(viewmodel.clockInLocationLabel).font(.caption)
+                    Text(viewmodel.clockInLocationLabel).font(.caption).foregroundColor(textColor)
                 }
                 Text("OverView")
                     .frame(maxWidth : .infinity, alignment: .center)
-                    .font(.headline)
-    
-                
+                    .font(.headline).foregroundColor(textColor)
                 List {
-                    
                     ForEach(viewmodel.timeLogHistory, id: \.SHIFT_ID) {
                         time_history in
                         Section(header:
                                     HStack {
-                            Text("Shift Date :")
-                            Text(time_history.SHIFT_DATE ?? "")
-                        }
+                            Text("Shift Date :").foregroundColor(textColor)
+                            Text(time_history.SHIFT_DATE ?? "").foregroundColor(
+                                textColor).font(.title3)
+                        } .listRowInsets(EdgeInsets())
+                                    .background(  Color("Marine"))
                                 , footer:
-                                    HStack {
-                            Text("Total").font(.footnote)
-                            Text(time_history.TOTALHOURS_TIME_FORMAT ?? "0.0")
-                        }.frame(maxWidth: .infinity, alignment: .trailing)
+                                    
+                            HStack {
                                 
-                        )  {
-                            ForEach(time_history.data!, id: \.ID ) {
-                                item in
-                                TimeClockRow(timeHistory: item)
-                            }
+                            Text("Total").foregroundColor(textColor)
+                            Text(time_history.TOTALHOURS_TIME_FORMAT ?? "0.0").foregroundColor(textColor)
+                                .font(.title3)
+                            }.frame(maxWidth: .infinity, alignment: .trailing)
+                                    .background(  Color("Marine"))
+                                    .listRowInsets(EdgeInsets())
+                                    
+                        
+                                
+                        )   {
+                            
+                                ForEach(time_history.data!, id: \.ID ) {
+                                    item in
+                                    TimeClockRow(timeHistory: item, textColor : textColor) .listRowInsets(EdgeInsets())
+                                       
+                                }
+                           
                         }
                     }
                 }.frame(maxWidth: .infinity)
-                    .listStyle(PlainListStyle())
+                    .listStyle(GroupedListStyle())
+                    
+                
                 
             }.padding(.horizontal, 10.0)
                 .frame(maxWidth : .infinity)
                 .onAppear {
                     print("Entramos a View")
                     viewmodel.getHistory()
+                    UITableView.appearance().backgroundColor = UIColor(named: "Marine")
                 }
         }
+        .navigationBarTitle("") //this must be empty
+           .navigationBarHidden(true)
+           .navigationBarBackButtonHidden(true)
+       
     }
     
     
@@ -102,6 +123,8 @@ struct TimeClockView: View {
 
 struct TimeClockView_Previews: PreviewProvider {
     static var previews: some View {
+        
+        
         TimeClockView()
     }
 }

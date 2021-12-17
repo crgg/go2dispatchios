@@ -6,7 +6,8 @@
 //
 
 import Foundation
-class LoginViewModel   {
+class LoginViewModel  {
+    
     
     static func login(email: String , password : String,  handler: @escaping (_ sucess : Bool, _ error : String?)->()) {
          
@@ -20,8 +21,9 @@ class LoginViewModel   {
         
         var deviceToken =  UserDefaults.standard.getDeviceToken()
         
+        
         if deviceToken.isEmpty {
-            deviceToken = "none"
+            deviceToken = "DDDAADADAD"
             
         }
    

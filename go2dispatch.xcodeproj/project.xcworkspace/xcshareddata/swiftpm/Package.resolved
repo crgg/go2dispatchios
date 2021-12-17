@@ -29,6 +29,15 @@
         }
       },
       {
+        "package": "SDWebImage",
+        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
+        "state": {
+          "branch": null,
+          "revision": "a72df4849408da7e5d3c1b586797b7c601c41d1b",
+          "version": "5.12.1"
+        }
+      },
+      {
         "package": "SocketIO",
         "repositoryURL": "https://github.com/socketio/socket.io-client-swift.git",
         "state": {

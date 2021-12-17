@@ -14,6 +14,7 @@ class ApiConfig {
 //    public static let URL_PROD : String =  "https://driverapp.goto-logistics.com/api/Shoprest/"
     
     public static let URL_PROD : String =  "https://driverapp.tech4tms.com/api/dispatcher_app/"
+    public static let URL_CHAT_API : String = "https://driverapp.tech4tms.com/api/chat_api/"
     
     public static let URL_LOGIN : String  =  "dispatcher_login"
     
@@ -35,6 +36,10 @@ class ApiConfig {
     public static let GET_LATEST_CLOCK_IN : String = "get_latest_clock_in"
     
     public static let DISPATCHER_CLOCK : String = "dispatcher_clock"
+    
+    public static let RETURN_MESSAGES : String = "session"
+    
+    public static let SEND_MESSAGE : String = "\(URL_CHAT_API)send"
     
     
     

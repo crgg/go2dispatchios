@@ -16,53 +16,81 @@ struct ChatView: View {
     @State private var text = ""
     
     @State private var messageIDToScroll: UUID?
+   
     
    // @FocusState private var isFocused
     
     var body: some View {
-        VStack (spacing : 0) {
-            GeometryReader {
-                reader in
-                ScrollView {
-                    ScrollViewReader {
-                        scrollReader in
-                        getMessagesView(viewWith: reader.size.width)
-                            .padding(.horizontal)
-                            .onChange(of: messageIDToScroll) { _ in
-                                if let messageID =  messageIDToScroll {
-                                    scrollTo(messageID: messageID, shouldAdmimate: true, scrollReader: scrollReader)
+        ZStack {
+            Color.blue
+                        .opacity(0.4)
+                        .ignoresSafeArea()
+            VStack (spacing : 0) {
+                GeometryReader {
+                    reader in
+                    ScrollView {
+                        ScrollViewReader {
+                            scrollReader in
+                            getMessagesView(viewWith: reader.size.width)
+                                .padding(.horizontal)
+                                .onChange(of: messageIDToScroll) { _ in
+                                    if let messageID =  messageIDToScroll {
+                                        scrollTo(messageID: messageID, shouldAdmimate: true, scrollReader: scrollReader)
+                                    }
                                 }
-                            }
-                            .onAppear {
-                                if let messageID = chat.messages.last?.id {
-                                    scrollTo(messageID: messageID, anchor: .bottom, shouldAdmimate: false  , scrollReader: scrollReader)
+                                .onAppear {
+                                    if let messageID = viewModel.messages.last?.id {
+                                        messageIDToScroll = messageID
+                                        scrollTo(messageID: messageID, anchor: .bottom, shouldAdmimate: false  , scrollReader: scrollReader)
+                                    }
                                 }
-                            }
+                        }
+     
                     }
- 
                 }
+                .padding(.bottom, 5)
+                .background(Color.white)
+                
+              toolbarView()
+               
             }
-            .padding(.bottom, 5)
+            .padding(.top, 1)
+            .navigationBarTitleDisplayMode(.inline)
             
-          toolbarView()
-           
+            .navigationBarItems(leading: navBarLeadingBtn, trailing: navBarTralingBtn)
+            .background(NavigationConfigurator { nc in
+                           nc.navigationBar.barTintColor = .blue
+                          nc.navigationBar.backgroundColor = .blue
+                nc.toolbar.tintColor = .blue
+                nc.navigationBar.backItem?.titleView?.tintColor = .blue
+                           nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+                       })
+            .navigationViewStyle(StackNavigationViewStyle())
+            .onAppear {
+                viewModel.markAsUnread(false, chat: chat)
+    //            viewModel.service.set_header(driverId: chat.person.driver_id, session_id: chat.session_id)
+                viewModel.service.join_room(chat: chat)
+                viewModel.setCurrentChat(chat: chat)
+                viewModel.getMessages(session_id: chat.session_id)
+                let appearance = UINavigationBarAppearance()
+                       appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+                       appearance.backgroundColor = UIColor(Color.orange.opacity(0.2))
+                       
+            }
+
+            
         }
-        .padding(.top, 1)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading: navBarLeadingBtn, trailing: navBarTralingBtn)
-        .onAppear {
-            viewModel.markAsUnread(false, chat: chat)
-        }
-        
+                
     }
     
     var navBarLeadingBtn : some View {
         Button(action: {}) {
             HStack {
-                Image(chat.person.imgString).resizable()
+                Image(uiImage: chat.person.imgString.load()).resizable()
                     .frame(width: 40, height: 40)
                     .clipShape(Circle())
-                Text(chat.person.name).bold()
+                Text(viewModel.isTyping ? "Typing" : chat.person.name).bold()
+                
             }
             .foregroundColor(.black)
         
@@ -72,16 +100,9 @@ struct ChatView: View {
     
     var navBarTralingBtn : some View {
         HStack {
-             
             Button(action: {}) {
-                Image(systemName: "video")
-                
+                Image(systemName: "trash.circle.fill")
             }
-            
-           Button(action: {}) {
-               Image(systemName: "phone")
-               
-           }
         }
     }
     
@@ -96,40 +117,86 @@ struct ChatView: View {
     
     func toolbarView() -> some View {
         VStack {
-            let height : CGFloat = 37
-            HStack {
-                TextField("Message....", text: $text)
-                    
-                    .padding(.horizontal, 10)
-                    .frame(height: height)
-                    .background(Color.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 13))
-                  
-//                    .focused($isFocused) // 15.0
-                    
-                Button(action: sendMessage) {
-                    Image(systemName: "paperplane.fill")
-                        .foregroundColor(.white)
-                        .frame(width: height, height: height)
-                        .background(
-                            Circle().foregroundColor(text.isEmpty ? .gray : .blue))
-                }
-                .disabled(text.isEmpty)
-            }
-            .frame(height: height)
+
+          
             
+            HStack(spacing: 15) {
+                HStack(spacing : 15) {
+                    TextField("Message....", text: $text)
+                    
+                    //                    .clipShape(RoundedRectangle(cornerRadius: 13))
+                    
+                    //                    .focused($isFocused) // 15.0
+                    Button(action: {}) {
+                        Image(systemName: "paperclip.circle.fill")
+                            .font(.system(size: 22))
+                            .foregroundColor(.gray)
+                    }
+                    
+                }  
+                .padding(.vertical, 12)
+                .padding(.horizontal)
+                .background(Color.black.opacity(0.06))
+                .clipShape(Capsule())
+                    
+                if text != "" {
+                    // Send button
+                    Button(action: sendMessage) {
+                        Image(systemName: "paperplane.fill")
+                            .font(.system(size: 22))
+                            .foregroundColor(Color.blue)
+                        //rotation the image
+                            .rotationEffect(.init(degrees: 45))
+                            .padding(.vertical, 12)
+                            .padding(.leading, 12)
+                            .padding(.trailing, 17)
+                            .background(Color.black.opacity(0.07))
+                            .clipShape(Circle())
+                    }
+                    .disabled(text.isEmpty)
+                }
+                
+
+            }.padding(.horizontal)
+                .animation(.easeOut)
+               
+                
         }
-        .padding(.vertical)
-        .padding(.horizontal)
+        .padding(.bottom, 8)
+        .background(Color.white)
+       
+        
+       
+//        .padding(.bottom, UIApplication.shared.windows.first?.safeAreaInsets.bottom)
+//            .background(Color.white)
+
+        
+//        .padding(.horizontal)
 //        .background(.thickMaterial) // 15.0
 //        .background(Color.blue)
         
     }
-    func sendMessage() {
-        if let message = viewModel.sendMessage(text, in: chat) {
-            text = ""
-            messageIDToScroll = message.id
+    
+    struct RoundedShape : Shape {
+        func path(in rect: CGRect) -> Path {
+            let path = UIBezierPath(roundedRect: rect, byRoundingCorners: [.topLeft,.topRight], cornerRadii: CGSize(width: 35, height: 35))
+            return Path(path.cgPath)
         }
+    }
+    
+    func sendMessage() {
+        
+          let message = viewModel.sendMessage2(text, chat: chat)
+           text  = ""
+             
+             messageIDToScroll = message.id
+         
+        
+        
+//        if let message = viewModel.sendMessage(text, in: chat) {
+//            text = ""
+//            messageIDToScroll = message.id
+//        }
     }
     
     let columns = [GridItem(.flexible(minimum: 10))]
@@ -141,25 +208,26 @@ struct ChatView: View {
                 let messages = sectionMessage[sectionIndex]
                 if messages.count > 0 {
                     Section(header: sectionHeader(firstMessage: messages.first!)) {
-                    ForEach(messages) { message in
-                        let isReceived = message.type == .received
-                        HStack {
-                            ZStack {
-                                Text(message.text)
-                                    .padding(.horizontal)
-                                    .padding(.vertical, 12)
-                                    .background(isReceived ? Color.black.opacity(0.2) : .green.opacity(0.9))
-                                    .cornerRadius(13)
+                        ForEach(messages) { message in
+                            let isReceived = message.type == .received
+                            HStack {
+                                ZStack {
+                                    Text(message.text)
+                                        .padding(.horizontal)
+                                        .padding(.vertical, 12)
+                                        .background(isReceived ? Color.black.opacity(0.2) : .green.opacity(0.9))
+                                        .cornerRadius(13)
+                                }
+                                .frame(width : viewWith * 0.7, alignment: isReceived ? .leading : .trailing)
+                                .padding(.vertical)
+                                //                    .background(Color.blue)
                             }
-                            .frame(width : viewWith * 0.7, alignment: isReceived ? .leading : .trailing)
-                            .padding(.vertical)
-                            //                    .background(Color.blue)
+                            .frame(maxWidth: .infinity,  alignment:  isReceived ? .leading : .trailing)
+                            .id(message.id) // important for automatic scrolling later!
+                            
                         }
-                        .frame(maxWidth: .infinity,  alignment:  isReceived ? .leading : .trailing)
-                        .id(message.id) // important for automatic scrolling later!
                         
                     }
-                }
                 }
             }
         }
@@ -177,15 +245,31 @@ struct ChatView: View {
         }
         .padding(.vertical, 5)
         .frame(maxWidth: .infinity)
+        
     }
+    
 }
 
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
+        
         NavigationView {
             
             ChatView(chat: Chat.sampleChat[0])
                 .environmentObject(ChatsViewModel())
         }
     }
+}
+struct NavigationConfigurator: UIViewControllerRepresentable {
+    var configure: (UINavigationController) -> Void = { _ in }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
+        UIViewController()
+    }
+    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
+        if let nc = uiViewController.navigationController {
+            self.configure(nc)
+        }
+    }
+
 }

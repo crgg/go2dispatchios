@@ -30,9 +30,36 @@ struct ChatRow: View {
         ZStack {
             Color("Marine") 
             HStack(spacing : 5) {
-                Image(uiImage: chat.person.imgString.load()).resizable()
-                    .frame(width: 70, height: 70)
-                    .clipShape(Circle())
+                ZStack {
+                                    Image(uiImage: chat.person.imgString.load()).resizable()
+                                        .frame(width: 70, height: 70)
+                                        .clipShape(Circle())
+                                    
+//                    Image(chat.person.imgString)
+//                        .resizable()
+//                        .frame(width: 70, height: 70)
+//                        .clipShape(Circle())
+                    ZStack {
+                    Circle()
+                             .fill(chat.online ? .green : .clear)
+                             .frame(width: 10, height: 10 )
+                             .frame(maxWidth:70, maxHeight: 70, alignment: .topLeading)
+                             .padding(.top)
+                    Circle()
+                             .strokeBorder(chat.online ? .black : .clear)
+                             .frame(width: 10, height: 10 )
+                             .frame(maxWidth:70, maxHeight: 70, alignment: .topLeading)
+                             .padding(.top)
+                    }
+                             
+
+                    
+                    
+                             
+                    
+
+                    
+                }
                 ZStack {
                     
                     VStack(alignment : .leading, spacing: 5) {
@@ -44,12 +71,20 @@ struct ChatRow: View {
                                     .foregroundColor(.white)
                             }
                             Spacer()
-                            Text(chat.messages.last?.date.descriptiveString() ?? "")
+                       
+                            Text(    chat.messages.last?.date.descriptiveString() ?? "")
                                 .foregroundColor(.white)
+                        
+                            
                             
                         }
                         HStack {
-                            Text(chat.messages.last?.text ?? "")
+                                                        
+                            
+//                            __ = chat.messages.last?.type == .received ? "" :
+//                            "you "
+                            
+                            Text(self.getTypeContent(last_msg: chat.messages.last?.text ?? "", type_content: chat.messages.last?.content_type ?? .text ))
                                 .foregroundColor(.gray)
                                 .lineLimit(2)
                                 .frame( height: 50, alignment: .top)
@@ -70,7 +105,26 @@ struct ChatRow: View {
         }
        
     }
+ 
+    func getTypeContent(last_msg : String, type_content : contentType) -> String{
+        
+        var msg = ""
+   
+        if  !last_msg.isEmpty {
+            switch type_content {
+            case .text :
+                 msg = last_msg
+            case .image :
+                 msg = "🖼 Photo"
+            case .video:
+                 msg = "Video"
+            
+            }
+        }
+        return msg
+    }
     
+   
 }
 
 struct ChatRow_Previews: PreviewProvider {

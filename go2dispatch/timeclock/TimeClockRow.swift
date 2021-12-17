@@ -11,26 +11,30 @@ struct TimeClockRow: View {
     
     let timeHistory :  TimeLogModelHistory
     @State var typeColor = Color.black
+    let textColor : Color
     
     var body: some View {
         ZStack {
-            Color("time_clock_bg")
+            Text("dale")
+            Color("Marine")
                 .ignoresSafeArea()
             HStack(spacing : 10) {
-            Text(formatoFecha(timeHistory.START_DATE!)).frame(width: 60,
-                                                              alignment: .leading)
-           
-            Text(formatoHora(timeHistory.START_DATE!)).frame(alignment: .trailing)
-            
-            Text("-")
-            Text(formatoHora(timeHistory.END_DATE ?? "")).frame(alignment: .trailing)
-            
-            
-            Text(formatoType(timeHistory.SHIFT_TYPE ?? "")).foregroundColor(typeColor).frame(alignment: .trailing)
-            Text(totalTime(timeHistory.START_DATE ?? "", timeHistory.END_DATE ?? "")).frame(maxWidth: .infinity, alignment: .trailing)
-            
-            
-        }
+                Text(formatoFecha(timeHistory.START_DATE!)).frame(width: 60,
+                                                                  alignment: .leading).foregroundColor(textColor)
+                
+                Text(formatoHora(timeHistory.START_DATE!)).frame(
+                    maxWidth: .infinity,alignment: .leading).foregroundColor(textColor)
+                
+                Text("-").foregroundColor(textColor)
+                Text(formatoHora(timeHistory.END_DATE ?? ""))
+                    .frame(maxWidth: .infinity, alignment: .center).foregroundColor(textColor)
+                
+                
+                Text(formatoType(timeHistory.SHIFT_TYPE ?? "")).foregroundColor(typeColor).frame(alignment: .center).foregroundColor(textColor)
+                Text(totalTime(timeHistory.START_DATE ?? "", timeHistory.END_DATE ?? "")).frame(maxWidth: .infinity, alignment: .trailing).foregroundColor(textColor)
+                
+                
+            }
             
         }
     }
@@ -63,7 +67,7 @@ struct TimeClockRow: View {
             self.typeColor =  prefix == "B" ?  Color.red : Color.green
         }
         
-        return prefix
+        return prefix;
     }
     
     
@@ -92,11 +96,13 @@ struct TimeClockRow: View {
         dateformater.dateFormat = formato
         return dateformater.date(from: fecha) ?? Date()
     }
+    
+    
 }
 
 struct TimeClockRow_Previews: PreviewProvider {
     static var previews: some View {
-        TimeClockRow(timeHistory: TimeLogModelHistory())
+        TimeClockRow(timeHistory: TimeLogModelHistory(), textColor: Color.white)
         
     }
 }
