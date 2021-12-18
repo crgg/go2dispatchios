@@ -13,6 +13,9 @@
 		9B1BEC2D270BD76000370896 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BEC2C270BD76000370896 /* Service.swift */; };
 		9B1BEC30270FC91100370896 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 9B1BEC2F270FC91100370896 /* SocketIO */; };
 		9B1BEC322710981700370896 /* NewChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1BEC312710981700370896 /* NewChatView.swift */; };
+		9B213DD2276D5A0C006CC10E /* ChatsView+ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B213DD1276D5A0C006CC10E /* ChatsView+ServiceProtocol.swift */; };
+		9B213DD4276D69FD006CC10E /* ChatsViewModelHandleChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B213DD3276D69FD006CC10E /* ChatsViewModelHandleChat.swift */; };
+		9B213DD6276D6A74006CC10E /* ServiceHandlerEvento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B213DD5276D6A74006CC10E /* ServiceHandlerEvento.swift */; };
 		9B2C9A9126D6BAF500D80185 /* ChatRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C9A9026D6BAF400D80185 /* ChatRooms.swift */; };
 		9B2C9A9426D6CC5400D80185 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C9A9326D6CC5400D80185 /* Driver.swift */; };
 		9B2C9A9726D6CE8800D80185 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C9A9626D6CE8800D80185 /* ViewModel.swift */; };
@@ -99,6 +102,9 @@
 		9B1BEC262707CA6900370896 /* ApiChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiChat.swift; sourceTree = "<group>"; };
 		9B1BEC2C270BD76000370896 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		9B1BEC312710981700370896 /* NewChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatView.swift; sourceTree = "<group>"; };
+		9B213DD1276D5A0C006CC10E /* ChatsView+ServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatsView+ServiceProtocol.swift"; sourceTree = "<group>"; };
+		9B213DD3276D69FD006CC10E /* ChatsViewModelHandleChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewModelHandleChat.swift; sourceTree = "<group>"; };
+		9B213DD5276D6A74006CC10E /* ServiceHandlerEvento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHandlerEvento.swift; sourceTree = "<group>"; };
 		9B2C9A9026D6BAF400D80185 /* ChatRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRooms.swift; sourceTree = "<group>"; };
 		9B2C9A9326D6CC5400D80185 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		9B2C9A9626D6CE8800D80185 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -274,6 +280,7 @@
 			children = (
 				9B1BEC2C270BD76000370896 /* Service.swift */,
 				9B4A7B832767ADB200922D46 /* ParseDatosOfSocket.swift */,
+				9B213DD5276D6A74006CC10E /* ServiceHandlerEvento.swift */,
 			);
 			path = socket_chat;
 			sourceTree = "<group>";
@@ -350,6 +357,8 @@
 			children = (
 				9BBE74C727061901009F85D2 /* ChatsViewModel.swift */,
 				9B90B4EB2763085C001E6801 /* ChatsViewModelMessage.swift */,
+				9B213DD1276D5A0C006CC10E /* ChatsView+ServiceProtocol.swift */,
+				9B213DD3276D69FD006CC10E /* ChatsViewModelHandleChat.swift */,
 			);
 			path = viewmodel;
 			sourceTree = "<group>";
@@ -607,11 +616,13 @@
 				9BDE04D92748ADBE008AF5DC /* IRLPDFScanContent.swift in Sources */,
 				9BB878DF272A45F000B7D95B /* TimeClockView.swift in Sources */,
 				9BB878E6272B3B3A00B7D95B /* TimeClockHeader.swift in Sources */,
+				9B213DD6276D6A74006CC10E /* ServiceHandlerEvento.swift in Sources */,
 				9B2C9A9726D6CE8800D80185 /* ViewModel.swift in Sources */,
 				9B2C9A9F26D6E70D00D80185 /* GameView.swift in Sources */,
 				9BB878F5272B5EA600B7D95B /* CurentGps.swift in Sources */,
 				9B90B4EC2763085C001E6801 /* ChatsViewModelMessage.swift in Sources */,
 				9B2C9AB526D811BB00D80185 /* LoginView.swift in Sources */,
+				9B213DD4276D69FD006CC10E /* ChatsViewModelHandleChat.swift in Sources */,
 				9B2C9AB226D810C300D80185 /* ApiConfig.swift in Sources */,
 				9B90B4E927630225001E6801 /* ApiChatMessage.swift in Sources */,
 				9B2C9ABF26D9877B00D80185 /* Extensions.swift in Sources */,
@@ -632,6 +643,7 @@
 				9BBE74BF2705280A009F85D2 /* ChatRow.swift in Sources */,
 				9B90B4E02762BECA001E6801 /* TripListViewModel.swift in Sources */,
 				9B2C9AA526D72CFF00D80185 /* SearchGame.swift in Sources */,
+				9B213DD2276D5A0C006CC10E /* ChatsView+ServiceProtocol.swift in Sources */,
 				9B90B4E62762FB6B001E6801 /* Chata_data_Messaage.swift in Sources */,
 				9BDE04DD2748AE3E008AF5DC /* Exports.swift in Sources */,
 				9BF040D726B8A95200A08890 /* go2dispatchApp.swift in Sources */,

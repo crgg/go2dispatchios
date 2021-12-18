@@ -18,6 +18,109 @@ struct ChatRooms: View {
     @State var chatNew : Chat = Chat.sampleChat[0]
     @State var showOverlay : Bool  = false
     
+  
+    @EnvironmentObject var vm: UserStateViewModel
+    
+    
+    private var messagesView : some View {
+        List {
+            ForEach (viewmodel.getSortedFilteredChats(query: query)) { chat in
+                //  HACK to hide the disclosure Arrow!
+                ZStack {
+                    
+                    ChatRow(chat: chat)
+                    
+                    NavigationLink(
+                        destination: {
+                            ChatView(chat: chat)
+                                .environmentObject(viewmodel)
+                        })
+                    {
+                        EmptyView()
+                    }.buttonStyle(PlainButtonStyle())
+                        .frame(width: 0)
+                        .opacity(0)
+                    
+                    
+                }                .listRowInsets(EdgeInsets())
+                
+            }
+        }.listStyle(PlainListStyle())
+            
+               
+                
+                
+            
+         
+    }
+    
+    
+    var body: some View {
+       
+      
+        NavigationView {
+            
+            ZStack {
+                Color("Marine").ignoresSafeArea()
+                
+                VStack {
+//                    customNavBar
+                    
+                    HStack {
+                        
+                        SearchBar(text: $query)
+                    }.padding(.horizontal)
+                    messagesView
+                }
+                .navigationBarTitle("Chats", displayMode: .inline)
+                
+            }.navigationBarColor(UIColor(named: "Marine"))
+             
+             
+            .navigationBarItems(trailing : Button(action: {
+
+                self.isNewChat =  true
+            })  {
+                Image(systemName: "square.and.pencil")
+            }).sheet(isPresented: $isNewChat) {
+                NewChatView(isNewChat: $isNewChat,chatNew: $chatNew, isOpenChat: $isOpenChat).environmentObject(viewmodel)
+            }
+            
+           
+            
+        }
+           
+           .navigationBarHidden(true)
+           
+        
+//           .navigationBarBackButtonHidden(true)
+       
+        .overlay(overlayView: NotificationView().environmentObject(viewmodel)
+                  , show: $viewmodel.isNewMessage)
+        .alert(isPresented: $viewmodel.message_error.isMessageError) {
+            Alert(title: Text("Error"),
+                  message: Text(viewmodel.message_error.messageErrorText),
+                  
+                  dismissButton: .default(Text("OK"),
+                                          action: {
+                if viewmodel.message_error.messageErrorText == "Credentials Not found" {
+                    UserDefaults.standard.setLoggedIn(false)
+                    vm.signOut()
+                }
+            }))
+            
+        }
+        .onAppear {
+           
+            UITableView.appearance().backgroundColor = UIColor(named: "Marine")
+           
+
+            
+            viewmodel.fetchUsers()
+           
+        }
+    }
+ 
     private var customNavBar : some View {
         HStack(spacing: 16) {
             
@@ -49,97 +152,6 @@ struct ChatRooms: View {
     }
 
     
-    @EnvironmentObject var vm: UserStateViewModel
-    
-    
-    var body: some View {
-       
-      
-        NavigationView {
-            
-            ZStack {
-                Color("Marine").ignoresSafeArea()
-                    
-            VStack {
-                customNavBar
-                HStack {
-                    
-                    SearchBar(text: $query)
-                }
-                List {
-                    
-                    ForEach (viewmodel.getSortedFilteredChats(query: query)) { chat in
-                        //  HACK to hide the disclosure Arrow!
-                        ZStack {
-                            
-                            ChatRow(chat: chat)
-                            
-                            
-                            
-                            
-                            NavigationLink(
-                                destination: {
-                                    ChatView(chat: chat)
-                                        .environmentObject(viewmodel)
-                                })
-                            {
-                                EmptyView()
-                            }.buttonStyle(PlainButtonStyle())
-                                .frame(width: 0)
-                                .opacity(0)
-                            
-                            
-                        }
-                        .listRowInsets(EdgeInsets())
-                        
-                        
-                    }
-                }.listStyle(PlainListStyle())
-                
-              }
-            }
-             
-             
-//            .navigationBarItems(trailing : Button(action: {
-//
-//                self.isNewChat =  true
-//            })  {
-//                Image(systemName: "square.and.pencil")
-//            }).sheet(isPresented: $isNewChat) {
-//                NewChatView(isNewChat: $isNewChat,chatNew: $chatNew, isOpenChat: $isOpenChat).environmentObject(viewmodel)
-//            }
-            
-           
-            
-        }
-           
-           .navigationBarHidden(true)
-//           .navigationBarBackButtonHidden(true)
-       
-        .overlay(overlayView: NotificationView().environmentObject(viewmodel)
-                  , show: $viewmodel.isNewMessage)
-        .alert(isPresented: $viewmodel.message_error.isMessageError) {
-            Alert(title: Text("Error"),
-                  message: Text(viewmodel.message_error.messageErrorText),
-                  
-                  dismissButton: .default(Text("OK"),
-                                          action: {
-                if viewmodel.message_error.messageErrorText == "Credentials Not found" {
-                    UserDefaults.standard.setLoggedIn(false)
-                    vm.signOut()
-                }
-            }))
-            
-        }
-        .onAppear {
-           
-            UITableView.appearance().backgroundColor = UIColor(named: "Marine")
-            print("Entramos a View")
-            viewmodel.fetchUsers()
-//            self.showOverlay =  viewmodel.getIsNewMessage()
-           
-        }
-    }
     
 }
 

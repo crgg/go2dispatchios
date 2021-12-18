@@ -8,7 +8,7 @@
 import Foundation
 extension ChatsViewModel {
     
-   
+ 
     
     func getSectionMessage(for chat : Chat) -> [[Message]]{
         
@@ -86,7 +86,7 @@ extension ChatsViewModel {
                     DispatchQueue.main.async {
                         if let row = self.chats.firstIndex(where: {$0.session_id == session_id}) {
 //                            self.chats[row].messages = []
-                            self.messages = []
+                            var messages1 = [Message]()
                             data.forEach({ c in
                                 
                                 let type =  c.type == 0 ?  MessageType.send : MessageType.received
@@ -101,11 +101,14 @@ extension ChatsViewModel {
                                     dateResult =  yourDate
                                 }
                                 
-                                self.messages.append(Message(c.message , type: type, date: dateResult, content_type: type_content))
+                                messages1.append(Message(c.message , type: type, date: dateResult, content_type: type_content))
                                 
 //                                self.chats[row].messages.append( Message(c.message , type: type, date: dateResult, content_type: type_content))
                                 
                             })
+//                            self.chats[row].messages = messages1
+                            self.messages = messages1
+                            self.messageIDToScroll = messages1.last?.id
                             
                         }
                     }

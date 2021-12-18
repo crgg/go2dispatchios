@@ -12,8 +12,10 @@ import SwiftLocation
 protocol ServiceChatProtocol {
     func newMessage(newMessageReceived : New_messag_received)
     func listOnline(list_online : [String])
-    func newMessageChat(m : Message)
+    func newMessageChat(m : Message, user_send : String)
     func typing(session_id : Int , username : String)
+    func readMessageUUID(uuid : String)
+    func readMessageIdSessionId(message_id : Int , session_id : Int)
 }
 
 final class Service : ObservableObject {
@@ -73,43 +75,8 @@ final class Service : ObservableObject {
             
         }
         
-        socket?.on("chat") { data, ack in
-            
-            if let dict  = data[0] as? [String : Any] {
-                
-                ParseDatosOfSocket.parseMessageReceived(dataReceived: dict) { result in
-                    var ctype : contentType = .text
-                    switch result.content {
-                        case "text":
-                        ctype = .text
-                        case "image":
-                        ctype = .image
-                    default :
-                        ctype = .video
-                    }
-                    
-                    let contentType : MessageType = result.type == 0 ?  .received : .send
-                
-                    
-                    let m = Message(result.message ?? "", type: contentType, date: UtilDate.parseDate(dateString: result.date!)!   , content_type: ctype)
-                    
-                    self.callback?.newMessageChat(m: m)
-   
-                    self.currenChat.messages[0] = m
-                    let c : Chata_data = Chata_data()
-                    c.insertMessage(chat: self.currenChat)
-                }
-                
-            }
-        }
-        socket?.on("newIdMessage2") {  data , ack in
-            
-            if let dict = data[0] as? [String: Any] {
-              let newMessage =   New_messag_received(dict)
-                self.callback?.newMessage(newMessageReceived: newMessage)
-                
-            }
-        }
+        self.setChats()
+        self.setOnMessageReceived()
         
         
         socket?.on(clientEvent: .disconnect) {  data , ack in
@@ -154,13 +121,10 @@ final class Service : ObservableObject {
         }
         
         socket?.on("messages") { data, ack in
-            //                    print(data)
-            if let data_ = data[0] as? [[String : Any]] {
-                print("Received message")
-                
-            }
+                print("message")
+      }
             
-        }
+        
         
         socket?.on("sever_error") {
             data, ack in
@@ -169,6 +133,18 @@ final class Service : ObservableObject {
         }
         
         socket?.on("readMessage") { data, ack in
+            if let datarc = data[0] as? [String : Any] {
+                if let uuid = datarc["uuid"] as? String {
+                    print(uuid)
+                    self.callback?.readMessageUUID(uuid: uuid)
+                    return
+                }
+                if let message_id =  datarc["message_id"] as? Int ,
+                   let session_id = datarc["session_id"] as? Int{
+                    self.callback?.readMessageIdSessionId(message_id: message_id, session_id: session_id)
+                    
+                }
+            }
            print(" ✏️ read the message")
         }
         
@@ -183,6 +159,72 @@ final class Service : ObservableObject {
         
         
       // }
+    }
+    func setChats() {
+        socket?.on("chat") { data, ack in
+            
+        
+            
+            if let dict  = data[0] as? [String : Any] {
+                
+                if let userSend = dict["user_send"] as? String  {
+                    if let curent_user =  UserDefaults.standard.getUserData()?.user.username  {
+                        if curent_user == userSend {
+                            return
+                        }
+                    }
+                }
+                
+              print("🎃 received \(dict["message"] ?? "none")")
+                ParseDatosOfSocket.parseMessageReceived(dataReceived: dict) { result in
+                    var ctype : contentType = .text
+                    switch result.content {
+                    case "text":
+                        ctype = .text
+                    case "image":
+                        ctype = .image
+                    default :
+                        ctype = .video
+                    }
+                    
+                    let contentType : MessageType = result.type == 0 ?  .received : .send
+                    
+                    
+                    var m = Message(result.message ?? "", type: contentType, date: UtilDate.parseDate(dateString: result.date!)!   , content_type: ctype)
+                    m.readed = false
+                    
+                    self.currenChat.messages[0] = m
+                    let c : Chata_data = Chata_data()
+                    c.insertMessage(chat: self.currenChat)
+                    self.callback?.newMessageChat(m: m, user_send: result.user_send ?? "")
+                    
+                    
+                    
+                    let paramav : [String : Any] = ["session_id" : result.session_id ?? 0,
+                                                    "message" : result.message ?? "",
+                                                    "user" : result.user_send ,
+                                                    "wherefrom" : "WEB",
+                                                    "uuid" : result.uuid.uuidString,
+                                                    "message_id" : self.currenChat.session_id]
+                                               
+                    self.socket?.emit("read_message", paramav)
+                     
+                 
+                }
+                
+            }
+        }
+    }
+    
+    func setOnMessageReceived() {
+        socket?.on("newIdMessage2") {  data , ack in
+            
+            if let dict = data[0] as? [String: Any] {
+              let newMessage =   New_messag_received(dict)
+                self.callback?.newMessage(newMessageReceived: newMessage)
+                
+            }
+        }
     }
     
     // MARK : Actiones
@@ -210,22 +252,7 @@ final class Service : ObservableObject {
         socket?.emit("set-header", param,"s")
     }
     
-    func join_room(chat : Chat) {
-        guard let username = UserDefaults.standard.getUserData()?.user.username else {
-            print("No have User name ")
-            return
-        }
-        guard chat.session_id > 0 else {
-            return
-        }
-        
-        let param3 : [String : Any] = ["user1_id" : username,
-                                       "user2_id" : chat.person.driver_id,
-                                       "id" : chat.session_id,
-                                       "trip" : 0]
-        socket?.emit("join", param3,"s")
-        
-    }
+  
     
 
     
@@ -261,7 +288,7 @@ final class Service : ObservableObject {
     }
     
     
-    func sendMessage(msg : String , chat : Chat) {
+    func sendMessage(msg : String , chat : Chat, uuid : UUID) {
         
         let driverid = chat.person.driver_id
         guard  chat.session_id > 0 else {
@@ -298,7 +325,7 @@ final class Service : ObservableObject {
                 "message": msg,
                 "content" : msg,
                 "date": result?.createdAt ?? "",
-                "UUID" : chat.messages.last?.id.uuidString ?? UUID().uuidString,
+                "UUID" : uuid.uuidString,
             ] as [String : Any]
             
             print("✏️ chatRoom: send the message \(param)")

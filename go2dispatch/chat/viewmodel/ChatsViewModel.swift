@@ -14,28 +14,10 @@ struct MessageError {
     var messageErrorText : String = ""
 }
 
-class ChatsViewModel: ObservableObject, ServiceChatProtocol {
-    func typing(session_id: Int, username: String) {
-        // search in chat
-        isTyping =  true
-        
-        _  = Timer.scheduledTimer(timeInterval: 3.0,
-                                  target: self,
-                                  selector: #selector(stopTyping),
-                                  userInfo: nil,
-                                  repeats: true)
-        
-    }
-    @objc func stopTyping() {
-        
-       isTyping = false
-    }
+class ChatsViewModel: ObservableObject  {
+   
     
- 
-    func newMessageChat(m: Message) {
-        self.messages.append(m)
-    
-    }
+    @Published var messageIDToScroll : UUID?
     
     @Published var isTyping =  false
     @Published var chats = [Chat]()
@@ -43,44 +25,13 @@ class ChatsViewModel: ObservableObject, ServiceChatProtocol {
     @Published var chatsDriverAll = [Chat]()
     @Published var isNewMessage = false
     @Published var message_error : MessageError  = MessageError()
-    
-    
     @Published var newMessageReceived : New_messag_received = New_messag_received()
- 
     
     @ObservedObject var service = Service()
+    
     var user_online : [String] = []
     
-    
-    func listOnline(list_online: [String]) {
-        self.user_online = list_online
-        
-        if self.chats.count > 0 {
-            
-            let chatdat = Chata_data()
-            for i in 0..<list_online.count {
-                chatdat.updateOnline(driverId: list_online[i])
-            }
-            DispatchQueue.main.async  {
-                self.chats.indices.forEach {
-                    self.chats[$0].online = list_online.contains(self.chats[$0].person.driver_id) ?  true :  false
-                }
-            }
-        }
-    }
-    
-    func newMessage(newMessageReceived : New_messag_received) {
-        isNewMessage = true
-        let chatdata = Chata_data()
-        chatdata.updateUserInfo(driverId: newMessageReceived.user_send, newMessageInfo: newMessageReceived )
-        
-        self.newMessageReceived = newMessageReceived
-        
-        
-        updateChats(newMessageReceived: newMessageReceived)
-        
-        
-    }
+
     
 
  
@@ -90,18 +41,7 @@ class ChatsViewModel: ObservableObject, ServiceChatProtocol {
       
     }
 
-    func updateChats(newMessageReceived : New_messag_received) {
-        if self.chats.count == 0 {
-            return
-        }
-        DispatchQueue.main.async {
-            if let row = self.chats.firstIndex(where: {$0.person.driver_id == newMessageReceived.user_send}) {
-                self.chats[row].messages[0].text = newMessageReceived.message
-                self.chats[row].hasUnreadMessage =  true
-            }
-        }
-    }
-    
+
     
     func fetchUsers()  {
         
@@ -351,10 +291,10 @@ class ChatsViewModel: ObservableObject, ServiceChatProtocol {
         
         
         
-        let message = Message(text, type: .send, content_type: .text)
+        let message = Message(text, type: .send, content_type: .text, readed: false)
         self.messages.append(message)
     
-        service.sendMessage(msg: text, chat: chat)
+        service.sendMessage(msg: text, chat: chat, uuid : message.id)
         return message
     }
     

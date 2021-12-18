@@ -12,11 +12,11 @@ struct ChatView: View {
     @EnvironmentObject var viewModel : ChatsViewModel
     
     let chat : Chat
-    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     @State private var text = ""
     
     @State private var messageIDToScroll: UUID?
-   
     
    // @FocusState private var isFocused
     
@@ -33,16 +33,19 @@ struct ChatView: View {
                             scrollReader in
                             getMessagesView(viewWith: reader.size.width)
                                 .padding(.horizontal)
-                                .onChange(of: messageIDToScroll) { _ in
-                                    if let messageID =  messageIDToScroll {
-                                        scrollTo(messageID: messageID, shouldAdmimate: true, scrollReader: scrollReader)
+                                .onChange(of: viewModel.messageIDToScroll) { _ in
+                      
+                                    if let messageID =  viewModel.messageIDToScroll {
+                                        scrollTo(messageID: messageID, shouldAdmimate: false, scrollReader: scrollReader)
                                     }
                                 }
                                 .onAppear {
-                                    if let messageID = viewModel.messages.last?.id {
-                                        messageIDToScroll = messageID
-                                        scrollTo(messageID: messageID, anchor: .bottom, shouldAdmimate: false  , scrollReader: scrollReader)
-                                    }
+                                    
+                                    
+//                                    if let messageID = viewModel.messages.last?.id {
+//                                        messageIDToScroll = messageID
+//                                        scrollTo(messageID: messageID, anchor: .bottom, shouldAdmimate: false  , scrollReader: scrollReader)
+//                                    }
                                 }
                         }
      
@@ -56,26 +59,30 @@ struct ChatView: View {
             }
             .padding(.top, 1)
             .navigationBarTitleDisplayMode(.inline)
-            
-            .navigationBarItems(leading: navBarLeadingBtn, trailing: navBarTralingBtn)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: navBarLeadingBtn)
             .background(NavigationConfigurator { nc in
                            nc.navigationBar.barTintColor = .blue
-                          nc.navigationBar.backgroundColor = .blue
+
                 nc.toolbar.tintColor = .blue
                 nc.navigationBar.backItem?.titleView?.tintColor = .blue
                            nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
                        })
+            . navigationBarColor(UIColor(named: "Marine"))
             .navigationViewStyle(StackNavigationViewStyle())
             .onAppear {
                 viewModel.markAsUnread(false, chat: chat)
     //            viewModel.service.set_header(driverId: chat.person.driver_id, session_id: chat.session_id)
-                viewModel.service.join_room(chat: chat)
+                viewModel.joinRoom(chat:  chat)
                 viewModel.setCurrentChat(chat: chat)
                 viewModel.getMessages(session_id: chat.session_id)
                 let appearance = UINavigationBarAppearance()
                        appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
                        appearance.backgroundColor = UIColor(Color.orange.opacity(0.2))
                        
+            }
+            .onDisappear {
+                
             }
 
             
@@ -84,28 +91,34 @@ struct ChatView: View {
     }
     
     var navBarLeadingBtn : some View {
-        Button(action: {}) {
+         
             HStack {
+                Button(action : {
+                    viewModel.outRoom(chat: chat)
+                    self.presentationMode.wrappedValue.dismiss()                }) {
+                    Image(systemName: "arrow.left.circle")
+                }
+                
+                
                 Image(uiImage: chat.person.imgString.load()).resizable()
                     .frame(width: 40, height: 40)
                     .clipShape(Circle())
                 Text(viewModel.isTyping ? "Typing" : chat.person.name).bold()
                 
             }
-            .foregroundColor(.black)
+            .foregroundColor(.white)
         
-        
-        }
     }
     
-    var navBarTralingBtn : some View {
-        HStack {
-            Button(action: {}) {
-                Image(systemName: "trash.circle.fill")
-            }
-        }
-    }
     
+//    var navBarTralingBtn : some View {
+//        HStack {
+//            Button(action: {}) {
+//                Image(systemName: "trash.circle.fill")
+//            }
+//        }
+//    }
+//
     func scrollTo(messageID : UUID, anchor : UnitPoint? = nil, shouldAdmimate : Bool, scrollReader : ScrollViewProxy) {
         
         DispatchQueue.main.async {
@@ -189,8 +202,8 @@ struct ChatView: View {
           let message = viewModel.sendMessage2(text, chat: chat)
            text  = ""
              
-             messageIDToScroll = message.id
-         
+//             messageIDToScroll = message.id
+           viewModel.messageIDToScroll  = message.id
         
         
 //        if let message = viewModel.sendMessage(text, in: chat) {
@@ -210,12 +223,13 @@ struct ChatView: View {
                     Section(header: sectionHeader(firstMessage: messages.first!)) {
                         ForEach(messages) { message in
                             let isReceived = message.type == .received
+                            
                             HStack {
                                 ZStack {
                                     Text(message.text)
                                         .padding(.horizontal)
                                         .padding(.vertical, 12)
-                                        .background(isReceived ? Color.black.opacity(0.2) : .green.opacity(0.9))
+                                        .background(isReceived ? Color.black.opacity(0.2) : message.readed  ? .green.opacity(0.9) : .blue.opacity(0.9))
                                         .cornerRadius(13)
                                 }
                                 .frame(width : viewWith * 0.7, alignment: isReceived ? .leading : .trailing)

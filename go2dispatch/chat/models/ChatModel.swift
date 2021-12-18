@@ -95,6 +95,7 @@ struct Message : Identifiable {
     var text : String
     var type : MessageType
     var content_type : contentType
+    var readed : Bool  = true
     init(_ text: String, type : MessageType, date: Date, content_type: contentType) {
         self.date = date
         self.type = type
@@ -102,6 +103,15 @@ struct Message : Identifiable {
         self.content_type = content_type
        
     }
+    init(_ text: String, type: MessageType , content_type : contentType, readed : Bool) {
+        self.date = Date()
+        self.type = type
+        self.text = text
+        self.content_type = content_type
+        self.readed = readed
+       
+    }
+    
     init(_ text: String, type: MessageType , content_type : contentType) {
         self.init(text, type:type, date: Date(), content_type: content_type)
     }
