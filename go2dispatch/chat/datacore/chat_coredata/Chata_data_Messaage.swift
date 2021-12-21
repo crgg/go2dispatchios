@@ -65,6 +65,36 @@ extension Chata_data {
         
     }
   
+    func updateAllReadedMessage(session_id : Int64) {
+        let context = PersistenceController.shared.container.viewContext
+        var resultado = [NSManagedObject] ()
+        let fetchrequest : NSFetchRequest<ChatMessages> = ChatMessages.fetchRequest()
+        fetchrequest.predicate = NSPredicate(format: "session_id == %i", session_id)
+        do {
+            resultado = try context.fetch(fetchrequest)
+            let resultadata = resultado as! [ChatMessages]
+            
+            if resultadata.count > 0 {
+                let chatMessage =  resultado[0] as! ChatMessages
+                chatMessage.read_at = true
+                
+                do {
+                    print("\(TAG) update ready from updateAllReaded")
+                    try context.save()
+                    
+                } catch {
+                    print("Error: search in driverscheduletb")
+                }
+                
+            }
+        } catch let error as NSError {
+            print("\(TAG) update ChatUsers \(error)")
+        }
+    }
+    
+    
+    
+    
     func updateReadedMessage(message_id : Int64) {
         let context = PersistenceController.shared.container.viewContext
         var resultado = [NSManagedObject] ()

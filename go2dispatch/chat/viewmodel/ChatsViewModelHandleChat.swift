@@ -8,8 +8,13 @@
 import Foundation
 extension ChatsViewModel {
     func joinRoom(chat : Chat) {
-       
+        DispatchQueue.main.async {
+            self.messages = []
+        }
+        
         service.join_room(chat: chat)
+        
+        
     }
     
     func outRoom(chat: Chat) {

@@ -34,6 +34,29 @@ class ParseDatosOfSocket {
         
     }
     
+    public static func parserOpenChat(dataReceived : Any?, handler: @escaping (_ rr_result: OpenChatDataReceived?) -> ()) {
+        if let datos =  dataReceived as? [String : Any] {
+                print(datos)
+            guard let session_id = datos["session_id"] as? Int else {
+                    handler(nil)
+                return
+            }
+            guard let user = datos["user"] as? String else {
+                handler(nil)
+                return
+            }
+             handler(OpenChatDataReceived(session_id: session_id, user: user))
+        }
+    }
+}
+
+extension ParseDatosOfSocket {
+    struct OpenChatDataReceived {
+        var session_id : Int?
+        var user : String?
+     
+    }
+    
 }
 
 extension ParseDatosOfSocket {

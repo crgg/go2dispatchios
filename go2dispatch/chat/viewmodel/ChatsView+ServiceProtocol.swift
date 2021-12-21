@@ -14,18 +14,41 @@
 
 import Foundation
 extension ChatsViewModel : ServiceChatProtocol {
+    func newSession(session_id: Int) {
+        //
+    }
+    
+    func openChat(openChatData: ParseDatosOfSocket.OpenChatDataReceived) {
+       // update all message no
+      
+        DispatchQueue.main.async {
+            self.messages.indices.forEach {
+                self.messages[$0].readed = true
+            }
+        }
+        
+        DispatchQueue.init(label: "dale", qos: .background).async {
+            let chat_data =  Chata_data()
+            if let session_id =  openChatData.session_id {
+                chat_data.updateAllReadedMessage(session_id: Int64(session_id))
+                if let to_user =  openChatData.user {
+                    ApiChat.markAllReaded(session_id: session_id, to_user: to_user, trip_number: 0)
+                }
+            }
+           
+        }
+    }
+    
+     
+    
+    // Update is readed from uuid
     func readMessageUUID(uuid: String) {
         // update search in chat
         DispatchQueue.main.async {
-//            if let row = self.chats.firstIndex(where: {$0.messages == newMessageReceived.user_send}) {
-//                self.chats[row].messages[0].text = newMessageReceived.message
-//                self.chats[row].hasUnreadMessage =  true
-//            }
             if let row  = self.messages.firstIndex(where: {$0.id.uuidString == uuid}) {
                 self.messages[row].readed = true
             }
         }
-        
     }
     
     func readMessageIdSessionId(message_id: Int, session_id: Int) {

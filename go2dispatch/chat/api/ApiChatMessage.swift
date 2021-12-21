@@ -8,6 +8,77 @@
 import Foundation
 extension ApiChat {
     
+    
+    static func markAllReaded(session_id : Int, to_user: String, trip_number: Int) {
+        
+        guard  session_id > 0 else {
+            print(" MarkAllReaded error session id is 0")
+            return
+        }
+        guard let username = UserDefaults.standard.getUserData()?.user.username  else {
+            print(" falta el user id")
+            return
+        }
+        
+        let urlString = "\(ApiConfig.READ_AT)"
+        guard let url = URL(string: urlString) else {
+            print("error the url conform")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+//        let dateFormatterGet = DateFormatter()
+//        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss.000000"
+//        let dateString =  String(dateFormatterGet.string(from: Date()))
+//
+        let param = ["session_id" : String(session_id) ,
+                      "trip":  String(trip_number),
+                      "to_user": to_user,
+                      "user_send" : username]
+        
+        guard let jsonParam = try? JSONEncoder().encode(param) else {
+            print("error the parameters")
+            return
+        }
+        request.httpBody =  jsonParam
+        let apiToken = UserDefaults.standard.getApiToken()
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue(apiToken ?? "", forHTTPHeaderField: "Authorization")
+ 
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            do {
+                               
+                if let jsonData = data {
+                    let decodeData = try JSONDecoder().decode(MessageRequest.self , from : jsonData)
+                   
+                    guard decodeData.status else {
+                        print("error markAllReaded")
+                        return
+                    }
+                    print("update all readed success")
+                    
+                    return
+                }
+            } catch let err {
+                print(err)
+            }
+            
+            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+           
+            
+        }.resume()
+        
+        
+
+        
+        
+    }
+    
     static func insertMessage(msg : String , chat : Chat, handler: @escaping (_ sucess : Bool, _ error : String?, _ result : DataMessageRequest? )->()) {
         
         let driverid = chat.person.driver_id

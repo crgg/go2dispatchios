@@ -16,6 +16,8 @@ protocol ServiceChatProtocol {
     func typing(session_id : Int , username : String)
     func readMessageUUID(uuid : String)
     func readMessageIdSessionId(message_id : Int , session_id : Int)
+    func openChat(openChatData : ParseDatosOfSocket.OpenChatDataReceived)
+    func newSession(session_id : Int)
 }
 
 final class Service : ObservableObject {
@@ -32,6 +34,8 @@ final class Service : ObservableObject {
     @Published var currenChat : Chat = Chat.sampleChat[0]
     
    var callback : ServiceChatProtocol?
+    
+    static let logs_chat : String = "🎯 \(Date())"
   
     
     var socket: SocketIOClient?
@@ -43,13 +47,14 @@ final class Service : ObservableObject {
         
         socket?.on(clientEvent: .connect) {  (data, ack) in
             
-            print("🎯 conneted")
+            print("\(Service.logs_chat) conneted")
             self.registerUser()
                  
         }
         
+        // get all users Conencted
         socket?.on("getUsersConnected") { data , ack in
-            print("\(Date()) 🎯 get user rcl")
+            print("\(Service.logs_chat) get user rcl")
             if let datareceived = data as? [[String: Any]] {
                 if  let data2 = datareceived[0]["clientsDriver"] as? [[String : Any]] {
                     ParseDatosOfSocket.parseUsersOnline(data2: data2) {
@@ -59,11 +64,13 @@ final class Service : ObservableObject {
                 }
             }
         }
+        
+        // Event the errors
         socket?.on(clientEvent: .error) { data, ack in
             if let errorStr: String = (data[0] as? String) {
                 if errorStr.hasPrefix("ERR_SOCKETIO_INVALID_SESSION") {
                     self.socket?.disconnect()
-                    print("App Chat: error \(errorStr)")
+                    print("\(Service.logs_chat) App Chat: error \(errorStr)")
                      return
                 }
                     
@@ -75,28 +82,29 @@ final class Service : ObservableObject {
             
         }
         
+        // set received the event ("chat")
         self.setChats()
+        
+        // set Message Received
         self.setOnMessageReceived()
         
         
+        // event the sockect discount
         socket?.on(clientEvent: .disconnect) {  data , ack in
-            print("🎯 socket discount")
-            
+            print("\(Service.logs_chat) socket discount")
+            self.socket?.connect()
         }
         
-        socket?.on("openedchat") {
-            data, ack in
-            print("socket openedchat")
-            
-        }
+        // event adavance the user open the session
+   
         socket?.on("new_session") { data , ack in
-            print("create a nuevo session")
+            print("\(Service.logs_chat) create a nuevo session")
         }
         socket?.on("typing") {
               data, ack in
             if let result  = data[0] as? [String : Any] {
 //                g ["session_id": 274, "user": RAMON, "from": PHONE]
-                print("typing \(result)")
+                print("\(Service.logs_chat) typing \(result)")
                 if let session_id = result["session_id"] as? Int, let user = result["user"] as? String {
                     
                     self.callback?.typing(session_id: session_id, username: user)
@@ -109,26 +117,26 @@ final class Service : ObservableObject {
             
         }
         socket?.on("chat_pend") { data, ack in
-            print("chat_pend")
+            print("\(Service.logs_chat) chat_pend")
         }
         
         socket?.on("no-read") {
             data , ack in
-            print("no-read")
+            print("\(Service.logs_chat) no-read")
         }
         socket?.on("openedchatwebforphone") { data, ack in
-            print("openedfromwebsite")
+            print("\(Service.logs_chat) openedfromwebsite")
         }
         
         socket?.on("messages") { data, ack in
-                print("message")
+                print("\(Service.logs_chat) message")
       }
             
-        
+        setOpenChat()
         
         socket?.on("sever_error") {
             data, ack in
-            print("sever error")
+            print("\(Service.logs_chat) sever error")
             
         }
         
@@ -145,7 +153,7 @@ final class Service : ObservableObject {
                     
                 }
             }
-           print(" ✏️ read the message")
+           print(" \(Service.logs_chat) read the message")
         }
         
 
@@ -160,6 +168,21 @@ final class Service : ObservableObject {
         
       // }
     }
+    func setOpenChat() {
+        
+        socket?.on("openedchat") {
+            data, ack in
+            print("\(Service.logs_chat) socket openedchat \(ack)")
+            ParseDatosOfSocket.parserOpenChat(dataReceived: data[0]) { r_result in
+                if let result = r_result {
+                    self.callback?.openChat(openChatData: result)
+                    
+                }
+            }
+            
+        }
+    }
+    
     func setChats() {
         socket?.on("chat") { data, ack in
             
@@ -175,7 +198,7 @@ final class Service : ObservableObject {
                     }
                 }
                 
-              print("🎃 received \(dict["message"] ?? "none")")
+              print("\(Service.logs_chat) received \(dict["message"] ?? "none")")
                 ParseDatosOfSocket.parseMessageReceived(dataReceived: dict) { result in
                     var ctype : contentType = .text
                     switch result.content {
@@ -247,7 +270,7 @@ final class Service : ObservableObject {
             ] as [String : Any]
         
         // set headet para autorizacion for user the server.
-        print( "✏️ chatRoom: emit set-header \(param)")
+        print( "\(Service.logs_chat) chatRoom: emit set-header \(param)")
        
         socket?.emit("set-header", param,"s")
     }
@@ -257,11 +280,11 @@ final class Service : ObservableObject {
 
     
     func registerUser() {
-        print("\(Date()) 🎯 connected")
+        print("\(Service.logs_chat) connected")
         
         let param2 = ["username" : "RAMON",
                       "type" : "dispatch"]
-        print( "\(Date()) 🎯 chatRoom: emit set user")
+        print( "\(Service.logs_chat) chatRoom: emit set user")
         socket?.emit("setUser", param2,"s");
         
     }
@@ -270,17 +293,17 @@ final class Service : ObservableObject {
                 let myhandler = socket.handlers
                 print(myhandler)
                 let socketConectionStatus = socket.status
-                print("🎯 status socket : \(socketConectionStatus)")
+                print("\(Service.logs_chat) status socket : \(socketConectionStatus)")
                 switch socketConectionStatus {
                   case SocketIOStatus.connected:
-                      print("socket connected")
+                      print("\(Service.logs_chat) socket connected")
                   case SocketIOStatus.connecting:
-                      print("socket connecting")
+                      print("\(Service.logs_chat) socket connecting")
                   case SocketIOStatus.disconnected:
                       socket.connect()
-                      print("🎯 Conected from disconnected")
+                      print("\(Service.logs_chat) Conected from disconnected")
                   case SocketIOStatus.notConnected:
-                      print("🎯 Conected from not connected")
+                      print("\(Service.logs_chat) Conected from not connected")
         
                       socket.connect()
                    
@@ -292,11 +315,11 @@ final class Service : ObservableObject {
         
         let driverid = chat.person.driver_id
         guard  chat.session_id > 0 else {
-            print(" ✏️ chatRoom: SEND_MESSAGE : Session is Null")
+            print(" \(Service.logs_chat) chatRoom: SEND_MESSAGE : Session is Null")
             return
         }
         guard let username = UserDefaults.standard.getUserData()?.user.username  else {
-            print(" ✏️ Error the username internal")
+            print(" \(Service.logs_chat) Error the username internal")
             return
         }
         
@@ -328,7 +351,7 @@ final class Service : ObservableObject {
                 "UUID" : uuid.uuidString,
             ] as [String : Any]
             
-            print("✏️ chatRoom: send the message \(param)")
+            print("\(Service.logs_chat) chatRoom: send the message \(param)")
             self.socket?.emit("chat", param, "DALE")
             let chat_data = Chata_data()
             chat_data.insertMessage(chat: chat)

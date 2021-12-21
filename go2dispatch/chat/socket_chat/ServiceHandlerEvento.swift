@@ -22,6 +22,7 @@ extension Service {
         socket?.off("newIdMessage2")
         socket?.off("chat")
         self.setChats()
+        self.setOpenChat()
         
         let param  = [
                       "session_id" :  chat.session_id,
@@ -39,6 +40,7 @@ extension Service {
     func outRooms(chat: Chat){
         socket?.emit("salir", chat.session_id)
         socket?.off("chat")
+        socket?.off("openedchat")
         self.setOnMessageReceived()
     }
     

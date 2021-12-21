@@ -117,6 +117,65 @@ class ApiChat {
     }
     
     
+    static func createSession(driver_id: String, trip_number : Int,    handler: @escaping(_ sucess : Bool, _ error : String?,_ result : Int? )->()) {
+        
+        guard let username = UserDefaults.standard.getUserData()?.user.username  else {
+            print(" falta el user id")
+            return
+        }
+        
+        let urlString = "\(ApiConfig.CREATE_SESSION)"
+        
+        guard let url = URL(string: urlString) else {
+            print("error the url conform")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        
+        let param = ["user" : username  ,
+                      "trip":  String(trip_number),
+                      "driver": driver_id ]
+        
+        guard let jsonParam = try? JSONEncoder().encode(param) else {
+            print("error the parameters")
+            return
+        }
+        request.httpBody =  jsonParam
+        let apiToken = UserDefaults.standard.getApiToken()
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue(apiToken ?? "", forHTTPHeaderField: "Authorization")
  
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            do {
+                               
+                if let jsonData = data {
+                    let decodeData = try JSONDecoder().decode(MessageRequest.self , from : jsonData)
+                   
+                    guard decodeData.status else {
+                        print("error markAllReaded")
+                        return
+                    }
+                    print("update all readed success")
+                    
+                    return
+                }
+            } catch let err {
+                print(err)
+            }
+            
+            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+           
+            
+        }.resume()
+        
+        
+        
+    }
     
 }

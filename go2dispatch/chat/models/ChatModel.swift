@@ -313,6 +313,8 @@ struct MessagesList: Codable {
     let uuid: String?
     let user: String
 
+    
+    
     enum CodingKeys: String, CodingKey {
         case message, id
         case sessionID = "session_id"

@@ -70,7 +70,9 @@ extension ChatsViewModel {
 //            }
 //          //  return
 //        }
-//            
+//
+        
+        print("🧩 \(Date()) Server get Message")
         ApiChat.getMessages(session_id: session_id) { sucess, error, data in
             if !sucess {
                 if let error = error {
@@ -83,9 +85,10 @@ extension ChatsViewModel {
             }
             if  data.count > 0 {
                 
-                    DispatchQueue.main.async {
-                        if let row = self.chats.firstIndex(where: {$0.session_id == session_id}) {
-//                            self.chats[row].messages = []
+                print("🧩\(Date()) Server finined Get Message")
+//                        if let row = self.chats.firstIndex(where: {$0.session_id == session_id}) {
+////                            self.chats[row].messages = []
+//                     self.messages = data
                             var messages1 = [Message]()
                             data.forEach({ c in
                                 
@@ -103,15 +106,20 @@ extension ChatsViewModel {
                                 
                                 messages1.append(Message(c.message , type: type, date: dateResult, content_type: type_content))
                                 
-//                                self.chats[row].messages.append( Message(c.message , type: type, date: dateResult, content_type: type_content))
+ 
                                 
                             })
-//                            self.chats[row].messages = messages1
-                            self.messages = messages1
-                            self.messageIDToScroll = messages1.last?.id
+ 
+                            DispatchQueue.main.async {
+                                 
+                               
+                                print("🧩\(Date()) Assign UI")
+                                self.messageIDToScroll = messages1.last?.id
+                            }
                             
-                        }
-                    }
+                            
+                       
+                    
                     
                 
                 
