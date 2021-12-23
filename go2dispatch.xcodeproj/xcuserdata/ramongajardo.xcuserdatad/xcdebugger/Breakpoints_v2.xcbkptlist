@@ -94,8 +94,8 @@
             filePath = "go2dispatch/chat/datacore/chat_coredata/Chat_data.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "save_users(driver_users:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,8 +110,8 @@
             filePath = "go2dispatch/chat/datacore/chat_coredata/Chat_data.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "save_users(driver_users:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -542,8 +542,8 @@
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
             landmarkName = "getMessages(session_id:handler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -558,8 +558,8 @@
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
+            startingLineNumber = "297"
+            endingLineNumber = "297"
             landmarkName = "getMessages(session_id:handler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -574,8 +574,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsViewModelMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "getMessages(session_id:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -590,8 +590,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsViewModelMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "getMessages(session_id:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -606,8 +606,8 @@
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
             landmarkName = "getMessages(session_id:handler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -679,38 +679,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C7EF241D-B750-47A3-98C5-1114E1148202"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "go2dispatch/chat/viewmodel/ChatsViewModelMessage.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "getMessages(session_id:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "509A978D-AE5E-4940-99EC-8D180827801E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "go2dispatch/chat/viewmodel/ChatsViewModelMessage.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "getMessages(session_id:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "BB36D64F-1895-4C29-BA37-6D7AB92587F3"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -718,40 +686,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsViewModelMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "getMessages(session_id:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F0953B67-BF58-43F3-BA65-CBF09AD6B305"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "go2dispatch/chat/viewmodel/ChatsViewModelMessage.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "getMessages(session_id:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FA242FEC-EB40-4580-AD84-F82A165193FE"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "go2dispatch/chat/viewmodel/ChatsViewModelMessage.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "getMessages(session_id:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -766,8 +702,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "fromApi()"
             landmarkType = "7">
          </BreakpointContent>
@@ -782,8 +718,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "fromApi()"
             landmarkType = "7">
          </BreakpointContent>
@@ -798,8 +734,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "fromApi()"
             landmarkType = "7">
          </BreakpointContent>
@@ -910,8 +846,8 @@
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "345"
+            endingLineNumber = "345"
             landmarkName = "getMessages(session_id:handler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -920,14 +856,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "76876942-D450-4457-B5EC-AE889309DA89"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "361"
+            endingLineNumber = "361"
             landmarkName = "getMessages(session_id:handler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -936,14 +872,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "9817ADE2-5CFC-40AF-92EB-28AEE14B8E87"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
             landmarkName = "getMessages(session_id:handler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1022,8 +958,8 @@
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
             landmarkName = "getMessages(session_id:handler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1038,8 +974,8 @@
             filePath = "go2dispatch/chat/datacore/chat_coredata/Chat_data.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "save_users(driver_users:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1054,8 +990,8 @@
             filePath = "go2dispatch/chat/datacore/chat_coredata/Chat_data.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "save_users(driver_users:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1086,8 +1022,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "parseUserInfo(data:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1102,8 +1038,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
             landmarkName = "parseUserInfo(data:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1143,22 +1079,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A38993BF-5092-4CAB-A92D-FB45928B92B4"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "go2dispatch/chat/ChatView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
-            landmarkName = "getMessagesView(viewWith:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "FBE69915-8B31-4A79-A1B9-5E46240FB7E9"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -1166,8 +1086,8 @@
             filePath = "go2dispatch/chat/ChatView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "getMessagesView(viewWith:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1214,8 +1134,8 @@
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
             landmarkName = "getMessages(session_id:handler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1246,8 +1166,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsViewModelMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "getMessages(session_id:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1262,8 +1182,8 @@
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "insertMessage(msg:chat:handler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1326,8 +1246,8 @@
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "insertMessage(msg:chat:handler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1342,8 +1262,8 @@
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
             landmarkName = "insertMessage(msg:chat:handler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1358,8 +1278,8 @@
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "insertMessage(msg:chat:handler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1390,8 +1310,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "parseUserInfo(data:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1406,8 +1326,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "fromApi()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1422,8 +1342,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsViewModelMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "getMessages(session_id:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1480,7 +1400,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "5A19B24E-3307-4539-9972-B94A0BDEF03A"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "go2dispatch/chat/socket_chat/Service.swift"
@@ -1550,8 +1470,8 @@
             filePath = "go2dispatch/chat/ChatView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1566,8 +1486,8 @@
             filePath = "go2dispatch/chat/ChatView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "sendMessage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1646,8 +1566,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsView+ServiceProtocol.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "newMessage(newMessageReceived:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1662,8 +1582,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsView+ServiceProtocol.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "updateChats(newMessageReceived:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1678,8 +1598,8 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsView+ServiceProtocol.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "updateChats(newMessageReceived:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1720,14 +1640,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "A5A270D6-39DD-485B-BC78-72D41397AC42"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "markAllReaded(session_id:to_user:trip_number:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1742,8 +1662,8 @@
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "markAllReaded(session_id:to_user:trip_number:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1752,46 +1672,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "5300A0B5-8417-40BE-9F50-674D8D83B23F"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "markAllReaded(session_id:to_user:trip_number:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3AB2D5C8-3F05-4D04-A959-6D342D192C15"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "markAllReaded(session_id:to_user:trip_number:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "106D5702-B174-49FA-80CB-85DD99CECC14"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "markAllReaded(session_id:to_user:trip_number:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1806,24 +1694,8 @@
             filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "markAllReaded(session_id:to_user:trip_number:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A0659B39-9B1E-4964-852F-A71AD0531B19"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "markAllReaded(session_id:to_user:trip_number:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1838,9 +1710,233 @@
             filePath = "go2dispatch/chat/viewmodel/ChatsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "parseUserInfo(data:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "24EB4C45-FED3-46AE-986B-1626F80605F9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "markAllReaded(session_id:to_user:trip_number:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "131B83DF-06F3-4DD5-961B-283EEEBD5EB4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "markAllReaded(session_id:to_user:trip_number:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "094B65AC-458C-4D5D-B61C-32E59A309820"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
+            landmarkName = "insertMessage(msg:chat:handler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ACD36308-9A4F-43BD-8CDE-C5582583A073"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
+            landmarkName = "getMessages(session_id:handler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3002E092-534F-4C33-ADC3-6AD220242731"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
+            landmarkName = "getMessages(session_id:handler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "467781C6-5E46-4364-BB18-690FB03292F0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
+            landmarkName = "getMessages(session_id:handler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F95B35B1-72BB-438E-BB07-52462EA4C4E0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "markAllReaded(session_id:to_user:trip_number:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "24E70C66-2C77-4204-B4BE-FB6CA8708700"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "markAllReaded(session_id:to_user:trip_number:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C444075A-965D-4375-A261-8C4AE3090838"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/ChatView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "95DC4D40-1C34-4780-8D28-67EB10A3EE58"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/viewmodel/ChatsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "fromApi()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "99596FEA-9D10-479E-82F6-B88FEC775521"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/viewmodel/ChatsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "fetchUsers()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "81A46B39-1CA1-4720-AB84-7BAA1049B15B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/viewmodel/ChatsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "fetchUsers()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7CC310F7-1F04-430E-8ACF-52402BA45108"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "readMessage(session_id:message_id:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9887C322-5FF7-41A5-A62E-BA310D7900ED"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "go2dispatch/chat/api/ApiChatMessage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "readMessage(session_id:message_id:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

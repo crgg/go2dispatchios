@@ -23,7 +23,7 @@ extension ChatsViewModel : ServiceChatProtocol {
       
         DispatchQueue.main.async {
             self.messages.indices.forEach {
-                self.messages[$0].readed = true
+                self.messages[$0].messageParse.readed = true
             }
         }
         
@@ -45,15 +45,17 @@ extension ChatsViewModel : ServiceChatProtocol {
     func readMessageUUID(uuid: String) {
         // update search in chat
         DispatchQueue.main.async {
-            if let row  = self.messages.firstIndex(where: {$0.id.uuidString == uuid}) {
-                self.messages[row].readed = true
+            if let row  = self.messages.firstIndex(where: {$0.messageParse.id.uuidString == uuid}) {
+                self.messages[row].messageParse.readed = true
             }
         }
+    
+       
     }
     
     func readMessageIdSessionId(message_id: Int, session_id: Int) {
      // update
-        
+        ApiChat.readMessage(session_id: session_id, message_id: message_id)
     }
     
     func typing(session_id: Int, username: String) {
@@ -99,7 +101,14 @@ extension ChatsViewModel : ServiceChatProtocol {
     }
     
     func newMessageChat(m: Message, user_send: String) {
-        self.messages.append(m)
+        
+       
+        let send_at =  DAt(date: "", timezoneType: 3, timezone: Timezone.americaChicago)
+       
+        let mess =  MessagesList(message: "", id: 0, sessionID: 0, type: 1, readAt: nil, sendAt: send_at , content: .text, trip: 0, uuid: nil, user: "", messageParse: m)
+        
+        
+        self.messages.append(mess)
         self.messageIDToScroll = m.id
         DispatchQueue.main.async {
             if let row = self.chats.firstIndex(where: {$0.person.driver_id == user_send}) {

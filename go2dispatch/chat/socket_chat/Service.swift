@@ -24,7 +24,7 @@ final class Service : ObservableObject {
     
 //    , .forceWebsockets(true),
 //    , .forceNew(true), .forceWebsockets(true), .forcePolling(false)
-    private var manager = SocketManager(socketURL: URL(string: "http://localhost:3001")!,
+    private var manager = SocketManager(socketURL: URL(string: ApiConfig.URL_CHAT)!,
                                         config: [.log(true), .compress,
                                                  .extraHeaders(["Authorization":"VhCxBC3c1a9jSmoJAdhtvGj6lBtKfPGoXVGSTCMoYOzeEAkchbzjmvHxBQx6"])])
     @Published var messages = [String]()
@@ -145,7 +145,7 @@ final class Service : ObservableObject {
                 if let uuid = datarc["uuid"] as? String {
                     print(uuid)
                     self.callback?.readMessageUUID(uuid: uuid)
-                    return
+                    
                 }
                 if let message_id =  datarc["message_id"] as? Int ,
                    let session_id = datarc["session_id"] as? Int{

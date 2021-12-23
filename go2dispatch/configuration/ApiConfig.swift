@@ -15,6 +15,8 @@ class ApiConfig {
     
     public static let URL_PROD : String =  "https://driverapp.tech4tms.com/api/dispatcher_app/"
     
+    public static let URL_CHAT : String = "http://localhost:3001"
+    
     public static let URL_CHAT_API : String = "https://driverapp.tech4tms.com/api/chat_api/"
     
     public static let URL_LOGIN : String  =  "dispatcher_login"

@@ -9,6 +9,89 @@ import Foundation
 extension ApiChat {
     
     
+    static func readMessage(session_id: Int, message_id : Int) {
+//        // message: '33',
+//            // message_id: 10507,
+//            // uuid: '60019E47-5CB4-457E-A09D-67E203BAEB79',
+//            // user: 'RAMON',
+//            // session_id: 274,
+//            // wherefrom: 'PHONE'
+//
+//            controllerMessages.readatByMessageId(msg.session_id, msg.message_id);
+        
+        guard  session_id > 0 else {
+            print(" MarkAllReaded error session id is 0")
+            return
+        }
+        guard let username = UserDefaults.standard.getUserData()?.user.username  else {
+            print(" falta el user id")
+            return
+        }
+        
+        let urlString = "\(ApiConfig.URL_CHAT)/message/readatByMessageId"
+      
+        guard let url = URL(string: urlString) else {
+            print("error the url conform")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+//        let dateFormatterGet = DateFormatter()
+//        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss.000000"
+//        let dateString =  String(dateFormatterGet.string(from: Date()))
+//
+        let param = ["session_id" : String(session_id) ,
+                     "message_id" : String(message_id)]
+        
+        guard let jsonParam = try? JSONEncoder().encode(param) else {
+            print("error the parameters")
+            return
+        }
+        request.httpBody =  jsonParam
+        let apiToken = UserDefaults.standard.getApiToken()
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue(apiToken ?? "", forHTTPHeaderField: "Authorization")
+ 
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+  
+                if let jsonData = data {
+                    // extra for know what is comming
+                    let responseJSON = try? JSONSerialization.jsonObject(with: jsonData, options: [])
+                    if let responseJSON = responseJSON as? [String: Any] {
+                        print(responseJSON)
+                        if let status = responseJSON["status"] as? Bool {
+                            if status {
+                                return
+                            } else {
+                                print("error")
+                            }
+                        }
+                        
+                    }
+                    if let errorCtm = try? JSONDecoder().decode(UserModelError.self, from: jsonData) {
+                        print(errorCtm.msg)
+//                        handler(false, errorCtm.msg, nil)
+                        return
+                    }
+                }
+                
+                
+            
+            
+            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+           
+            
+        }.resume()
+        
+        
+        
+    }
+    
     static func markAllReaded(session_id : Int, to_user: String, trip_number: Int) {
         
         guard  session_id > 0 else {
@@ -20,7 +103,8 @@ extension ApiChat {
             return
         }
         
-        let urlString = "\(ApiConfig.READ_AT)"
+        let urlString = "\(ApiConfig.URL_CHAT)/message/readat"
+      
         guard let url = URL(string: urlString) else {
             print("error the url conform")
             return
@@ -51,22 +135,30 @@ extension ApiChat {
  
         URLSession.shared.dataTask(with: request) { data, response, error in
             
-            do {
-                               
+  
                 if let jsonData = data {
-                    let decodeData = try JSONDecoder().decode(MessageRequest.self , from : jsonData)
-                   
-                    guard decodeData.status else {
-                        print("error markAllReaded")
+                    // extra for know what is comming
+                    let responseJSON = try? JSONSerialization.jsonObject(with: jsonData, options: [])
+                    if let responseJSON = responseJSON as? [String: Any] {
+                        print(responseJSON)
+                        if let status = responseJSON["status"] as? Bool {
+                            if status {
+                                return
+                            } else {
+                                print("error")
+                            }
+                        }
+                        
+                    }
+                    if let errorCtm = try? JSONDecoder().decode(UserModelError.self, from: jsonData) {
+                        print(errorCtm.msg)
+//                        handler(false, errorCtm.msg, nil)
                         return
                     }
-                    print("update all readed success")
-                    
-                    return
                 }
-            } catch let err {
-                print(err)
-            }
+                
+                
+            
             
             print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
            
@@ -91,7 +183,8 @@ extension ApiChat {
             return
         }
         
-        let urlString = "\(ApiConfig.SEND_MESSAGE)/\(chat.session_id )"
+        let urlString2 = "\(ApiConfig.SEND_MESSAGE)/\(chat.session_id )"
+        let urlString = "http://localhost:3001/message/add"
         
         guard let url = URL(string: urlString) else {
             print("error the url conform")
@@ -116,6 +209,7 @@ extension ApiChat {
                             "content" : msg,
                             "date": dateString,
                             "UUID" : chat.messages.last?.id.uuidString ?? UUID().uuidString,
+                            "url" : urlString2,
                         ]
         
         
@@ -192,25 +286,32 @@ extension ApiChat {
             return
 
         }
-        
-        
         guard let username = UserDefaults.standard.getUserData()?.user.username else {
             handler(false, "Error username pleae log out the app", [] )
             return
         }
         
-        let urlString = "\(ApiConfig.URL_PROD)\(ApiConfig.RETURN_MESSAGES)/\(session_id)/chats"
+//        let urlString = "\(ApiConfig.URL_PROD)\(ApiConfig.RETURN_MESSAGES)/\(session_id)/chats"
+        let urlString = "http://localhost:3001/message"
         
-        guard let url = URL(string: urlString) else {
+        guard var url = URLComponents(string: urlString) else {
             print("error the url conform")
             return
         }
         
-        var request = URLRequest(url: url)
-        
-        request.httpMethod = "POST"
-        
         let apiToken = UserDefaults.standard.getApiToken()
+        url.queryItems = [ URLQueryItem(name: "session_id", value: String(session_id)),
+                           URLQueryItem(name: "api_token", value: apiToken ?? "")
+                            
+                            ]
+        
+        var request = URLRequest(url: url.url!)
+        
+        request.httpMethod = "GET"
+        
+        
+        
+       
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")

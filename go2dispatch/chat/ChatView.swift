@@ -31,6 +31,8 @@ struct ChatView: View {
                     ScrollView {
                         ScrollViewReader {
                             scrollReader in
+                             
+                            
                             getMessagesView(viewWith: reader.size.width)
                                 .padding(.horizontal)
                                 .onChange(of: viewModel.messageIDToScroll) { _ in
@@ -215,6 +217,8 @@ struct ChatView: View {
     let columns = [GridItem(.flexible(minimum: 10))]
     
     func getMessagesView(viewWith: CGFloat) -> some View  {
+        
+        
         LazyVGrid(columns: columns, spacing: 0, pinnedViews: [.sectionHeaders]) {
             let sectionMessage = viewModel.getSectionMessage(for: chat)
             ForEach(sectionMessage.indices, id: \.self) { sectionIndex in

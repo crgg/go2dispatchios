@@ -73,6 +73,8 @@ class Chata_data {
                 chatuser.user_name = username
                 chatuser.user_image_profile = driverUser.pictureName
                 
+                assert(driverUser.session?.id != nil)
+                
                 let session_id = driverUser.session?.id ?? 0
                 if session_id == 0 {
                     print("Error \(session_id)")

@@ -111,6 +111,17 @@ struct Message : Identifiable {
         self.readed = readed
        
     }
+    init(_ text: String, type: MessageType , content_type : contentType, readed : Bool, date: Date) {
+       
+        self.type = type
+        self.text = text
+        self.content_type = content_type
+        self.readed = readed
+        self.date = date
+       
+    }
+ 
+    
     
     init(_ text: String, type: MessageType , content_type : contentType) {
         self.init(text, type:type, date: Date(), content_type: content_type)
@@ -255,6 +266,7 @@ struct LastMessage: Codable {
 enum TypeEnum: String, Codable {
     case text = "text"
     case image = "image"
+    case video = "video"
     
 }
 
@@ -304,16 +316,16 @@ struct MessagesReceived: Codable {
 
 // MARK: - Datum
 struct MessagesList: Codable {
-    let message: String
-    let id, sessionID, type: Int
-    let readAt: DAt?
-    let sendAt: DAt
-    let content: TypeEnum
-    let trip : Int?
-    let uuid: String?
-    let user: String
-
-    
+    var message: String
+    var id, sessionID, type: Int
+    var readAt: DAt?
+    var sendAt: DAt
+    var content: TypeEnum
+    var trip : Int?
+    var uuid: String?
+    var user: String
+    var messageParse : Message
+ 
     
     enum CodingKeys: String, CodingKey {
         case message, id
@@ -323,6 +335,62 @@ struct MessagesList: Codable {
         case sendAt = "send_at"
         case content, uuid, user, trip
     }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        message =  try  values.decode(String.self, forKey: .message)
+        id  = try values.decode(Int.self, forKey: .id)
+        sessionID = try values.decode(Int.self, forKey: .sessionID)
+        type = try values.decode(Int.self, forKey: .type)
+        readAt = try? values.decode(DAt.self, forKey: .readAt)
+        sendAt = try values.decode(DAt.self, forKey: .sendAt)
+        content = try values.decode(TypeEnum.self, forKey: .content)
+        trip = try? values.decode(Int.self, forKey: .trip)
+        uuid = try? values.decode(String.self, forKey: .uuid)
+        user = try values.decode(String.self, forKey: .user)
+ 
+        var type_content : contentType = .text
+        switch(content) {
+        case .text:
+            type_content = .text
+            
+        case .image:
+            type_content = .image
+        case .video:
+            type_content = .video
+        }
+        
+        let dateString  =  sendAt.date
+        var dateResult = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat =   "yyyy-MM-dd HH:mm:ss.000000"
+        formatter.locale = Locale(identifier: "en_us")
+        if let yourDate = formatter.date(from: dateString) {
+            dateResult =  yourDate
+        }
+         
+        self.messageParse = Message(self.message, type: type == 1 ? .received : .send, content_type: type_content
+                                    , readed : (readAt != nil), date: dateResult)
+        
+    }
+    
+    init(message: String, id : Int, sessionID : Int,  type: Int, readAt: DAt? ,sendAt: DAt,
+content: TypeEnum, trip : Int?, uuid: String?, user: String,  messageParse : Message) {
+        self.message = message
+        self.id = id
+        self.sessionID = sessionID
+        self.type = type
+        self.readAt = readAt
+        self.sendAt = sendAt
+        self.content = content
+        self.trip = trip
+        self.uuid = uuid
+        self.user = user
+        self.messageParse = messageParse
+}
+    
+ 
 }
 
  

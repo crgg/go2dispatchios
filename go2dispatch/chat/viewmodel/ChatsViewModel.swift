@@ -21,7 +21,7 @@ class ChatsViewModel: ObservableObject  {
     
     @Published var isTyping =  false
     @Published var chats = [Chat]()
-    @Published var messages = [Message]()
+    @Published var messages = [MessagesList]()
     @Published var chatsDriverAll = [Chat]()
     @Published var isNewMessage = false
     @Published var message_error : MessageError  = MessageError()
@@ -78,7 +78,8 @@ class ChatsViewModel: ObservableObject  {
             if data.count > 0 {
                 DispatchQueue.main.async {
                     for user_d in data {
-                        
+                        print(user_d)
+                        assert(user_d.session?.id ?? 0 > 0 )
                         if user_d.session?.id == 0 {
                             print("session id is 0")
                         }
@@ -118,10 +119,11 @@ class ChatsViewModel: ObservableObject  {
 
                         let isonline =  self.user_online.contains(user_d.driverID)
                         
-                        let c =  Chat(person: Person(name: user_d.name, driver_id: user_d.driverID, imgString: user_d.pictureName), messages : [
+                        let c =  Chat(person: Person(name: user_d.name, driver_id: user_d.driverID,
+                                                     imgString: user_d.pictureName), messages : [
 
                             Message(user_d.lastMessage?.content ?? "", type: whosendms, date: dateResult, content_type: content_type)
-                        ], hasUnreadMessage: false, online: isonline)
+                        ], hasUnreadMessage: false, online: isonline, session_id: user_d.session?.id ?? 0)
                         
                     
                         if let row = self.chats.firstIndex(where: {$0.person.driver_id == user_d.driverID}) {
@@ -152,6 +154,8 @@ class ChatsViewModel: ObservableObject  {
     func parseUserInfo(data : [ChatUsers]) {
         var ch = [Chat]()
         for user_d in data {
+            
+            assert(user_d.session_id > 0)
             
             if user_d.session_id == 0  {
                 print(user_d)
@@ -292,7 +296,11 @@ class ChatsViewModel: ObservableObject  {
         
         
         let message = Message(text, type: .send, content_type: .text, readed: false)
-        self.messages.append(message)
+        let send_at =  DAt(date: "", timezoneType: 3, timezone: Timezone.americaChicago)
+       
+        let mess =  MessagesList(message: text, id: 0, sessionID: chat.session_id, type: 1, readAt: nil, sendAt: send_at , content: .text, trip: 0, uuid: nil, user: "", messageParse: message)
+        
+        self.messages.append(mess)
     
         service.sendMessage(msg: text, chat: chat, uuid : message.id)
         return message

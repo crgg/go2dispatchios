@@ -16,19 +16,20 @@ extension ChatsViewModel {
         var tmp = [Message]()
         for message in messages {
             if let firstMessage = tmp.first {
-                let daysBetween = firstMessage.date.daysBetween(date: message.date)
+                let daysBetween = firstMessage.date.daysBetween(date: message.messageParse.date)
                 if daysBetween >= 1 {
                     res.append(tmp)
                     tmp.removeAll()
-                    tmp.append(message)
+                    tmp.append(message.messageParse)
                 } else {
-                    tmp.append(message)
+                    tmp.append(message.messageParse)
                 }
         
             } else {
-                tmp.append(message)
+                tmp.append(message.messageParse)
             }
         }
+//        print("🧩 \(Date() ) parse ")
         res.append(tmp)
         return res
         
@@ -73,7 +74,7 @@ extension ChatsViewModel {
 //
         
         print("🧩 \(Date()) Server get Message")
-        ApiChat.getMessages(session_id: session_id) { sucess, error, data in
+        ApiChat.getMessages(session_id: session_id){ sucess, error, data in
             if !sucess {
                 if let error = error {
                     DispatchQueue.main.async {
@@ -84,56 +85,20 @@ extension ChatsViewModel {
                 return
             }
             if  data.count > 0 {
-                
                 print("🧩\(Date()) Server finined Get Message")
-//                        if let row = self.chats.firstIndex(where: {$0.session_id == session_id}) {
-////                            self.chats[row].messages = []
-//                     self.messages = data
-                            var messages1 = [Message]()
-                            data.forEach({ c in
-                                
-                                let type =  c.type == 0 ?  MessageType.send : MessageType.received
-                                let type_content = c.content.rawValue == "text" ? contentType.text : contentType.image
-                                
-                                let dateString  =  c.sendAt.date
-                                var dateResult = Date()
-                                let formatter = DateFormatter()
-                                formatter.dateFormat =   "yyyy-MM-dd HH:mm:ss.000000"
-                                formatter.locale = Locale(identifier: "en_us")
-                                if let yourDate = formatter.date(from: dateString) {
-                                    dateResult =  yourDate
-                                }
-                                
-                                messages1.append(Message(c.message , type: type, date: dateResult, content_type: type_content))
-                                
- 
-                                
-                            })
- 
-                            DispatchQueue.main.async {
-                                 
-                               
-                                print("🧩\(Date()) Assign UI")
-                                self.messageIDToScroll = messages1.last?.id
-                            }
-                            
-                            
-                       
+                DispatchQueue.main.async {
+                    self.messages =  data
+                    self.messageIDToScroll = data.last?.messageParse.id
+                    print("🧩\(Date()) last is \( String(describing: self.messages.last?.id))")
+                    print("🧩\(Date()) Assign UI")
                     
-                    
-                
-                
+                }
             }
             
-            
         }
-            
-        
-        
-        
-  
     }
    
     
     
 }
+ 
