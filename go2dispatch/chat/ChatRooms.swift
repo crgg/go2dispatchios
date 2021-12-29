@@ -15,6 +15,7 @@ struct ChatRooms: View {
     @State private var query = ""
     @State var isNewChat = false
     @State var isOpenChat =  false
+    @State var isOpenChat2 =  false
     @State var chatNew : Chat = Chat.sampleChat[0]
     @State var showOverlay : Bool  = false
     
@@ -27,22 +28,20 @@ struct ChatRooms: View {
             ForEach (viewmodel.getSortedFilteredChats(query: query)) { chat in
                 //  HACK to hide the disclosure Arrow!
                 ZStack {
+        
+                    Button {
+                        isOpenChat2 = true
+                        viewmodel.setElCurrentChat(chat:  chat)
+                    } label: {
+                        ChatRow(chat: chat)
+                    }
+
                     
-                    ChatRow(chat: chat)
+                }
+              
                     
-                    NavigationLink(
-                        destination: {
-                            ChatView(chat: chat)
-                                .environmentObject(viewmodel)
-                        })
-                    {
-                        EmptyView()
-                    }.buttonStyle(PlainButtonStyle())
-                        .frame(width: 0)
-                        .opacity(0)
-                    
-                    
-                }                .listRowInsets(EdgeInsets())
+                
+                .listRowInsets(EdgeInsets())
                 
             }
         }.listStyle(PlainListStyle())
@@ -71,6 +70,10 @@ struct ChatRooms: View {
                         SearchBar(text: $query)
                     }.padding(.horizontal)
                     messagesView
+                    
+                     
+                    
+                    
                 }
                 .navigationBarTitle("Chats", displayMode: .inline)
                 
@@ -82,10 +85,17 @@ struct ChatRooms: View {
                 self.isNewChat =  true
             })  {
                 Image(systemName: "square.and.pencil")
-            }).sheet(isPresented: $isNewChat) {
+            }).fullScreenCover(isPresented: $isNewChat) {
                 NewChatView(isNewChat: $isNewChat,chatNew: $chatNew, isOpenChat: $isOpenChat).environmentObject(viewmodel)
-            }
+            }.fullScreenCover(isPresented: $isOpenChat) {
             
+                ChatViewModal(chat: chatNew)
+                    .environmentObject(viewmodel)
+            }
+            .fullScreenCover(isPresented: $isOpenChat2) {
+        
+                ChatViewModal(chat: viewmodel.getElCurrentChat())                .environmentObject(viewmodel)
+            }
            
             
         }

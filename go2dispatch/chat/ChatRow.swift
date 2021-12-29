@@ -31,9 +31,11 @@ struct ChatRow: View {
             Color("Marine") 
             HStack(spacing : 5) {
                 ZStack {
-                                    Image(uiImage: chat.person.imgString.load()).resizable()
-                                        .frame(width: 70, height: 70)
-                                        .clipShape(Circle())
+                    DownloadingImageView(url: chat.person.imgString, key: chat.person.driver_id)
+                        .frame(width: 70, height: 70)
+//                                    Image(uiImage: chat.person.imgString.load()).resizable()
+//                                        .frame(width: 70, height: 70)
+//                                        .clipShape(Circle())
                                     
 //                    Image(chat.person.imgString)
 //                        .resizable()

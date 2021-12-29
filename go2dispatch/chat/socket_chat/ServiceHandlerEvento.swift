@@ -20,7 +20,9 @@ extension Service {
         }
         // disnectamos received message
         socket?.off("newIdMessage2")
+        print("\(Service.logs_chat) off newIdMessage2 ")
         socket?.off("chat")
+        print("\(Service.logs_chat) off chat")
         self.setChats()
         self.setOpenChat()
         
@@ -35,13 +37,17 @@ extension Service {
                                        "id" : chat.session_id,
                                        "trip" : 0]
         socket?.emit("join", param3,"s")
+        print("\(Service.logs_chat) join")
         
     }
     func outRooms(chat: Chat){
         socket?.emit("salir", chat.session_id)
+        print("\(Service.logs_chat) emit salir")
         socket?.off("chat")
         socket?.off("openedchat")
+        print("\(Service.logs_chat) off chat, openedchat")
         self.setOnMessageReceived()
+        print("\(Service.logs_chat) set Registration")
     }
     
 }

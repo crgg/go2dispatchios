@@ -182,6 +182,10 @@ extension ApiChat {
             print(" ✏️ Error the username internal")
             return
         }
+        guard !msg.isEmpty else {
+            print(" 🚨 Message viene empty")
+            return
+        }
         
         let urlString2 = "\(ApiConfig.SEND_MESSAGE)/\(chat.session_id )"
         let urlString = "http://localhost:3001/message/add"
@@ -329,9 +333,9 @@ extension ApiChat {
                         return
                     }
                     
-                    let chat_data : Chata_data = Chata_data()
+                    
                     DispatchQueue.main.async {
-                        chat_data.saveMessages(decodeData.data)
+                        ChatDataManager.instance.saveMessages(decodeData.data)
                     }
                             
                    let datar = decodeData.data.sorted(by: {$0.id < $1.id})

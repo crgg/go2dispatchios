@@ -96,79 +96,58 @@ struct Message : Identifiable {
     var type : MessageType
     var content_type : contentType
     var readed : Bool  = true
-    init(_ text: String, type : MessageType, date: Date, content_type: contentType) {
+    var userOwn : String
+    var messageId : Int
+    init(_ text: String, type : MessageType, date: Date, content_type: contentType, userOwn: String,  messageId : Int) {
         self.date = date
         self.type = type
         self.text = text
         self.content_type = content_type
+        self.userOwn = userOwn
+        self.messageId =  messageId
        
     }
-    init(_ text: String, type: MessageType , content_type : contentType, readed : Bool) {
+    init(_ text: String, type: MessageType , content_type : contentType, readed : Bool,  userOwn: String,  messageId : Int) {
         self.date = Date()
         self.type = type
         self.text = text
         self.content_type = content_type
         self.readed = readed
-       
+        self.userOwn = userOwn
+        self.messageId =  messageId
     }
-    init(_ text: String, type: MessageType , content_type : contentType, readed : Bool, date: Date) {
+    init(_ text: String, type: MessageType , content_type : contentType, readed : Bool, date: Date,  userOwn: String,  messageId: Int) {
        
         self.type = type
         self.text = text
         self.content_type = content_type
         self.readed = readed
         self.date = date
-       
+        self.userOwn = userOwn
+        self.messageId =  messageId
     }
  
     
     
-    init(_ text: String, type: MessageType , content_type : contentType) {
-        self.init(text, type:type, date: Date(), content_type: content_type)
+    init(_ text: String, type: MessageType , content_type : contentType,  userOwn: String, messageId : Int) {
+        self.init(text, type:type, date: Date(), content_type: content_type,  userOwn: userOwn,  messageId : messageId)
     }
     
 }
 
 extension Chat {
     static let sampleChat = [
-        Chat(person: Person(name: "Paulette Gajardo", driver_id:"Paulette", imgString: "Avatar Users2_1"), messages : [
-            Message("Hey Paullete", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("I m jsust developing an Whatsapp clone app hello", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("Please I need your help", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("I m jsust developing an Whatsapp clone app hello", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("Sure I can do that no problem", type: .received, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("Yes Dale", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("Aguante el Bullita", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("Vamo con todo", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text)
+        Chat(person: Person(name: "Paulette Gajardo", driver_id:"Paulette", imgString: "https://via.placeholder.com/600/92c952"), messages : [
+            Message("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut semper quam. Phasellus non mauris sem. Donec sed fermentum eros. Donec pretium nec turpis a semper. ", type: .received, date: Date(timeIntervalSinceNow: -86400 * 2), content_type: .text, userOwn:"Ramon",  messageId: 133),
+            Message("I m jsust developing an Whatsapp clone app hello", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text, userOwn: "Ramon",  messageId: 133),
+            Message("Please I need your help", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text, userOwn: "Ramon",  messageId: 514),
+            Message("I m jsust developing an Whatsapp clone app hello", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text, userOwn: "sdd",  messageId: 4545),
+            Message("Sure I can do that no problem", type: .received, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text,userOwn: "dd",  messageId: 1313),
+            Message("Yes Dale", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text, userOwn: "dad",  messageId: 131313),
+            Message("Aguante el Bullita", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text, userOwn: "dad",  messageId: 2324),
+            Message("Vamo con todo", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text, userOwn: "dsdd",  messageId: 24244)
         ], hasUnreadMessage: true, online: true),
-        
-        Chat(person: Person(name: "Raymond Gajardo", driver_id: "Raymond", imgString: "Avatar Users2_2"), messages : [
-            Message("Hey Raymond", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("I m jsust developing an Whatsapp clone app hello", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("Please I need your help", type: .send, date: Date(timeIntervalSinceNow: -86400 * 1), content_type: .text),
-            Message("I m jsust developing an Whatsapp clone app hello", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("Sure I can do that no problem", type: .received, date: Date(timeIntervalSinceNow: -86400 * 1), content_type: .text)
-            
-            
-        ], hasUnreadMessage: true,  online: true),
-        Chat(person: Person(name: "Paola Carvallo", driver_id: "Paola",  imgString: "Avatar Users2_3"), messages : [
-            Message("Hey Paola", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("I m jsust developing an Whatsapp clone app hello", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("Please I need your help", type: .send, date: Date(timeIntervalSinceNow: -86400 * 2), content_type: .text),
-            Message("I m jsust developing an Whatsapp clone app hello", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("Sure I can do that no problem", type: .received, date: Date(timeIntervalSinceNow: -86400 * 1), content_type: .text)
-            
-            
-        ], hasUnreadMessage: false),
-        Chat(person: Person(name: "Ramon Gajardo", driver_id: "Ramon", imgString: "Avatar Users2_4"), messages : [
-            Message("Hey Ramon", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("I m jsust developing an Whatsapp clone app hello", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("Please I need your help", type: .send, date: Date(timeIntervalSinceNow: -86400 * 2), content_type: .text),
-            Message("I m jsust developing an Whatsapp clone app hello", type: .send, date: Date(timeIntervalSinceNow: -86400 * 3), content_type: .text),
-            Message("Sure I can do that no problem", type: .received, date: Date(timeIntervalSinceNow: -86400 * 1), content_type: .text)
-            
-            
-        ], hasUnreadMessage: true)
+  
     ]
 }
 
@@ -193,7 +172,8 @@ struct AllDriverUsers: Codable {
     let data: [All_drivers_users]
 }
 
-struct All_drivers_users: Codable {
+struct All_drivers_users: Identifiable, Codable {
+    let id: UUID = UUID()
     let name : String
     let driver_id : String
     let picture_name : String
@@ -205,6 +185,33 @@ struct All_drivers_users: Codable {
         case picture_name = "picture_name"
         case lastMessage = "last_message"
     }
+    
+ 
+    
+    func getChat() -> Chat {
+        
+        let person = Person(name: self.name, driver_id: self.driver_id, imgString: self.picture_name)
+        
+        guard let lastMessage = lastMessage else {
+            
+            return  Chat(person: person, messages: [], hasUnreadMessage: true, online: false, session_id: 0)
+        }
+
+        var s : contentType = .text
+        switch lastMessage.type {
+        case .image:
+            s = .image
+        case .text :
+            s = .text
+        case .video:
+            s = .video
+        }
+        let message = Message(lastMessage.content, type: .received, content_type: s, readed: false, date: lastMessage.getDate(),
+                              userOwn: driver_id,  messageId: lastMessage.id)
+        
+        return  Chat(person: person, messages: [message], hasUnreadMessage: true, online: false, session_id: lastMessage.sessionID)
+    }
+    
 }
 
 
@@ -261,6 +268,13 @@ struct LastMessage: Codable {
                 CodingKeys.user_of_chat.rawValue : user_of_chat ?? "",
                 CodingKeys.tripNumber.rawValue  : tripNumber ]
     }
+    
+    func getDate() -> Date {
+  
+
+        return  UtilDate.parseDate(dateString: self.createdAt)!
+        
+    }
 }
 
 enum TypeEnum: String, Codable {
@@ -315,7 +329,8 @@ struct MessagesReceived: Codable {
 }
 
 // MARK: - Datum
-struct MessagesList: Codable {
+struct MessagesList: Identifiable, Codable {
+    var ud: UUID?
     var message: String
     var id, sessionID, type: Int
     var readAt: DAt?
@@ -361,17 +376,28 @@ struct MessagesList: Codable {
             type_content = .video
         }
         
-        let dateString  =  sendAt.date
+        var dateString  =  sendAt.date
+        
+        if dateString.count == 26 {
+            let range2 = dateString.index(dateString.endIndex, offsetBy: -7)..<dateString.endIndex
+            dateString.removeSubrange(range2)
+            
+        }
+        
+        
         var dateResult = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat =   "yyyy-MM-dd HH:mm:ss.000000"
+        formatter.dateFormat =   "yyyy-MM-dd HH:mm:ss"
         formatter.locale = Locale(identifier: "en_us")
         if let yourDate = formatter.date(from: dateString) {
+             
             dateResult =  yourDate
+        } else {
+            print("🚨 \(dateString)")
         }
          
         self.messageParse = Message(self.message, type: type == 1 ? .received : .send, content_type: type_content
-                                    , readed : (readAt != nil), date: dateResult)
+                                    , readed : (readAt != nil), date: dateResult, userOwn: user,  messageId: id)
         
     }
     

@@ -46,9 +46,9 @@ extension ChatsViewModel {
         
         
         
-        let chatdata =  Chata_data()
+//
         
-//        let (status, result) = chatdata.getMessages(session_id: Int64(session_id))
+//        let (status, result) = ChatDataManager.instance.getMessages(session_id: Int64(session_id))
 ////        guard result != nil else {
 ////            return
 ////        }
@@ -87,11 +87,15 @@ extension ChatsViewModel {
             if  data.count > 0 {
                 print("🧩\(Date()) Server finined Get Message")
                 DispatchQueue.main.async {
+                    
                     self.messages =  data
+                    self.messagesResumen = self.getSectionMessage(for: Chat.sampleChat[0])
                     self.messageIDToScroll = data.last?.messageParse.id
                     print("🧩\(Date()) last is \( String(describing: self.messages.last?.id))")
                     print("🧩\(Date()) Assign UI")
-                    
+                    DispatchQueue.main.async {
+                        self.count = data.count
+                    }
                 }
             }
             

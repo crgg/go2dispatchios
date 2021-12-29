@@ -163,11 +163,14 @@ struct ProfilView: View {
     }
     
     func returnUiImage(named : String) -> UIImage? {
+        let locaFileM = LocalFileManager.instance
+    
+        return locaFileM.getImage(name: "profile_sample")
         
-        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
-            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
-        }
-        return nil
+//        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+//            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
+//        }
+//        return nil
         
     }
 }

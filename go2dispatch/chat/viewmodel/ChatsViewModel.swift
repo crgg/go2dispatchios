@@ -26,6 +26,9 @@ class ChatsViewModel: ObservableObject  {
     @Published var isNewMessage = false
     @Published var message_error : MessageError  = MessageError()
     @Published var newMessageReceived : New_messag_received = New_messag_received()
+    @Published var elcurrentChat = Chat.sampleChat[0]
+    @Published var count : Int = 0
+    @Published var  messagesResumen : [[Message]] = []
     
     @ObservedObject var service = Service()
     
@@ -40,14 +43,26 @@ class ChatsViewModel: ObservableObject  {
         service.callback = self
       
     }
+   
+    deinit {
+        
+        print("DEINITIALIZE NOW!!!")
+        
+    }
 
-
+    
+    func setElCurrentChat(chat: Chat) {
+        self.elcurrentChat = chat
+    }
+    func getElCurrentChat() -> Chat {
+        return elcurrentChat
+    }
     
     func fetchUsers()  {
         
-        let chatdata = Chata_data()
+        
         if let username = UserDefaults.standard.getUserData()?.user.username {
-          let (status, result) = chatdata.getAllUserWithMessageMe(usernameID: username )
+            let (status, result) = ChatDataManager.instance.getAllUserWithMessageMe(usernameID: username )
             if status {
                 if let r = result {
                     parseUserInfo(data: r)
@@ -67,16 +82,16 @@ class ChatsViewModel: ObservableObject  {
             if !sucess {
                 if let error = error {
                     print(error  )
-                    DispatchQueue.main.async {
-                        self.message_error.isMessageError = true
-                        self.message_error.messageErrorText = error
+                    DispatchQueue.main.async { [weak self] in
+                        self?.message_error.isMessageError = true
+                        self?.message_error.messageErrorText = error
                     }
                 }
                 return
             }
 
             if data.count > 0 {
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
                     for user_d in data {
                         print(user_d)
                         assert(user_d.session?.id ?? 0 > 0 )
@@ -117,26 +132,27 @@ class ChatsViewModel: ObservableObject  {
                             }
                         }
 
-                        let isonline =  self.user_online.contains(user_d.driverID)
+                        let isonline =  self?.user_online.contains(user_d.driverID)
                         
                         let c =  Chat(person: Person(name: user_d.name, driver_id: user_d.driverID,
                                                      imgString: user_d.pictureName), messages : [
 
-                            Message(user_d.lastMessage?.content ?? "", type: whosendms, date: dateResult, content_type: content_type)
-                        ], hasUnreadMessage: false, online: isonline, session_id: user_d.session?.id ?? 0)
+                                                        Message(user_d.lastMessage?.content ?? "", type: whosendms, date: dateResult, content_type: content_type,
+                                                                userOwn: user_d.lastMessage?.user_of_chat ?? "" ,  messageId: user_d.lastMessage?.id ?? 0)
+                                                     ], hasUnreadMessage: false, online: isonline ?? false, session_id: user_d.session?.id ?? 0)
                         
                     
-                        if let row = self.chats.firstIndex(where: {$0.person.driver_id == user_d.driverID}) {
-                            self.chats[row].person.name = user_d.name
-                            self.chats[row].person.driver_id = user_d.driverID
-                            self.chats[row].person.imgString = user_d.pictureName
-                            self.chats[row].messages[0].text = user_d.lastMessage?.content ?? ""
-                            self.chats[row].messages[0].type = whosendms
-                            self.chats[row].messages[0].date = dateResult
-                            self.chats[row].messages[0].content_type = content_type
-                            self.chats[row].session_id  = user_d.session?.id ?? 0
+                        if let row = self?.chats.firstIndex(where: {$0.person.driver_id == user_d.driverID}) {
+                            self?.chats[row].person.name = user_d.name
+                            self?.chats[row].person.driver_id = user_d.driverID
+                            self?.chats[row].person.imgString = user_d.pictureName
+                            self?.chats[row].messages[0].text = user_d.lastMessage?.content ?? ""
+                            self?.chats[row].messages[0].type = whosendms
+                            self?.chats[row].messages[0].date = dateResult
+                            self?.chats[row].messages[0].content_type = content_type
+                            self?.chats[row].session_id  = user_d.session?.id ?? 0
                         } else {
-                            self.chats.append(c)
+                            self?.chats.append(c)
                         }
                         
               
@@ -174,9 +190,9 @@ class ChatsViewModel: ObservableObject  {
             
             let isonline =  self.user_online.contains(user_d.driver_id ?? "")
             
-            let c =  Chat(person: Person(name: user_d.name ?? "", driver_id: user_d.driver_id ?? "", imgString: user_d.user_image_profile ?? ""), messages : [
+            let c =  Chat(person: Person(name: user_d.name ?? "", driver_id: user_d.driver_id ?? "", imgString: user_d.user_name ?? ""), messages : [
                 
-                Message(user_d.last_message ?? "", type: whosendms, date: dateResult, content_type: content_type)
+                Message(user_d.last_message ?? "", type: whosendms, date: dateResult, content_type: content_type, userOwn : user_d.last_message_user_of_chat ?? "" , messageId: 0)
             ], hasUnreadMessage: false, online: isonline, session_id: Int(user_d.session_id ))
             
             
@@ -223,13 +239,14 @@ class ChatsViewModel: ObservableObject  {
                         
                         if let yourDate = formatter.date(from: dateString) {
                             dateResult =  yourDate
-                            message.append(Message(user_d.lastMessage?.content ?? "", type: .send, date: dateResult, content_type: content_type))
+                            message.append(Message(user_d.lastMessage?.content ?? "", type: .send, date: dateResult, content_type: content_type,
+                                                   userOwn: user_d.lastMessage?.user_of_chat ?? "" , messageId: user_d.lastMessage?.id ?? 0))
                         }
                     }
                     
                  
                     
-                    let c =  Chat(person: Person(name: user_d.name, driver_id: user_d.driver_id, imgString: user_d.picture_name), messages : message, hasUnreadMessage: false)
+                    let c =  Chat(person: Person(name: user_d.name, driver_id: user_d.driver_id, imgString: user_d.picture_name), messages : message, hasUnreadMessage: false, session_id: user_d.lastMessage?.sessionID ?? 0)
                     
                     
                     ch.append(c)
@@ -295,20 +312,20 @@ class ChatsViewModel: ObservableObject  {
         
         
         
-        let message = Message(text, type: .send, content_type: .text, readed: false)
+        let message = Message(text, type: .send, content_type: .text, readed: false, userOwn: "", messageId: 0)
         let send_at =  DAt(date: "", timezoneType: 3, timezone: Timezone.americaChicago)
        
         let mess =  MessagesList(message: text, id: 0, sessionID: chat.session_id, type: 1, readAt: nil, sendAt: send_at , content: .text, trip: 0, uuid: nil, user: "", messageParse: message)
         
         self.messages.append(mess)
-    
+        self.count += 1
         service.sendMessage(msg: text, chat: chat, uuid : message.id)
         return message
     }
     
     func sendMessage(_ text: String, in chat: Chat) -> Message? {
         if let index = chats.firstIndex(where: { $0.id == chat.id}) {
-            let message = Message(text, type: .send, content_type: .text)
+            let message = Message(text, type: .send, content_type: .text, userOwn: "", messageId: 0)
             chats[index].messages.append(message)
             return message
         }
@@ -318,5 +335,7 @@ class ChatsViewModel: ObservableObject  {
     func getIsNewMessage() -> Bool {
         return isNewMessage
     }
+    
+    
     
 }

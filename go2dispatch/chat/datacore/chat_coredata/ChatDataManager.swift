@@ -1,5 +1,5 @@
 //
-//  chat_data.swift
+//  ChatDataManager.swift
 //  go2dispatch
 //
 //  Created by Ramon Gajardo on 11/2/21.
@@ -10,9 +10,14 @@ import CoreData
 import UIKit
 import SwiftUI
 import simd
+import Combine
 
-class Chata_data {
+class ChatDataManager {
      
+    static let instance =  ChatDataManager()
+    
+    private init() {}
+    
     let TAG : String = "💬 CHAT_DATA"
     
     func getAllUserWithMessageMe(usernameID : String )-> (Bool, [ChatUsers]?) {
@@ -149,8 +154,40 @@ class Chata_data {
             }
     }
     
+    func updateAllOff() {
+        let context = PersistenceController.shared.container.viewContext
+        var resultado = [NSManagedObject] ()
+        let fetchrequest : NSFetchRequest<ChatUsers> = ChatUsers.fetchRequest()
+        fetchrequest.predicate = NSPredicate(format: "online == %@", NSNumber(value: true))
+        do {
+            resultado = try context.fetch(fetchrequest)
+            let resultadata = resultado as! [ChatUsers]
+            
+            if resultadata.count > 0 {
+                for r in resultadata {
+                    
+                    r.online = false
+                    do {
+                        try context.save()
+                        
+                        
+                        
+                    } catch {
+                        
+                        print("Error: search in driverscheduletb")
+                        
+                        
+                    }
+                }
+                
+             
+            }
+        } catch let error as NSError {
+            print("\(TAG) update ChatUsers \(error)")
+        }
+    }
     
-    func updateOnline(driverId : String) {
+    func updateOnline(driverId : String, isOnline : Bool) {
         let context = PersistenceController.shared.container.viewContext
         var resultado = [NSManagedObject] ()
         let fetchrequest : NSFetchRequest<ChatUsers> = ChatUsers.fetchRequest()
@@ -161,7 +198,7 @@ class Chata_data {
             
             if resultadata.count > 0 {
                 let chatuser =  resultado[0] as! ChatUsers
-                chatuser.online = true
+                chatuser.online = isOnline
                 do {
                     try context.save()
                     
@@ -247,5 +284,9 @@ class Chata_data {
         
     }
 
+    func reduceImage() {
+
+        
+    }
     
 }

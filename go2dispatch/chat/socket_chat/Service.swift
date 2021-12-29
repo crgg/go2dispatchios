@@ -12,6 +12,7 @@ import SwiftLocation
 protocol ServiceChatProtocol {
     func newMessage(newMessageReceived : New_messag_received)
     func listOnline(list_online : [String])
+    func allOffOnline()
     func newMessageChat(m : Message, user_send : String)
     func typing(session_id : Int , username : String)
     func readMessageUUID(uuid : String)
@@ -46,8 +47,12 @@ final class Service : ObservableObject {
         socket = manager.defaultSocket
         
         socket?.on(clientEvent: .connect) {  (data, ack) in
+            print("\(Service.logs_chat) connected socket")
             
-            print("\(Service.logs_chat) conneted")
+            self.socket?.emit("check_user_online")
+            print("\(Service.logs_chat) emit check_user_online")
+            
+            
             self.registerUser()
                  
         }
@@ -57,6 +62,12 @@ final class Service : ObservableObject {
             print("\(Service.logs_chat) get user rcl")
             if let datareceived = data as? [[String: Any]] {
                 if  let data2 = datareceived[0]["clientsDriver"] as? [[String : Any]] {
+                    guard data2.count > 0 else {
+                        self.callback?.allOffOnline()
+                        
+                        return
+                    }
+                    
                     ParseDatosOfSocket.parseUsersOnline(data2: data2) {
                         (list_online) in
                         self.callback?.listOnline(list_online: list_online)
@@ -67,6 +78,7 @@ final class Service : ObservableObject {
         
         // Event the errors
         socket?.on(clientEvent: .error) { data, ack in
+            print("\(Service.logs_chat) Error socket")
             if let errorStr: String = (data[0] as? String) {
                 if errorStr.hasPrefix("ERR_SOCKETIO_INVALID_SESSION") {
                     self.socket?.disconnect()
@@ -75,10 +87,12 @@ final class Service : ObservableObject {
                 }
                     
                  if errorStr == "Tried emitting when not connected" {
-                     print(errorStr)
+                     print("\(Service.logs_chat) \(errorStr)")
                      return
                  }
               }
+            self.socket?.disconnect()
+            self.socket?.connect()
             
         }
         
@@ -132,7 +146,7 @@ final class Service : ObservableObject {
                 print("\(Service.logs_chat) message")
       }
             
-        setOpenChat()
+       
         
         socket?.on("sever_error") {
             data, ack in
@@ -160,19 +174,18 @@ final class Service : ObservableObject {
         
         //if !socket.status.active {
         socket?.connect()
-        socket?.emit("check_user_online")
         
-        
+     
         
         
         
       // }
     }
     func setOpenChat() {
-        
+        print("\(Service.logs_chat) set openedchat")
         socket?.on("openedchat") {
             data, ack in
-            print("\(Service.logs_chat) socket openedchat \(ack)")
+            print("\(Service.logs_chat) socket openedchat")
             ParseDatosOfSocket.parserOpenChat(dataReceived: data[0]) { r_result in
                 if let result = r_result {
                     self.callback?.openChat(openChatData: result)
@@ -186,7 +199,7 @@ final class Service : ObservableObject {
     func setChats() {
         socket?.on("chat") { data, ack in
             
-        
+            print("\(Service.logs_chat) event chat")
             
             if let dict  = data[0] as? [String : Any] {
                 
@@ -213,12 +226,12 @@ final class Service : ObservableObject {
                     let contentType : MessageType = result.type == 0 ?  .received : .send
                     
                     
-                    var m = Message(result.message ?? "", type: contentType, date: UtilDate.parseDate(dateString: result.date!)!   , content_type: ctype)
+                    var m = Message(result.message ?? "", type: contentType, date: UtilDate.parseDate(dateString: result.date!)!   , content_type: ctype, userOwn: result.user_send ?? "", messageId: result.id ?? 0)
                     m.readed = false
                     
                     self.currenChat.messages[0] = m
-                    let c : Chata_data = Chata_data()
-                    c.insertMessage(chat: self.currenChat)
+                    
+                    ChatDataManager.instance.insertMessage(chat: self.currenChat)
                     self.callback?.newMessageChat(m: m, user_send: result.user_send ?? "")
                     
                     
@@ -231,7 +244,7 @@ final class Service : ObservableObject {
                                                     "message_id" : self.currenChat.session_id]
                                                
                     self.socket?.emit("read_message", paramav)
-                     
+                    print("\(Service.logs_chat) emit read_message")
                  
                 }
                 
@@ -241,7 +254,7 @@ final class Service : ObservableObject {
     
     func setOnMessageReceived() {
         socket?.on("newIdMessage2") {  data , ack in
-            
+            print("\(Service.logs_chat) new Id Message")
             if let dict = data[0] as? [String: Any] {
               let newMessage =   New_messag_received(dict)
                 self.callback?.newMessage(newMessageReceived: newMessage)
@@ -273,6 +286,7 @@ final class Service : ObservableObject {
         print( "\(Service.logs_chat) chatRoom: emit set-header \(param)")
        
         socket?.emit("set-header", param,"s")
+        print("\(Service.logs_chat) emit set-header")
     }
     
   
@@ -280,12 +294,11 @@ final class Service : ObservableObject {
 
     
     func registerUser() {
-        print("\(Service.logs_chat) connected")
-        
         let param2 = ["username" : "RAMON",
                       "type" : "dispatch"]
         print( "\(Service.logs_chat) chatRoom: emit set user")
         socket?.emit("setUser", param2,"s");
+        print("\(Service.logs_chat) emit setUser")
         
     }
     
@@ -353,8 +366,9 @@ final class Service : ObservableObject {
             
             print("\(Service.logs_chat) chatRoom: send the message \(param)")
             self.socket?.emit("chat", param, "DALE")
-            let chat_data = Chata_data()
-            chat_data.insertMessage(chat: chat)
+            print("\(Service.logs_chat) emit Chat")
+            
+            ChatDataManager.instance.insertMessage(chat: chat)
         }
     }
     

@@ -34,10 +34,12 @@ class ApiChat {
                     let decodeData = try JSONDecoder().decode(DriverUsers.self , from : jsonData)
                     print(decodeData.data.first ?? "")
                     handler(true, "success", decodeData.data)
-                    let s = Chata_data()
+                    
                     DispatchQueue.main.async {
-                        s.save_users(driver_users: decodeData.data)
+                        ChatDataManager.instance.save_users(driver_users: decodeData.data)
                     }
+                    
+                    
                     
                     return
                 }
@@ -68,7 +70,7 @@ class ApiChat {
         
         let urlString = "\(ApiConfig.URL_PROD)\(ApiConfig.URL_DRIVER_LIST_WITH_IMAGES)"
         
-        let url = URL(string: urlString)!
+        guard  let url = URL(string: urlString) else { return  }
         
         var request = URLRequest(url: url)
         

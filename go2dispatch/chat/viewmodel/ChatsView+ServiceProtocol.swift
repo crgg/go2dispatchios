@@ -14,6 +14,24 @@
 
 import Foundation
 extension ChatsViewModel : ServiceChatProtocol {
+    func allOffOnline() {
+        self.user_online = []
+        
+        if self.chats.count > 0 {
+            
+            
+            
+                ChatDataManager.instance.updateAllOff()
+            
+            DispatchQueue.main.async  {
+                self.chats.indices.forEach {
+                    self.chats[$0].online = false
+                }
+                self.elcurrentChat.online = false
+            }
+        }
+    }
+    
     func newSession(session_id: Int) {
         //
     }
@@ -28,7 +46,7 @@ extension ChatsViewModel : ServiceChatProtocol {
         }
         
         DispatchQueue.init(label: "dale", qos: .background).async {
-            let chat_data =  Chata_data()
+            let chat_data =  ChatDataManager.instance
             if let session_id =  openChatData.session_id {
                 chat_data.updateAllReadedMessage(session_id: Int64(session_id))
                 if let to_user =  openChatData.user {
@@ -78,8 +96,8 @@ extension ChatsViewModel : ServiceChatProtocol {
  
     func newMessage(newMessageReceived : New_messag_received) {
         isNewMessage = true
-        let chatdata = Chata_data()
-        chatdata.updateUserInfo(driverId: newMessageReceived.user_send, newMessageInfo: newMessageReceived )
+         
+        ChatDataManager.instance.updateUserInfo(driverId: newMessageReceived.user_send, newMessageInfo: newMessageReceived )
         
         self.newMessageReceived = newMessageReceived
         
@@ -110,6 +128,7 @@ extension ChatsViewModel : ServiceChatProtocol {
         
         self.messages.append(mess)
         self.messageIDToScroll = m.id
+        self.count += 1
         DispatchQueue.main.async {
             if let row = self.chats.firstIndex(where: {$0.person.driver_id == user_send}) {
                 self.chats[row].messages[0] = m
@@ -125,14 +144,21 @@ extension ChatsViewModel : ServiceChatProtocol {
         
         if self.chats.count > 0 {
             
-            let chatdat = Chata_data()
+            
             for i in 0..<list_online.count {
-                chatdat.updateOnline(driverId: list_online[i])
+                ChatDataManager.instance.updateOnline(driverId: list_online[i],isOnline: true)
             }
             DispatchQueue.main.async  {
                 self.chats.indices.forEach {
                     self.chats[$0].online = list_online.contains(self.chats[$0].person.driver_id) ?  true :  false
                 }
+                
+                
+                let isonline =  self.user_online.contains(self.elcurrentChat.person.driver_id)
+                
+                    self.elcurrentChat.online = isonline
+                
+                
             }
         }
     }

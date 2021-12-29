@@ -27,6 +27,8 @@ class UserStateViewModel : ObservableObject {
             UserDefaults.standard.setUserData(nil)
             self.isLoggedIn =  false
             self.isBusy = false
+          //  LocalFileManager.instance.deleteFolder()
+            
         }
     }
 }

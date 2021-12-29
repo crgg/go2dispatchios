@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ChatView: View {
     
     @EnvironmentObject var viewModel : ChatsViewModel
+ 
+
+    @State private var isCameraActive = false
+    
     
     let chat : Chat
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -132,7 +137,7 @@ struct ChatView: View {
     
     func toolbarView() -> some View {
         VStack {
-
+           
           
             
             HStack(spacing: 15) {
@@ -142,10 +147,17 @@ struct ChatView: View {
                     //                    .clipShape(RoundedRectangle(cornerRadius: 13))
                     
                     //                    .focused($isFocused) // 15.0
-                    Button(action: {}) {
+                    Button(action: {
+                        isCameraActive = true
+                    }) {
                         Image(systemName: "paperclip.circle.fill")
                             .font(.system(size: 22))
                             .foregroundColor(.gray)
+                            .sheet(isPresented: $isCameraActive, content: {
+                               CameraViewController()
+
+                            })
+                        
                     }
                     
                 }  
@@ -291,3 +303,22 @@ struct NavigationConfigurator: UIViewControllerRepresentable {
     }
 
 }
+
+ 
+struct CameraViewController : UIViewControllerRepresentable {
+    func makeUIViewController(context: UIViewControllerRepresentableContext<CameraViewController>) -> UIViewController {
+        let camevc =  CameraCaptureViewController()
+        return camevc
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<CameraViewController>) {
+        //
+    }
+    
+    
+    typealias UIViewControllerType = UIViewController
+    
+    
+}
+
+ 

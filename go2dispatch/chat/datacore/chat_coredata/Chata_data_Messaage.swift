@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 import UIKit
-extension Chata_data {
+extension ChatDataManager {
     
     func saveMessages(_ messages_list : [MessagesList]) {
         guard let username =  UserDefaults.standard.getUserData()?.user.username else {

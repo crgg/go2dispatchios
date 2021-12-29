@@ -14,8 +14,11 @@ struct NewChatView: View {
     @Binding var isNewChat : Bool
     @Binding var chatNew : Chat
     @Binding var isOpenChat : Bool
+    @EnvironmentObject var viewModel : ChatsViewModel
     
-    @EnvironmentObject var viewmodel : ChatsViewModel
+    
+    @StateObject var vm = ChatAllUserViewModel()
+    
     @State private var query = ""
     
     var body: some View {
@@ -28,30 +31,20 @@ struct NewChatView: View {
                     }
                     List {
                         
-                        ForEach (viewmodel.getSortedFilteredChatsAllDrivers(query: query)) { chat in
+                        ForEach (vm.getSortedFilteredChatsAllDrivers(query: query)) { chat in
                             //  HACK to hide the disclosure Arrow!
                             ZStack {
                                 //
                                 Button(action: {
                                     self.isNewChat =  false
+                                    self.chatNew = chat.getChat()
                                     self.isOpenChat = true
-                                    self.chatNew = chat
                                 }) {
-                                    ChatRow(chat: chat)
+
+                                    ChatRowAll(chat: chat.getChat())
                                 }
                                 
-                                
-                                
-                                
-                                //                            NavigationLink(
-                                //                                destination:
-                                //                                    ChatView(chat: chat).environmentObject(viewmodel)
-                                //                                 , isActive: $isOpenChat)
-                                //                            {
-                                //                                EmptyView()
-                                //                            }.buttonStyle(PlainButtonStyle())
-                                //                                .frame(width: 0)
-                                //                                .opacity(0)
+                 
                             }.listRowInsets(EdgeInsets())
                         }
                     }.listStyle(PlainListStyle())
@@ -68,7 +61,7 @@ struct NewChatView: View {
         }
         .onAppear {
             print("Entramos a View New Chat")
-            viewmodel.fetchAllUsers()
+//            viewmodel.fetchAllUsers()
         }
     }
 }
