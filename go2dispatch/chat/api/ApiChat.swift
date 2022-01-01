@@ -66,7 +66,7 @@ class ApiChat {
         }.resume()
     }
     
-    static func getAllUsers(handler: @escaping (_ sucess : Bool, _ error : String?, [All_drivers_users])->()) {
+    static func getAllUsers(handler: @escaping (_ sucess : Bool, _ error : String?, [driver_users])->()) {
         
         let urlString = "\(ApiConfig.URL_PROD)\(ApiConfig.URL_DRIVER_LIST_WITH_IMAGES)"
         
@@ -123,6 +123,7 @@ class ApiChat {
         
         guard let username = UserDefaults.standard.getUserData()?.user.username  else {
             print(" falta el user id")
+            handler(false, "Error missing username", nil)
             return
         }
         
@@ -130,6 +131,7 @@ class ApiChat {
         
         guard let url = URL(string: urlString) else {
             print("error the url conform")
+            handler(false, "Error create url", nil)
             return
         }
         
@@ -143,6 +145,7 @@ class ApiChat {
         
         guard let jsonParam = try? JSONEncoder().encode(param) else {
             print("error the parameters")
+            handler(false, "Error the parameters", nil)
             return
         }
         request.httpBody =  jsonParam
@@ -157,21 +160,24 @@ class ApiChat {
             do {
                                
                 if let jsonData = data {
-                    let decodeData = try JSONDecoder().decode(MessageRequest.self , from : jsonData)
+                    let decodeData = try JSONDecoder().decode(CreateSessionRequest.self , from : jsonData)
                    
                     guard decodeData.status else {
                         print("error markAllReaded")
+                        handler(false, "Error request try again later", nil)
                         return
                     }
-                    print("update all readed success")
-                    
+                    print("update all readed success \(decodeData.sessionid)")
+                    handler(true,nil, decodeData.sessionid)
                     return
                 }
             } catch let err {
                 print(err)
+                handler(false, "Error data received", nil)
             }
             
             print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+            handler(false, "unknow error", nil)
            
             
         }.resume()

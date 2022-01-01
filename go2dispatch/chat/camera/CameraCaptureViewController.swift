@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 import CoreImage
-
+import SwiftUI
 class CameraCaptureViewController: UIViewController {
     // Capture Session
     var session : AVCaptureSession?
@@ -17,7 +17,15 @@ class CameraCaptureViewController: UIViewController {
     var output =  AVCapturePhotoOutput()
     // video Preview
     let previewLayer = AVCaptureVideoPreviewLayer()
+    
     // Shutter
+    public var chat : Chat 
+  
+    
+    
+    var vm : ChatsViewModel
+    
+    
     private let shutterButton : UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         button.layer.cornerRadius = 50
@@ -44,8 +52,16 @@ class CameraCaptureViewController: UIViewController {
                 button.layer.borderColor = UIColor.white.cgColor
         return button
     }()
-                            
     
+    init(vm : ChatsViewModel, chat: Chat) {
+        self.vm = vm
+        self.chat = chat
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
@@ -57,6 +73,15 @@ class CameraCaptureViewController: UIViewController {
         checkCameraPermissions()
         shutterButton.addTarget(self, action: #selector(didTapTakePhoto), for: .touchUpInside)
         buttonClose.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+        buttongallery.addTarget(self, action: #selector(galleryButton), for: .touchUpInside)
+    }
+    
+    @objc func galleryButton() {
+        
+        let cameraPicker = UIImagePickerController()
+        cameraPicker.sourceType = .photoLibrary
+        cameraPicker.delegate = self
+        self.present(cameraPicker, animated: true, completion: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -120,6 +145,66 @@ class CameraCaptureViewController: UIViewController {
     }
     
     
+}
+
+extension CameraCaptureViewController: UIImagePickerControllerDelegate {
+    
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+          
+      }
+
+      public func imagePickerController(_ picker: UIImagePickerController,
+                                        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+          guard let imagen_capture = info[.originalImage] as? UIImage else {
+              return
+          }
+      
+//          let imagenReduce : UIImage = self.resizeImage(image:  imagen_capture, targetSize: CGSize(width:  imagen_capture.size.width / 2 , height: imagen_capture.size.height / 2  ))
+//
+          
+              vm.didSelectImage(imagen_capture, chat: chat)
+          
+          
+          
+          picker.dismiss(animated: true, completion: nil)
+          
+          closeView()
+          
+          
+         
+}
+    
+    // reduce la imagen
+    func resizeImage ( image: UIImage, targetSize: CGSize) -> UIImage {
+       
+        let size = image.size
+        
+        let widthRatio = targetSize.width / image.size.width
+        let heightRatio = targetSize.height / image.size.height
+        
+        var newSize: CGSize
+        
+        if (widthRatio > heightRatio) {
+        
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        
+        } else {
+
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+            
+        }
+        
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    
+    }
+}
+extension CameraCaptureViewController: UINavigationControllerDelegate {
+
 }
 
 extension CameraCaptureViewController: AVCapturePhotoCaptureDelegate {

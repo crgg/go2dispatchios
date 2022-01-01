@@ -186,8 +186,7 @@ struct ChatViewModal: View {
                             .font(.system(size: 22))
                             .foregroundColor(.gray)
                             .sheet(isPresented: $isCameraActive, content: {
-                               CameraViewController()
-
+                                CameraViewController(chat: chat, vm: viewModel)
                             })
                         
                     }
@@ -237,13 +236,24 @@ struct ChatViewModal: View {
     
     func sendMessage() {
         
+        guard !text.isEmpty else {
+            return
+        }
         
-        
-          let message = viewModel.sendMessage2(text, chat: chat)
-           text  = ""
-             
-//             messageIDToScroll = message.id
-           viewModel.messageIDToScroll  = message.id
+    viewModel.sendMessage2(text, chat: chat) {
+             status, result in
+            if status {
+                if let result = result {
+                    
+                    DispatchQueue.main.async {
+                        self.viewModel.messageIDToScroll  = result.id
+                    }
+                }
+            }
+                
+            
+          }
+        self.text  = ""
         
         
 //        if let message = viewModel.sendMessage(text, in: chat) {
@@ -337,18 +347,7 @@ struct ChatViewModal: View {
    
         
     func sectionHeader(firstMessage message: Message) -> some View {
-        ZStack {
-            Text(message.date.descriptiveString(dateStyle: .medium))
-                .foregroundColor(.white)
-                .font(.system(size: 14,weight: .regular))
-                .frame(width: 120)
-                .cornerRadius(10)
-                .padding(.vertical, 5)
-                .background(Color.blue)
-                .background(Capsule().foregroundColor(.blue))
-        }
-        .padding(.vertical, 5)
-        .frame(maxWidth: .infinity)
+        ChatHeader(message: message)
         
     }
     

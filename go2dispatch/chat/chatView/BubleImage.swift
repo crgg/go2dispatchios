@@ -12,7 +12,14 @@ struct BubleImage: View {
     @StateObject var loader : ImageLoadingViewModel
     init(message : Message, url: String, key : String) {
         self.message = message
-        _loader = StateObject(wrappedValue: ImageLoadingViewModel(url: url, key: key))
+        
+        if message.messageId == 0 {
+            print("🤳 no message id o digame \(message.id.uuidString)")
+            _loader = StateObject(wrappedValue: ImageLoadingViewModel(url: url, key: message.id.uuidString))
+            
+        } else {
+            _loader = StateObject(wrappedValue: ImageLoadingViewModel(url: url, key: key))
+        }
         
         
     }

@@ -12,7 +12,7 @@ class ChatAllUserService {
     
     static let instance = ChatAllUserService()
     
-    @Published var chatAllUsers :[All_drivers_users] = []
+    @Published var chatAllUsers :[driver_users] = []
     var cancellables = Set<AnyCancellable>()
     
     private init() {

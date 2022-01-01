@@ -19,6 +19,8 @@ protocol ServiceChatProtocol {
     func readMessageIdSessionId(message_id : Int , session_id : Int)
     func openChat(openChatData : ParseDatosOfSocket.OpenChatDataReceived)
     func newSession(session_id : Int)
+    
+    
 }
 
 final class Service : ObservableObject {
@@ -324,52 +326,36 @@ final class Service : ObservableObject {
     }
     
     
-    func sendMessage(msg : String , chat : Chat, uuid : UUID) {
+    func sendMessage(msg : String , dateCreated: String, chat : Chat, uuid : UUID) {
         
         let driverid = chat.person.driver_id
-        guard  chat.session_id > 0 else {
-            print(" \(Service.logs_chat) chatRoom: SEND_MESSAGE : Session is Null")
-            return
-        }
-        guard let username = UserDefaults.standard.getUserData()?.user.username  else {
+            guard let username = UserDefaults.standard.getUserData()?.user.username  else {
             print(" \(Service.logs_chat) Error the username internal")
             return
+     
         }
+        let param = [
+            "id" : chat.messages[0].messageId ,
+            "type" : 1,
+            "session_id" : chat.session_id ,
+            "where": "WEB",
+            "trip":  "0",
+            "to_user": driverid,
+            "user_send": username,
+            "driver" : driverid,
+            "user" : username,
+            "message": msg,
+            "content" : msg,
+            "date": dateCreated,
+            "UUID" : uuid.uuidString,
+        ] as [String : Any]
         
-        ApiChat.insertMessage(msg: msg, chat: chat) { sucess, error, result in
-            if let error = error {
-                print("Error \(error)")
-                return
-            }
-            if result == nil {
-                return
-            }
-//            let dateFormatterGet = DateFormatter()
-//            dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss.000000"
-//            let dateString =  String(dateFormatterGet.string(from: Date()))
-            
-            let param = [
-                "id" : result?.messageID ?? 0,
-                "type" : 1,
-                "session_id" : chat.session_id ,
-                "where": "WEB",
-                "trip":  "0",
-                "to_user": driverid,
-                "user_send": username,
-                "driver" : driverid,
-                "user" : username,
-                "message": msg,
-                "content" : msg,
-                "date": result?.createdAt ?? "",
-                "UUID" : uuid.uuidString,
-            ] as [String : Any]
-            
-            print("\(Service.logs_chat) chatRoom: send the message \(param)")
-            self.socket?.emit("chat", param, "DALE")
-            print("\(Service.logs_chat) emit Chat")
-            
-            ChatDataManager.instance.insertMessage(chat: chat)
-        }
+        print("\(Service.logs_chat) chatRoom: send the message \(param)")
+        
+        self.socket?.emit("chat", param, "DALE")
+        
+        
+  
     }
     
     

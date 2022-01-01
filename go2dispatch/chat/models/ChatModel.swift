@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct New_messag_received : Decodable{
     var session_id : Int = 0
@@ -42,7 +43,14 @@ struct New_messag_received : Decodable{
         }
         if let sessionId =  dict["session_id"] as? Int {
             self.session_id =  sessionId
+        } else {
+            if let sessid = dict["session_id"] as? String {
+                if let sess =  Int(sessid) {
+                    self.session_id = sess
+                }
+            }
         }
+            
         if let trip = dict["trip"] as? Int {
             self.trip =  trip
         }
@@ -169,7 +177,7 @@ struct DriverUsers: Codable {
 // MARK : - All Drivers
 struct AllDriverUsers: Codable {
     let status: Bool
-    let data: [All_drivers_users]
+    let data: [driver_users]
 }
 
 struct All_drivers_users: Identifiable, Codable {
@@ -216,7 +224,8 @@ struct All_drivers_users: Identifiable, Codable {
 
 
 // MARK: - Datum
-struct driver_users: Codable {
+struct driver_users: Identifiable, Codable {
+    var id : String  { driverID }
     let name, driverID, lastTrip, currentTrip: String
     let nextTrip: String
     let pictureName: String
@@ -234,6 +243,30 @@ struct driver_users: Codable {
         case session, lastMessage
         case lastPosition = "last_position"
     }
+    func getChat() -> Chat {
+        
+        let person = Person(name: self.name, driver_id: self.driverID, imgString: self.pictureName)
+        
+        guard let lastMessage = lastMessage else {
+            
+            return  Chat(person: person, messages: [], hasUnreadMessage: true, online: false, session_id: 0)
+        }
+
+        var s : contentType = .text
+        switch lastMessage.type {
+        case .image:
+            s = .image
+        case .text :
+            s = .text
+        case .video:
+            s = .video
+        }
+        let message = Message(lastMessage.content, type: .received, content_type: s, readed: false, date: lastMessage.getDate(),
+                              userOwn: driverID,  messageId: lastMessage.id)
+        
+        return  Chat(person: person, messages: [message], hasUnreadMessage: true, online: false, session_id: lastMessage.sessionID)
+    }
+    
 }
 
 // MARK: - LastMessage
@@ -498,7 +531,11 @@ enum Timezone: String, Codable {
 //    }
 //}
 
- 
+struct CreateSessionRequest : Codable {
+    let status : Bool
+    let sessionid : Int
+    
+}
 
 // MARK: MessageRequest
 // MARK: - MessageRequest
@@ -578,6 +615,25 @@ class JSONNull: Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encodeNil()
+    }
+}
+
+struct Media {
+    let key : String
+    let filename : String
+    let data : Data
+    let mimeType : String
+    
+    init?(withImage image : UIImage, forkey key: String) {
+        self.key = key
+        self.mimeType = "image/jpeg"
+        self.filename = "\(arc4random()).jpeg"
+        guard let data = image.jpegData(compressionQuality: 0.5) else  { return nil}
+        
+        self.data = data
+        
+        
+                 
     }
 }
 

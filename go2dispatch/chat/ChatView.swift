@@ -15,6 +15,8 @@ struct ChatView: View {
 
     @State private var isCameraActive = false
     
+   
+    
     
     let chat : Chat
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -154,7 +156,7 @@ struct ChatView: View {
                             .font(.system(size: 22))
                             .foregroundColor(.gray)
                             .sheet(isPresented: $isCameraActive, content: {
-                               CameraViewController()
+                                CameraViewController(chat: chat, vm: viewModel)
 
                             })
                         
@@ -213,11 +215,20 @@ struct ChatView: View {
     
     func sendMessage() {
         
-          let message = viewModel.sendMessage2(text, chat: chat)
-           text  = ""
-             
-//             messageIDToScroll = message.id
-           viewModel.messageIDToScroll  = message.id
+       viewModel.sendMessage2(text, chat: chat) {
+            status, result in
+           if (status) {
+               if let result = result {
+                   self.text  = ""
+        
+                   self.viewModel.messageIDToScroll  = result.id
+                   
+               }
+                
+           }
+           
+        }
+           
         
         
 //        if let message = viewModel.sendMessage(text, in: chat) {
@@ -306,18 +317,26 @@ struct NavigationConfigurator: UIViewControllerRepresentable {
 
  
 struct CameraViewController : UIViewControllerRepresentable {
+    typealias UIViewControllerType = UIViewController
+    
+    let chat : Chat
+    var vm : ChatsViewModel
+    
     func makeUIViewController(context: UIViewControllerRepresentableContext<CameraViewController>) -> UIViewController {
-        let camevc =  CameraCaptureViewController()
+        let camevc =  CameraCaptureViewController(vm: vm, chat: chat)
+        
+        camevc.chat = chat
         return camevc
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<CameraViewController>) {
         //
     }
+    func makeCoordinator() -> Coordinator {
+          Coordinator()
+      }
     
-    
-    typealias UIViewControllerType = UIViewController
-    
+ 
     
 }
 

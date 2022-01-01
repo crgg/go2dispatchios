@@ -11,6 +11,9 @@
 		9B13AE9C277BDE390080D560 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B13AE9B277BDE390080D560 /* ChatBubble.swift */; };
 		9B13AE9E277BE7760080D560 /* BubbleSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B13AE9D277BE7760080D560 /* BubbleSend.swift */; };
 		9B13AEA0277C00120080D560 /* BubleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B13AE9F277C00120080D560 /* BubleImage.swift */; };
+		9B13AEA2277CA9390080D560 /* ChatHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B13AEA1277CA9390080D560 /* ChatHeader.swift */; };
+		9B13AEA5277E7ABA0080D560 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9B13AEA4277E7ABA0080D560 /* Alamofire */; };
+		9B13AEA7277F7EE30080D560 /* UimageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B13AEA6277F7EE20080D560 /* UimageExtensions.swift */; };
 		9B198E97277A39F300DC79E5 /* PhotoModelCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B198E96277A39F300DC79E5 /* PhotoModelCacheManager.swift */; };
 		9B198E99277A3B3100DC79E5 /* PhotoModelFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B198E98277A3B3100DC79E5 /* PhotoModelFileManager.swift */; };
 		9B198E9C277A623300DC79E5 /* ChatViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B198E9B277A623300DC79E5 /* ChatViewModal.swift */; };
@@ -116,6 +119,8 @@
 		9B13AE9B277BDE390080D560 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 		9B13AE9D277BE7760080D560 /* BubbleSend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleSend.swift; sourceTree = "<group>"; };
 		9B13AE9F277C00120080D560 /* BubleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubleImage.swift; sourceTree = "<group>"; };
+		9B13AEA1277CA9390080D560 /* ChatHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHeader.swift; sourceTree = "<group>"; };
+		9B13AEA6277F7EE20080D560 /* UimageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UimageExtensions.swift; sourceTree = "<group>"; };
 		9B198E96277A39F300DC79E5 /* PhotoModelCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModelCacheManager.swift; sourceTree = "<group>"; };
 		9B198E98277A3B3100DC79E5 /* PhotoModelFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModelFileManager.swift; sourceTree = "<group>"; };
 		9B198E9B277A623300DC79E5 /* ChatViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModal.swift; sourceTree = "<group>"; };
@@ -209,6 +214,7 @@
 				9B2C9A9C26D6E0F000D80185 /* Kingfisher in Frameworks */,
 				9BBE74B5270293BD009F85D2 /* iPhoneNumberField in Frameworks */,
 				9B1BEC30270FC91100370896 /* SocketIO in Frameworks */,
+				9B13AEA5277E7ABA0080D560 /* Alamofire in Frameworks */,
 				9BB87904272B797100B7D95B /* SwiftLocation in Frameworks */,
 				9BCFF034275831F6002CFBD5 /* SDWebImage in Frameworks */,
 			);
@@ -225,6 +231,7 @@
 				9B13AE9B277BDE390080D560 /* ChatBubble.swift */,
 				9B13AE9D277BE7760080D560 /* BubbleSend.swift */,
 				9B13AE9F277C00120080D560 /* BubleImage.swift */,
+				9B13AEA1277CA9390080D560 /* ChatHeader.swift */,
 			);
 			path = chatView;
 			sourceTree = "<group>";
@@ -321,6 +328,7 @@
 				9B2C9ABE26D9877B00D80185 /* Extensions.swift */,
 				9BBE74B827039AA0009F85D2 /* TextFieldManager.swift */,
 				9BBE74BA2703F1A7009F85D2 /* Tools.swift */,
+				9B13AEA6277F7EE20080D560 /* UimageExtensions.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -597,6 +605,7 @@
 				9B1BEC2F270FC91100370896 /* SocketIO */,
 				9BB87903272B797100B7D95B /* SwiftLocation */,
 				9BCFF033275831F6002CFBD5 /* SDWebImage */,
+				9B13AEA4277E7ABA0080D560 /* Alamofire */,
 			);
 			productName = go2dispatch;
 			productReference = 9BF040D326B8A95200A08890 /* go2dispatch.app */;
@@ -631,6 +640,7 @@
 				9B1BEC2E270FC91100370896 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 				9BB87902272B797100B7D95B /* XCRemoteSwiftPackageReference "SwiftLocation" */,
 				9BCFF032275831F5002CFBD5 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				9B13AEA3277E7AB90080D560 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 9BF040D426B8A95200A08890 /* Products */;
 			projectDirPath = "";
@@ -715,6 +725,7 @@
 				9B1BEC2D270BD76000370896 /* Service.swift in Sources */,
 				9BB878EA272B3B9200B7D95B /* TimeClockRow.swift in Sources */,
 				9BBE74C627055565009F85D2 /* SearchBar.swift in Sources */,
+				9B13AEA7277F7EE30080D560 /* UimageExtensions.swift in Sources */,
 				9BBE74CA27064591009F85D2 /* ChatView.swift in Sources */,
 				9B950EC0277A088500145738 /* ChatAllUserService.swift in Sources */,
 				9B2C9AA726D73C4D00D80185 /* FavoritesView.swift in Sources */,
@@ -733,6 +744,7 @@
 				9B90B4E02762BECA001E6801 /* TripListViewModel.swift in Sources */,
 				9B13AE9C277BDE390080D560 /* ChatBubble.swift in Sources */,
 				9B2C9AA526D72CFF00D80185 /* SearchGame.swift in Sources */,
+				9B13AEA2277CA9390080D560 /* ChatHeader.swift in Sources */,
 				9B213DD2276D5A0C006CC10E /* ChatsView+ServiceProtocol.swift in Sources */,
 				9B90B4E62762FB6B001E6801 /* Chata_data_Messaage.swift in Sources */,
 				9B213DD9277510EF006CC10E /* CameraCaptureViewController.swift in Sources */,
@@ -932,6 +944,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9B13AEA3277E7AB90080D560 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		9B1BEC2E270FC91100370896 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
@@ -975,6 +995,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9B13AEA4277E7ABA0080D560 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B13AEA3277E7AB90080D560 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		9B1BEC2F270FC91100370896 /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9B1BEC2E270FC91100370896 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;

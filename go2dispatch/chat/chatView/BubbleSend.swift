@@ -17,10 +17,7 @@ struct BubbleSend: View {
                 Text(message.text)
                    
                 Text(getHours(date: message.date))
-                    .font(.caption2)
-                    .frame(alignment: .trailing)
-                    .foregroundColor(.black)
-                    .frame( alignment: .trailing)
+                    .font(.system(size: 11, weight: .light, design: .default))
                 
                 
                  

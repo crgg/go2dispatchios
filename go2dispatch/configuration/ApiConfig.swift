@@ -41,6 +41,8 @@ class ApiConfig {
     public static let DISPATCHER_CLOCK : String = "dispatcher_clock"
     
     public static let RETURN_MESSAGES : String = "session"
+   
+    public static let SEND_MEDIA : String  =  "\(URL_PROD)chat_save_file"
     
     public static let SEND_MESSAGE : String = "\(URL_CHAT_API)send"
    

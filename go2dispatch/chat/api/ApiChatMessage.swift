@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import Alamofire
+
+typealias Parameters = [String: String]
 extension ApiChat {
     
     
@@ -171,7 +174,9 @@ extension ApiChat {
         
     }
     
-    static func insertMessage(msg : String , chat : Chat, handler: @escaping (_ sucess : Bool, _ error : String?, _ result : DataMessageRequest? )->()) {
+    static func insertMessage(msg : String , chat : Chat ,handler: @escaping (_ sucess : Bool, _ error : String?, _ result : DataMessageRequest? )->()) {
+        
+        
         
         let driverid = chat.person.driver_id
         guard  chat.session_id > 0 else {
@@ -235,7 +240,8 @@ extension ApiChat {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue(apiToken ?? "", forHTTPHeaderField: "Authorization")
- 
+        
+         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
             do {
@@ -366,5 +372,130 @@ extension ApiChat {
             
         }.resume()
     }
+
     
+    static func sendMedia(msg : String , chat : Chat, image_data : Data?, handler: @escaping (_ sucess : Bool, _ error : String?, _ result : sendDataModel? )->()) {
+        
+        
+        guard  chat.session_id > 0 else {
+            print(" ✏️ chatRoom: SEND_MESSAGE : Session is Null")
+            return
+        }
+        guard let username = UserDefaults.standard.getUserData()?.user.username  else {
+            print(" ✏️ Error the username internal")
+            return
+        }
+        guard !msg.isEmpty else {
+            print(" 🚨 Message viene empty")
+            return
+        }
+        let driverid = chat.person.driver_id
+        
+        let urlString2 = "\(ApiConfig.SEND_MEDIA)"
+        let urlString = "http://localhost:3001/message/media"
+//        let urlString =  urlString2
+        
+        guard let url = URL(string: urlString) else {
+            print("error the url conform")
+            return
+        }
+        
+      
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss.000000"
+        let dateString =  String(dateFormatterGet.string(from: Date()))
+        
+                    let params = [
+                            "session_id" : String(chat.session_id) ,
+                            "session" : String(chat.session_id) ,
+                            "trip":  "0",
+                            "to_user": driverid,
+                            "user_send": username,
+                            "username" : username,
+                            "driver" : driverid,
+                            "user" : username,
+                            "message": msg,
+                            "content" : msg,
+                            "date": dateString,
+                            "UUID" : chat.messages.last?.id.uuidString ?? UUID().uuidString,
+                            "url" : urlString2,
+                            
+                        ]
+        
+        
+//        guard let jsonParam = try? JSONEncoder().encode(params) else {
+//            print("error the parameters")
+//            return
+//        }
+        let apiToken = UserDefaults.standard.getApiToken()
+        let headers : HTTPHeaders =   [ "Authorization" : "Bearer \(apiToken ?? "")",
+                         "Content-Type" : "application/json",
+                         "Content-type": "multipart/form-data",
+                         "Accept" : "application/json"]
+        
+        print("🤳 initial upload photo ")
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            for (key, value) in params {
+                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+            }
+          
+                if let avatarData = image_data {
+                    multipartFormData.append(avatarData, withName: "file", fileName: "\(arc4random()).jpg", mimeType: "image/png")
+                }
+        }, to: urlString, usingThreshold: UInt64.init(),  method: .post, headers: headers)
+            .responseDecodable(of: sendDataReceivedResponse.self ) { (response) in
+                switch response.result {
+                case .success(let value):
+                    if let datos =  value.data {
+                        print("🤳 data Received \(datos.user ?? "") url : \(datos.message ?? "")")
+                        handler(true, nil, datos)
+                    } else {
+                        print("🤳 error received the data")
+                        handler(false, "Error unknow please try again later", nil)
+                    }
+                case .failure(let error):
+                    print("🤳\(error)")
+                    handler(false, "Error unknow please try again later", nil)
+                }
+            }
+    }
+    
+  static  func generateBoundary() -> String {
+        return "Boundary-\(NSUUID().uuidString)"
+        
+    }
+    
+ 
+}
+struct sendDataReceivedResponse : Codable {
+    let status : Bool
+    let data : sendDataModel?
+    let msg : String?
+    
+}
+
+struct sendDataModel : Codable {
+    var id : Int?
+    var date : String?
+    var driver : String?
+    var message : String?
+    var trip: String?
+    var type : Int?
+    var user : String?
+    var send_at : send_at?
+    var session_id : Int?
+    var url : String?
+    var uuid : UUID?
+    var status : String?
+    var content : String?
+    var wherefrom: String?
+    
+}
+struct send_at : Codable {
+    var date : String?
 }

@@ -97,12 +97,49 @@ extension ChatsViewModel : ServiceChatProtocol {
     func newMessage(newMessageReceived : New_messag_received) {
         isNewMessage = true
          
-        ChatDataManager.instance.updateUserInfo(driverId: newMessageReceived.user_send, newMessageInfo: newMessageReceived )
+        // Verificar si existe en nuestra lista
+        let isExist = chats.contains(where: {$0.person.driver_id == newMessageReceived.user_send})
+        if !isExist {
+            var typecontenido : contentType = .text
+            switch(newMessageReceived.type_content) {
+            case .text :
+                typecontenido = .text
+            case .image:
+                typecontenido = .image
+            case .video :
+                typecontenido = .video
+                
+            }
+            var dateMessage = Date()
+            if  !newMessageReceived.date.isEmpty {
+                if let dateMessage1 = UtilDate.parseDate(dateString: newMessageReceived.date) {
+                    dateMessage =  dateMessage1
+                }
+            }
+            
+            
+            var chatnew = Chat(person: Person(name: newMessageReceived.user_send, driver_id: newMessageReceived.user_send, imgString: ""), messages: [
+                Message(newMessageReceived.content, type: .received, content_type: typecontenido, readed: false, date: dateMessage, userOwn: newMessageReceived.user_send, messageId: 0)])
+            chatnew.session_id =  newMessageReceived.session_id
+            DispatchQueue.main.async {
+                self.chats.append(chatnew)
+            }
+            
+            // falta ordenar
+            ChatDataManager.instance.updateUserInfo(driverId: newMessageReceived.user_send, newMessageInfo: newMessageReceived )
+            self.newMessageReceived = newMessageReceived
+            
+        } else {
+            
+            ChatDataManager.instance.updateUserInfo(driverId: newMessageReceived.user_send, newMessageInfo: newMessageReceived )
+            
+            self.newMessageReceived = newMessageReceived
+            
+            
+            updateChats(newMessageReceived: newMessageReceived)
+        }
         
-        self.newMessageReceived = newMessageReceived
-        
-        
-        updateChats(newMessageReceived: newMessageReceived)
+     
         
         
     }
@@ -128,7 +165,7 @@ extension ChatsViewModel : ServiceChatProtocol {
         
         self.messages.append(mess)
         self.messageIDToScroll = m.id
-        self.count += 1
+        self.countMessage += 1
         DispatchQueue.main.async {
             if let row = self.chats.firstIndex(where: {$0.person.driver_id == user_send}) {
                 self.chats[row].messages[0] = m

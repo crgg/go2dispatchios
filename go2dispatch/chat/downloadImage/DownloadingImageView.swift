@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DownloadingImageView: View {
     @StateObject var loader : ImageLoadingViewModel
-    
+    var imagePerfil : UIImage =  UIImage(named: "noimg")!
     init(url: String, key : String) {
         _loader = StateObject(wrappedValue: ImageLoadingViewModel(url: url, key: key))
         
@@ -22,6 +22,10 @@ struct DownloadingImageView: View {
                 ProgressView()
             } else  if let image = loader.image {
                  Image(uiImage: image)
+                    .resizable()
+                    .clipShape(Circle())
+            } else {
+                Image(uiImage: imagePerfil)
                     .resizable()
                     .clipShape(Circle())
             }

@@ -9,7 +9,7 @@ import Foundation
 import Combine
 class ChatAllUserViewModel : ObservableObject {
     
-    @Published var dataArray = [All_drivers_users]()
+    @Published var dataArray = [driver_users]()
     
     let dataService = ChatAllUserService.instance
     var cancellables = Set<AnyCancellable>()
@@ -26,14 +26,14 @@ class ChatAllUserViewModel : ObservableObject {
             .store(in: &cancellables)
     }
     
-    func getSortedFilteredChatsAllDrivers(query : String) -> [All_drivers_users] {
+    func getSortedFilteredChatsAllDrivers(query : String) -> [driver_users] {
         let sortedChats = dataArray.sorted {
             return $0.name < $1.name
         }
         if query == "" {
             return sortedChats
         }
-        return sortedChats.filter { $0.driver_id.lowercased().contains(query.lowercased())
+        return sortedChats.filter { $0.driverID.lowercased().contains(query.lowercased())
                                       || $0.name.lowercased().contains(query.lowercased())
             
         }

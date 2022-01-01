@@ -94,7 +94,7 @@ extension ChatsViewModel {
                     print("🧩\(Date()) last is \( String(describing: self.messages.last?.id))")
                     print("🧩\(Date()) Assign UI")
                     DispatchQueue.main.async {
-                        self.count = data.count
+                        self.countMessage = data.count
                     }
                 }
             }

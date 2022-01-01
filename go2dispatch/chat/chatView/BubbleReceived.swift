@@ -26,7 +26,8 @@ struct BubbleReceived: View {
                 
                 
                     Text(getHours(date: message.date))
-                        .font(.caption2)
+                    .font(.system(size: 11, weight: .light, design: .default))
+                        .foregroundColor(.black.opacity(0.7))
                        
                         
                        
