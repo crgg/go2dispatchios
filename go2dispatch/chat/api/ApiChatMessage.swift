@@ -217,7 +217,7 @@ extension ApiChat {
                             "message": msg,
                             "content" : msg,
                             "date": dateString,
-                            "UUID" : chat.messages.last?.id.uuidString ?? UUID().uuidString,
+                            "UUID" : UUID().uuidString,
                             "url" : urlString2,
                         ]
         
@@ -395,6 +395,7 @@ extension ApiChat {
         let urlString = "http://localhost:3001/message/media"
 //        let urlString =  urlString2
         
+        
         guard let url = URL(string: urlString) else {
             print("error the url conform")
             return
@@ -459,11 +460,28 @@ extension ApiChat {
                         handler(false, "Error unknow please try again later", nil)
                     }
                 case .failure(let error):
-                    print("🤳\(error)")
+                    print("🤳 \(error)")
                     handler(false, "Error unknow please try again later", nil)
                 }
             }
     }
+    
+    
+//    Handling event: chat with data: [{
+//        UUID = "46BABAFE-00E9-4915-AC4B-DF63665752C3";
+//        content = image;
+//        date = "2022-01-04 17:45:11.000000";
+//        driver = RAMON;
+//        id = 10994;
+//        message = "https://go2storage.s3.us-east-2.amazonaws.com/DRIVER_CHAT_TEST/CHATS/311/2022/01/311_33.png";
+//        "session_id" = 311;
+//        "to_user" = RAMON;
+//        trip = 0;
+//        type = 1;
+//        user = RAMON;
+//        "user_send" = RAMON;
+//        where = WEB;
+//
     
   static  func generateBoundary() -> String {
         return "Boundary-\(NSUUID().uuidString)"

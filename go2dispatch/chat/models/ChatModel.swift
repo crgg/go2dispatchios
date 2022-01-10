@@ -123,6 +123,7 @@ struct Message : Identifiable {
         self.readed = readed
         self.userOwn = userOwn
         self.messageId =  messageId
+        
     }
     init(_ text: String, type: MessageType , content_type : contentType, readed : Bool, date: Date,  userOwn: String,  messageId: Int) {
        
@@ -134,6 +135,7 @@ struct Message : Identifiable {
         self.userOwn = userOwn
         self.messageId =  messageId
     }
+ 
  
     
     

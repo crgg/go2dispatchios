@@ -11,7 +11,7 @@ extension ChatsViewModel {
  
     
     func getSectionMessage(for chat : Chat) -> [[Message]]{
-        
+        print("🤳 getSection Message parse by section")
         var res =  [[Message]]()
         var tmp = [Message]()
         for message in messages {

@@ -215,6 +215,14 @@ struct ChatView: View {
     
     func sendMessage() {
         
+        guard !viewModel.service.errorChatDiscount else {
+            DispatchQueue.main.async {
+                viewModel.message_error.isMessageError = true
+                viewModel.message_error.messageErrorText = "Error the connecton try again later"
+            }
+            return
+        }
+        
        viewModel.sendMessage2(text, chat: chat) {
             status, result in
            if (status) {

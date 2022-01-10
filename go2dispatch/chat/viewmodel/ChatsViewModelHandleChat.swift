@@ -10,14 +10,16 @@ extension ChatsViewModel {
     func joinRoom(chat : Chat) {
         DispatchQueue.main.async {
             self.messages = []
+           
         }
-        
+        service.inTheRoom = true
         service.join_room(chat: chat)
         
         
     }
     
     func outRoom(chat: Chat) {
+        service.inTheRoom = false
         service.outRooms(chat: chat)
     }
     

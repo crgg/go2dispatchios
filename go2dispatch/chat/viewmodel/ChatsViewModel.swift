@@ -30,6 +30,8 @@ class ChatsViewModel: ObservableObject  {
     @Published var countMessage : Int = 0
     @Published var  messagesResumen : [[Message]] = []
     
+   
+    
     @ObservedObject var service = Service()
     
     var user_online : [String] = []
@@ -310,6 +312,13 @@ class ChatsViewModel: ObservableObject  {
     func sendMessage2(_ text: String, chat : Chat ,
                       handler: @escaping (_ status : Bool, _ result: Message?)->()) {
         var chatTemp = chat
+        
+        var messagePaso = Message(text, type: .send, content_type: .text,
+                              readed: false, date: Date(), userOwn: "", messageId: 0 )
+        
+        chatTemp.messages = []
+        chatTemp.messages.append(messagePaso)
+        
         if  chat.session_id == 0 {
             print(" \(Service.logs_chat) chatRoom: SEND_MESSAGE : Session is Null")
             
@@ -343,6 +352,7 @@ class ChatsViewModel: ObservableObject  {
                             return
                             
                         }
+                       
                         
                         print("\(Service.logs_chat) emit Chat")
                         
@@ -354,23 +364,24 @@ class ChatsViewModel: ObservableObject  {
                                 dateCreate = dateCreate1
                             }
                         }
+                  
+                        messagePaso.messageId = messageid
+                        messagePaso.date = dateCreate
                         
+                 
                         
-                        
-                        let message = Message(text, type: .send, content_type: .text,
-                                              readed: false, date: dateCreate, userOwn: "", messageId: messageid                        )
                         let send_at =  DAt(date: "", timezoneType: 3, timezone: Timezone.americaChicago)
                        
-                        let mess =  MessagesList(message: text, id: 0, sessionID: chatTemp.session_id, type: 1, readAt: nil, sendAt: send_at , content: .text, trip: 0, uuid: nil, user: "", messageParse: message)
+                        let mess =  MessagesList(message: text, id: 0, sessionID: chatTemp.session_id, type: 1, readAt: nil, sendAt: send_at , content: .text, trip: 0, uuid: nil, user: "", messageParse: messagePaso)
                         
                         
-                        chatTemp.messages.append(message)
+                        chatTemp.messages.append(messagePaso)
                         
                         DispatchQueue.main.async {
                             self?.messages.append(mess)
                             self?.countMessage += 1
-                            self?.service.sendMessage(msg: text, dateCreated: result?.createdAt ?? "", chat: chatTemp, uuid : message.id)
-                            handler(true, message)
+                            self?.service.sendMessage(msg: text, dateCreated: result?.createdAt ?? "", chat: chatTemp, uuid : messagePaso.id)
+                            handler(true, messagePaso)
                             
                             ChatDataManager.instance.insertMessage(chat: chatTemp)
                         }
@@ -468,6 +479,7 @@ class ChatsViewModel: ObservableObject  {
             let mess =  MessagesList(message:  message.id.uuidString, id: 0, sessionID: chat.session_id, type: 1, readAt: nil, sendAt: send_at , content: .image, trip: 0, uuid: nil, user: "", messageParse: message)
             DispatchQueue.main.async {
                 self.messages.append(mess)
+                print("🤳 append message in table message line 480")
                 self.countMessage += 1
             }
             
@@ -526,7 +538,7 @@ class ChatsViewModel: ObservableObject  {
                         
                     }
                     guard let mesage_id =  result.id  else {
-                        print("🤳 No tenemos un mensaje de id")
+                        print("🤳 No tenemos un mensaje de id send the picture")
                         return
                     }
                     
@@ -535,6 +547,9 @@ class ChatsViewModel: ObservableObject  {
                     let send_at =  DAt(date: dateMessage, timezoneType: 3, timezone: Timezone.americaChicago)
                     
                     let mess =  MessagesList(message: text, id: 0, sessionID: chat.session_id, type: 1, readAt: nil, sendAt: send_at , content: .text, trip: 0, uuid: nil, user: "", messageParse: message)
+                    
+                  
+                    
                    
 //                    DispatchQueue.main.async {
 //

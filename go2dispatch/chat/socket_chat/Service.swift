@@ -35,6 +35,8 @@ final class Service : ObservableObject {
     @Published var isNewMessage = false
     @Published var message_txt = false
     @Published var currenChat : Chat = Chat.sampleChat[0]
+    @Published var inTheRoom = false
+    @Published var errorChatDiscount = false
     
    var callback : ServiceChatProtocol?
     
@@ -49,13 +51,20 @@ final class Service : ObservableObject {
         socket = manager.defaultSocket
         
         socket?.on(clientEvent: .connect) {  (data, ack) in
+            self.errorChatDiscount = false
             print("\(Service.logs_chat) connected socket")
             
             self.socket?.emit("check_user_online")
             print("\(Service.logs_chat) emit check_user_online")
             
-            
+        
             self.registerUser()
+            
+            if (self.inTheRoom) {
+                self.join_room(chat: self.currenChat)
+            }
+            
+            
                  
         }
         
@@ -107,6 +116,7 @@ final class Service : ObservableObject {
         
         // event the sockect discount
         socket?.on(clientEvent: .disconnect) {  data , ack in
+            self.errorChatDiscount = true
             print("\(Service.logs_chat) socket discount")
             self.socket?.connect()
         }
