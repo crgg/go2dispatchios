@@ -8,33 +8,60 @@
 import SwiftUI
 
 struct ShowDocuments: View {
-    let documenturl = [ "https://media.goto-logistics.com/TruckmateDownload/DOC/BOL/BOL-555306.pdf",
-                       "https://media.goto-logistics.com/TruckmateDownload/DOC/BOL/BOL-555626.pdf"
-                       ]
+    @State var fotos : [fotos]
+    
+    @State var freight : Freight
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("document")
-                        .font(.largeTitle)
+         
             ScrollView  {
-                ForEach(0..<documenturl.count) { i  in
+                ForEach(0..<fotos.count) { i  in
                     
                     GeometryReader{
                         proxy in
                     
-                         PDFKitView(url:  URL(string: documenturl[i])!)
+                        PDFKitView(url: fotos[i].avatar, key: String(fotos[i].id))
                     }
                 }
             }
                 
                 
         }
+        .overlay(
+            HStack {
+                Button {
+                    self.presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Image(systemName: "arrow.left")
+                        .font(.title2)
+                    Text("Freight \(self.freight.BILL_NUMBER)")
+                        .font(.title2.bold())
+                    Spacer(minLength: 0)
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "square.and.arrow.up.fill"
+                        )
+                            .font(.title2)
+                    }
+                }
+            }.foregroundColor(.white)
+                .padding()
+                .background(BlurView(style: .systemThinMaterialDark).ignoresSafeArea())
+               
+                
+            ,
+            alignment: .top
+        )
         
     }
 }
 
 struct ShowDocuments_Previews: PreviewProvider {
     static var previews: some View {
-        ShowDocuments()
+        ShowDocuments(fotos: TripList.sampleTrips[0].freights[0].fotos.filter({ $0.typedocument == "D"  }), freight: TripList.sampleTrips[0].freights[0])
     }
 }

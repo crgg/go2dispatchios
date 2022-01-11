@@ -107,7 +107,9 @@ class TimeClockViewModel : ObservableObject {
                 DispatchQueue.main.async {
                     self.isLoading = false
                     self.timeLogHistory = data
-                    self.checkInfoFromHistory(data[0],  time_zone: time_zone ?? "")
+                    if data.count > 0 {
+                        self.checkInfoFromHistory(data[0],  time_zone: time_zone ?? "")
+                    }
                  }
                 
                 return

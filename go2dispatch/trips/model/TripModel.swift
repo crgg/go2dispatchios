@@ -38,7 +38,7 @@ struct TripList : Identifiable {
      
 }
 
-struct TripFilter : Identifiable {
+struct FilterList : Identifiable {
     let id : UUID = UUID()
     let name : String
 }

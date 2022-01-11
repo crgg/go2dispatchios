@@ -17,13 +17,15 @@ struct Trip_ListView: View {
     @State var showFreights =  false
     @State var showOverlay : Bool  = false
     @State var openDetails : Bool = false
+
      
     
     
     
-    var selectTab : String = "YOUR"
-    let filter : [TripFilter] = [TripFilter( name: "YOUR"), TripFilter(name: "LOCAL"), TripFilter( name: "NLTERM"),
-                                 TripFilter(name: "SCTERM"), TripFilter( name: "PHTERM")]
+    @State var selectTab : String = "YOUR"
+    
+    let filter : [FilterList] = [FilterList( name: "YOUR"), FilterList(name: "LOCAL"), FilterList( name: "NLTERM"),
+                                 FilterList(name: "SCTERM"), FilterList( name: "PHTERM")]
     
     var body: some View {
          
@@ -31,26 +33,24 @@ struct Trip_ListView: View {
                 Color("Marine").ignoresSafeArea()
                 
                 VStack {
-                    Text("Multimode")
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.white)
+                    HStack {
+                        Spacer()
+                        Text("Multimode")
+                            .foregroundColor(.white)
+                        Spacer()
+                        Button {
+                            
+                            
+                        } label: {
+                            Image(systemName: "plus")
+                                .foregroundColor(.white)
+                                .padding(10)
+                            
+                        }
+                    }.frame(maxWidth: .infinity)
                     ScrollView(.horizontal, showsIndicators: false, content:  {
                         HStack(spacing: 0) {
-                                ForEach(filter) {
-                                    f in
-                                    Text(f.name)
-                                        .font(.caption)
-                                        .padding(.vertical, 10)
-                                        .padding(.horizontal)
-                                        .foregroundColor(
-                                            selectTab == f.name ?
-                                                .white : .gray)
-                                            
-                                        .background(Color.primary.opacity(selectTab == f.name ? 1 : 0))
-                                        .clipShape(Capsule())
-                                    
-                                }
-                           
+                               FilterTabView(selectTab: $selectTab, filter: filter)
                         }
                     })
                     
@@ -84,7 +84,7 @@ struct Trip_ListView: View {
         
     
     }
-   
+     
 
 }
     

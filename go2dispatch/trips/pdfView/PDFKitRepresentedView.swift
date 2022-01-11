@@ -11,9 +11,17 @@ import PDFKit
 
 struct PDFKitRepresentedView : UIViewRepresentable {
     
-    var url : URL?
+    
+    
+    var pdfdoc : PDFDocument?
+    
+ 
     
     func makeUIView(context: Context) -> UIView {
+        
+       
+        
+        
         let pdfView = PDFView()
         
         
@@ -26,11 +34,11 @@ struct PDFKitRepresentedView : UIViewRepresentable {
         pdfView.displaysPageBreaks = true
         
         
-   
+        pdfView.document = pdfdoc
         
-        if let url = url {
-            pdfView.document = PDFDocument(url: url)
-        }
+//        if let url = url {
+//            pdfView.document = PDFDocument(url: url)
+//        }
         return pdfView
         
     }

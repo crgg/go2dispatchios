@@ -14,9 +14,17 @@ struct TripRow: View {
     let widthIcon : CGFloat = 20
     let heightIcon : CGFloat = 15
     let colorFont : Color = .white
+    
     @State private var rotation = -90.0
     
+    @State private var ShowMenuAction = false
+    
+    @State private var openDriver = false
+    
+    @State private var openFreightAssign = false
+    
     @Binding  var showFreights : Bool
+    
     
     @State var openFreight = false
     var body: some View {
@@ -33,7 +41,65 @@ struct TripRow: View {
                     TextTripView(texto: trip.description ?? "" , colorFont: colorFont)
                     
                     Spacer()
+                    Text("Status")
+                        .foregroundColor(.green)
+                        .font(.caption2)
                     TextTripView(texto: trip.status, colorFont: colorFont)
+                    Spacer()
+                    Button {
+                        ShowMenuAction.toggle()
+                    } label: {
+                        HStack {
+                            Image(systemName: "ellipsis")
+                                .font(.system(size: 25, weight: .bold))
+                                .foregroundColor(colorFont)
+                        }
+                    }.foregroundColor(.white)
+                        .actionSheet(isPresented: $ShowMenuAction) {
+                            ActionSheet(
+                                title: Text("Trip # \(String(trip.trip_number))"),
+                                buttons: [
+                                    .default(Text("Change Status")) {
+                                        
+                                    },
+                                    .default(Text("Assign freight")) {
+                                        openFreightAssign.toggle()
+                                        
+                                    },
+                                    .default(Text(optionMenuAction(texto:
+                                                                    "Assign Driver", value: trip.driver_id ?? ""))
+                                                .foregroundColor(.green)
+                                            ) {
+                                                openDriver.toggle()
+                                        
+                                    },
+                                    .default(Text(optionMenuAction(texto:
+                                                                    "Assign Truck", value: trip.truck_id ?? ""))
+                                                .foregroundColor(.green)
+                                            ) {
+                                        
+                                    },
+                                    .default(Text(optionMenuAction(texto:
+                                                                    "Assign Trailer", value: trip.trailer_id ?? ""))
+                                                .foregroundColor(.green)
+                                            ) {
+                                        
+                                    },
+                                    .destructive(Text("Cancel")) {
+                                            
+                                     }
+                                ]
+                            )
+                        }
+
+                        
+//                        .confirmationDialog("Trip # \(trip.TRIP_NUMBER)", isPresented: $ShowMenuAction, titleVisibility: .visible) {
+//
+//                        }
+//
+                        
+                    
+                    
                     
                 }.frame(maxWidth: .infinity)
               
@@ -70,21 +136,21 @@ struct TripRow: View {
                         .background(Color.gray)
                         .cornerRadius(.infinity)
                     
-                     
+                    // action
                     Spacer()
+          
                     Button(action: {
                         rotation = trip.expland ? -90 : 0
                          viewModel.explanded(trip.trip_number, expland:  !trip.expland)
                          
                     }) {
-                        
+                        Text("Freights")
+                            .font(.caption)
                         Image("ic_explain")
                             .resizable()
                             .frame(width: 20, height: 20)
                             .foregroundColor(colorFont)
                             .rotationEffect(.degrees(rotation))
-                    
-                             
                         
                     }
                 }
@@ -102,8 +168,26 @@ struct TripRow: View {
                 .padding(.vertical,5)
                
         }
+        .fullScreenCover(isPresented: $openDriver) {
+            DriversView(trip: trip)
+        }
+        .fullScreenCover(isPresented: $openFreightAssign) {
+            BillNumberView(trip: trip)
+        }
+
             
     }
+    
+    private func optionMenuAction (texto : String, value : String)-> String{
+        
+        if value.isEmpty {
+            return texto
+        }
+        
+        return "\(texto) (\(value)) "
+        
+    }
+    
     
 
 }

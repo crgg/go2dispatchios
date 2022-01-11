@@ -52,6 +52,15 @@
 		9B2C9ABC26D8266700D80185 /* SUImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C9ABB26D8266700D80185 /* SUImagePickerView.swift */; };
 		9B2C9ABF26D9877B00D80185 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C9ABE26D9877B00D80185 /* Extensions.swift */; };
 		9B3B333926FEA59C0051511D /* MyAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3B333826FEA59C0051511D /* MyAppDelegate.swift */; };
+		9B3E12DF278C973900D55A5A /* FilePdfFileManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E12DE278C973900D55A5A /* FilePdfFileManger.swift */; };
+		9B3E12E6278D05E200D55A5A /* DriversView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E12E5278D05E200D55A5A /* DriversView.swift */; };
+		9B3E12EA278D060900D55A5A /* DriverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E12E9278D060900D55A5A /* DriverViewModel.swift */; };
+		9B3E12EC278D0B7500D55A5A /* DriverTripModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E12EB278D0B7500D55A5A /* DriverTripModel.swift */; };
+		9B3E12EE278D17FA00D55A5A /* FilterTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E12ED278D17FA00D55A5A /* FilterTabView.swift */; };
+		9B3E12F1278E105B00D55A5A /* BillNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E12F0278E105B00D55A5A /* BillNumberView.swift */; };
+		9B3E12F3278E107400D55A5A /* BillNumberVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E12F2278E107400D55A5A /* BillNumberVM.swift */; };
+		9B3E12F7278E178100D55A5A /* FreighRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E12F6278E178100D55A5A /* FreighRow.swift */; };
+		9B3E12FA278E2F6000D55A5A /* NewFreightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E12F9278E2F6000D55A5A /* NewFreightView.swift */; };
 		9B4A7B842767ADB200922D46 /* ParseDatosOfSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4A7B832767ADB200922D46 /* ParseDatosOfSocket.swift */; };
 		9B4A7B88276828A100922D46 /* UtilDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4A7B87276828A000922D46 /* UtilDate.swift */; };
 		9B74F3A82730DF5100457043 /* MultimodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B74F3A72730DF5100457043 /* MultimodeView.swift */; };
@@ -167,6 +176,15 @@
 		9B2C9ABE26D9877B00D80185 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9B3B333726FEA4A60051511D /* go2dispatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = go2dispatch.entitlements; sourceTree = "<group>"; };
 		9B3B333826FEA59C0051511D /* MyAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppDelegate.swift; sourceTree = "<group>"; };
+		9B3E12DE278C973900D55A5A /* FilePdfFileManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePdfFileManger.swift; sourceTree = "<group>"; };
+		9B3E12E5278D05E200D55A5A /* DriversView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversView.swift; sourceTree = "<group>"; };
+		9B3E12E9278D060900D55A5A /* DriverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverViewModel.swift; sourceTree = "<group>"; };
+		9B3E12EB278D0B7500D55A5A /* DriverTripModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverTripModel.swift; sourceTree = "<group>"; };
+		9B3E12ED278D17FA00D55A5A /* FilterTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTabView.swift; sourceTree = "<group>"; };
+		9B3E12F0278E105B00D55A5A /* BillNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillNumberView.swift; sourceTree = "<group>"; };
+		9B3E12F2278E107400D55A5A /* BillNumberVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillNumberVM.swift; sourceTree = "<group>"; };
+		9B3E12F6278E178100D55A5A /* FreighRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreighRow.swift; sourceTree = "<group>"; };
+		9B3E12F9278E2F6000D55A5A /* NewFreightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFreightView.swift; sourceTree = "<group>"; };
 		9B4A7B832767ADB200922D46 /* ParseDatosOfSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseDatosOfSocket.swift; sourceTree = "<group>"; };
 		9B4A7B87276828A000922D46 /* UtilDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilDate.swift; sourceTree = "<group>"; };
 		9B74F3A72730DF5100457043 /* MultimodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimodeView.swift; sourceTree = "<group>"; };
@@ -366,6 +384,74 @@
 			path = camera;
 			sourceTree = "<group>";
 		};
+		9B3E12E0278D059800D55A5A /* driver */ = {
+			isa = PBXGroup;
+			children = (
+				9B3E12E8278D05F200D55A5A /* viewmodel */,
+				9B3E12E7278D05EA00D55A5A /* model */,
+				9B3E12E5278D05E200D55A5A /* DriversView.swift */,
+			);
+			path = driver;
+			sourceTree = "<group>";
+		};
+		9B3E12E1278D059F00D55A5A /* truck */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = truck;
+			sourceTree = "<group>";
+		};
+		9B3E12E2278D05AD00D55A5A /* trailer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = trailer;
+			sourceTree = "<group>";
+		};
+		9B3E12E3278D05B400D55A5A /* freight */ = {
+			isa = PBXGroup;
+			children = (
+				9B3E12F8278E2F3300D55A5A /* Create */,
+				9B2A478227865B3200EBCD7C /* FreigthView.swift */,
+				9B3E12F0278E105B00D55A5A /* BillNumberView.swift */,
+				9B3E12F2278E107400D55A5A /* BillNumberVM.swift */,
+				9B3E12F6278E178100D55A5A /* FreighRow.swift */,
+			);
+			path = freight;
+			sourceTree = "<group>";
+		};
+		9B3E12E7278D05EA00D55A5A /* model */ = {
+			isa = PBXGroup;
+			children = (
+				9B3E12EB278D0B7500D55A5A /* DriverTripModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		9B3E12E8278D05F200D55A5A /* viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				9B3E12E9278D060900D55A5A /* DriverViewModel.swift */,
+			);
+			path = viewmodel;
+			sourceTree = "<group>";
+		};
+		9B3E12EF278D1A6900D55A5A /* filter */ = {
+			isa = PBXGroup;
+			children = (
+				9B3E12ED278D17FA00D55A5A /* FilterTabView.swift */,
+			);
+			path = filter;
+			sourceTree = "<group>";
+		};
+		9B3E12F8278E2F3300D55A5A /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				9B3E12F9278E2F6000D55A5A /* NewFreightView.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
 		9B4A7B822767AD8D00922D46 /* socket_chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,6 +478,7 @@
 				9B213DDD27797874006CC10E /* StorageCache.swift */,
 				9B198E96277A39F300DC79E5 /* PhotoModelCacheManager.swift */,
 				9B198E98277A3B3100DC79E5 /* PhotoModelFileManager.swift */,
+				9B3E12DE278C973900D55A5A /* FilePdfFileManger.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -442,6 +529,11 @@
 		9B90B4D92762B141001E6801 /* trips */ = {
 			isa = PBXGroup;
 			children = (
+				9B3E12EF278D1A6900D55A5A /* filter */,
+				9B3E12E3278D05B400D55A5A /* freight */,
+				9B3E12E2278D05AD00D55A5A /* trailer */,
+				9B3E12E1278D059F00D55A5A /* truck */,
+				9B3E12E0278D059800D55A5A /* driver */,
 				9B75F9462789266000B0B79B /* Gallery */,
 				9B75F9452789262C00B0B79B /* pdfView */,
 				9B25C76A2787A886007B2497 /* helper */,
@@ -449,7 +541,6 @@
 				9B90B4DA2762B15F001E6801 /* Trip_ListView.swift */,
 				9B90B4DF2762BECA001E6801 /* TripListViewModel.swift */,
 				9BB02F7527861BB000B88BCF /* TripRow.swift */,
-				9B2A478227865B3200EBCD7C /* FreigthView.swift */,
 				9B75F93D2788D93300B0B79B /* BlurView.swift */,
 			);
 			path = trips;
@@ -722,7 +813,9 @@
 				9B7FBB7E271E6254004629A7 /* AlertToast.swift in Sources */,
 				9B1BEC252707C77A00370896 /* Persistence.swift in Sources */,
 				9B1BEC322710981700370896 /* NewChatView.swift in Sources */,
+				9B3E12FA278E2F6000D55A5A /* NewFreightView.swift in Sources */,
 				9B13AE9E277BE7760080D560 /* BubbleSend.swift in Sources */,
+				9B3E12F3278E107400D55A5A /* BillNumberVM.swift in Sources */,
 				9BDE04DB2748ADFB008AF5DC /* IRLPDFView.swift in Sources */,
 				9B74F3AB2731CDD800457043 /* ChatDataManager.swift in Sources */,
 				9B4A7B88276828A100922D46 /* UtilDate.swift in Sources */,
@@ -732,6 +825,7 @@
 				9B213DDB27792B48006CC10E /* LocalFileManager.swift in Sources */,
 				9B3B333926FEA59C0051511D /* MyAppDelegate.swift in Sources */,
 				9BB878E8272B3B6F00B7D95B /* TimeClockFooter.swift in Sources */,
+				9B3E12F1278E105B00D55A5A /* BillNumberView.swift in Sources */,
 				9B2C9ABC26D8266700D80185 /* SUImagePickerView.swift in Sources */,
 				9B1BEC272707CA6900370896 /* ApiChat.swift in Sources */,
 				9BB878EF272B3D3F00B7D95B /* ApiTimeClock.swift in Sources */,
@@ -759,6 +853,7 @@
 				9B13AEA0277C00120080D560 /* BubleImage.swift in Sources */,
 				9BB878F2272B3D7000B7D95B /* TimeClockModel.swift in Sources */,
 				9BDE04E12748AED4008AF5DC /* IRLPDFScanContent+VNDocumentCameraViewControllerDelegate.swift in Sources */,
+				9B3E12EA278D060900D55A5A /* DriverViewModel.swift in Sources */,
 				9B2C9AAB26D7407500D80185 /* ProfilView.swift in Sources */,
 				9B198E99277A3B3100DC79E5 /* PhotoModelFileManager.swift in Sources */,
 				9BB878ED272B3CA400B7D95B /* TimeClockViemModel.swift in Sources */,
@@ -767,6 +862,7 @@
 				9BDE04D92748ADBE008AF5DC /* IRLPDFScanContent.swift in Sources */,
 				9BB878DF272A45F000B7D95B /* TimeClockView.swift in Sources */,
 				9BB878E6272B3B3A00B7D95B /* TimeClockHeader.swift in Sources */,
+				9B3E12EE278D17FA00D55A5A /* FilterTabView.swift in Sources */,
 				9B213DD6276D6A74006CC10E /* ServiceHandlerEvento.swift in Sources */,
 				9B2C9A9726D6CE8800D80185 /* ViewModel.swift in Sources */,
 				9B75F9402789097E00B0B79B /* PDFKitRepresentedView.swift in Sources */,
@@ -787,6 +883,7 @@
 				9BB02F7627861BB100B88BCF /* TripRow.swift in Sources */,
 				9BBE74CA27064591009F85D2 /* ChatView.swift in Sources */,
 				9B950EC0277A088500145738 /* ChatAllUserService.swift in Sources */,
+				9B3E12E6278D05E200D55A5A /* DriversView.swift in Sources */,
 				9B2C9AA726D73C4D00D80185 /* FavoritesView.swift in Sources */,
 				9B90B4DB2762B161001E6801 /* Trip_ListView.swift in Sources */,
 				9B90B4EE2763D321001E6801 /* UserStateViewModel.swift in Sources */,
@@ -797,6 +894,7 @@
 				9BBE74BB2703F1A7009F85D2 /* Tools.swift in Sources */,
 				9BBE74B7270299D0009F85D2 /* CodeVerifyView.swift in Sources */,
 				9B2C9ABA26D8136E00D80185 /* UserModel.swift in Sources */,
+				9B3E12F7278E178100D55A5A /* FreighRow.swift in Sources */,
 				9B13AE9A277BDAD20080D560 /* BubbleReceived.swift in Sources */,
 				9BB878DD272A459700B7D95B /* GetLocation.swift in Sources */,
 				9BBE74BF2705280A009F85D2 /* ChatRow.swift in Sources */,
@@ -809,8 +907,10 @@
 				9B90B4E62762FB6B001E6801 /* Chata_data_Messaage.swift in Sources */,
 				9B213DD9277510EF006CC10E /* CameraCaptureViewController.swift in Sources */,
 				9BDE04DD2748AE3E008AF5DC /* Exports.swift in Sources */,
+				9B3E12DF278C973900D55A5A /* FilePdfFileManger.swift in Sources */,
 				9B950EC7277A2FA400145738 /* DownloadingImageView.swift in Sources */,
 				9BF040D726B8A95200A08890 /* go2dispatchApp.swift in Sources */,
+				9B3E12EC278D0B7500D55A5A /* DriverTripModel.swift in Sources */,
 				9B2C9AAF26D7FEA400D80185 /* SaveData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
