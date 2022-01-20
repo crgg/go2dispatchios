@@ -18,7 +18,7 @@ struct FreigthView: View {
     var body: some View {
         ForEach( freights , id: \.id) { fb in
             ZStack {
-                Color("Marine")
+                Color.theme.background
                 FreighRow(fb: fb)
             }
         }
@@ -32,6 +32,7 @@ struct FreigthView_Previews: PreviewProvider {
     static var previews: some View {
         FreigthView(freights: TripList.sampleTrips[0].freights)
             .environmentObject(TripListViewModel())
+        
  }
     }
 

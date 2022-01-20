@@ -57,6 +57,7 @@ struct ApplicationSwitcher : View {
             
             if UserDefaults.standard.getLoggedIn() || vm.isLoggedIn {
                 Home().environment(\.managedObjectContext, persistenceContainer.container.viewContext) // <- and here <-
+//                NewFreightView(freight: TripList.sampleTrips[0].freights[0])
 
                  
             } else {

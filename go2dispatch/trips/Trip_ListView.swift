@@ -17,8 +17,8 @@ struct Trip_ListView: View {
     @State var showFreights =  false
     @State var showOverlay : Bool  = false
     @State var openDetails : Bool = false
-
-     
+    @State var ShowMenuAction2 : Bool = false
+    @State var openNewFreight : Bool = false
     
     
     
@@ -30,23 +30,22 @@ struct Trip_ListView: View {
     var body: some View {
          
             ZStack {
-                Color("Marine").ignoresSafeArea()
+                Color.theme.background.ignoresSafeArea()
                 
                 VStack {
                     HStack {
+                       
                         Spacer()
                         Text("Multimode")
                             .foregroundColor(.white)
                         Spacer()
                         Button {
-                            
-                            
+                            ShowMenuAction2 = true
                         } label: {
-                            Image(systemName: "plus")
-                                .foregroundColor(.white)
-                                .padding(10)
+                            CircleButtonView(iconName: "plus")
                             
                         }
+                
                     }.frame(maxWidth: .infinity)
                     ScrollView(.horizontal, showsIndicators: false, content:  {
                         HStack(spacing: 0) {
@@ -58,6 +57,23 @@ struct Trip_ListView: View {
                     HStack {
                         
                         SearchBar(text: $query)
+                    }      .actionSheet(isPresented: $ShowMenuAction2) {
+                        ActionSheet(
+                            title: Text("Action"),
+                            buttons: [
+                                .default(Text("New Trip")) {
+                                    
+                                },
+                                .default(Text("New Freight")) {
+                                     
+                                    openNewFreight.toggle()
+                                },
+                                 
+                                .destructive(Text("Cancel")) {
+                                        
+                                 }
+                            ]
+                        )
                     }
                     
                     ScrollView {
@@ -73,7 +89,12 @@ struct Trip_ListView: View {
                 }.listStyle(PlainListStyle())
                     
             
-        }.onAppear {
+        }  .fullScreenCover(isPresented: $openNewFreight) {
+            NewFreightView(freight: TripList.sampleTrips[0].freights[0])
+        }
+          
+                
+                .onAppear {
             
             UITableView.appearance().backgroundColor = UIColor(named: "Marine")
             print("Entramos a View")
@@ -94,5 +115,6 @@ struct Trip_ListView: View {
 struct Trip_ListView_Previews: PreviewProvider {
     static var previews: some View {
         Trip_ListView()
+            .navigationBarHidden(true)
     }
 }

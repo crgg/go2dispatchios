@@ -93,6 +93,24 @@ struct Freight :Identifiable, Codable {
     var TEMPERATURE :  String?
     var ISSURVEY : Bool
     var fotos : [fotos]
+    var CALLNAME      : String?
+    var CALLADDR1    : String?
+    var CALLADDR2    : String?
+    var CALLCITY      : String?
+    var CALLPROV      : String?
+    var CALLPC         : String?
+    var CALLPHONE    : String?
+    var CALLCONTACT : String?
+    
+    func callBuildAddress() -> String {
+        
+        return (self.CALLADDR1 ?? "")
+            .appending("\n")
+            .appending(self.CALLCITY ?? "")
+            .appending(" \(CALLPROV ?? "")")
+            .appending(" \(CALLPC ?? "") " )
+        
+    }
       
 }
 struct fotos : Codable, Identifiable {

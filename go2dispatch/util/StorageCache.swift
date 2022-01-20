@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-
+ 
 class StorageCacheManager {
  
     static let instance =  StorageCacheManager()

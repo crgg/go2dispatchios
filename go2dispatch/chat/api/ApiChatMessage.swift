@@ -193,7 +193,7 @@ extension ApiChat {
         }
         
         let urlString2 = "\(ApiConfig.SEND_MESSAGE)/\(chat.session_id )"
-        let urlString = "http://localhost:3001/message/add"
+        let urlString = ApiConfig.message_add
         
         guard let url = URL(string: urlString) else {
             print("error the url conform")
@@ -302,7 +302,7 @@ extension ApiChat {
         }
         
 //        let urlString = "\(ApiConfig.URL_PROD)\(ApiConfig.RETURN_MESSAGES)/\(session_id)/chats"
-        let urlString = "http://localhost:3001/message"
+        let urlString = ApiConfig.message_chat
         
         guard var url = URLComponents(string: urlString) else {
             print("error the url conform")
@@ -392,7 +392,7 @@ extension ApiChat {
         let driverid = chat.person.driver_id
         
         let urlString2 = "\(ApiConfig.SEND_MEDIA)"
-        let urlString = "http://localhost:3001/message/media"
+        let urlString = ApiConfig.message_media
 //        let urlString =  urlString2
         
         

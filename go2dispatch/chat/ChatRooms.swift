@@ -60,7 +60,7 @@ struct ChatRooms: View {
         NavigationView {
             
             ZStack {
-                Color("Marine").ignoresSafeArea()
+                Color.theme.background.ignoresSafeArea()
                 
                 VStack {
 //                    customNavBar

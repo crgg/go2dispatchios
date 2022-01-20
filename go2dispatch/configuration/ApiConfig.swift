@@ -15,7 +15,7 @@ class ApiConfig {
     
     public static let URL_PROD : String =  "https://driverapp.tech4tms.com/api/dispatcher_app/"
     
-    public static let URL_CHAT : String = "http://localhost:3001"
+    public static let URL_CHAT : String = "http://3.15.5.85:3001/"
     
     public static let URL_CHAT_API : String = "https://driverapp.tech4tms.com/api/chat_api/"
     
@@ -50,5 +50,19 @@ class ApiConfig {
     
     public static let CREATE_SESSION : String  = "\(URL_CHAT_API)session/create"
     
+//    let urlString = "http://localhost:3001/message/add"
+    public static let message_add : String  = "\(URL_CHAT)message/add"
+    
+//    let urlString = "http://localhost:3001/message"
+    public static let message_chat : String  = "\(URL_CHAT)message"
+//  http://localhost:3001/message/media
+    public static let message_media : String  = "\(URL_CHAT)message/media"
+    
+    // customers
+    
+    
+    
+    
+    public static let RETURN_SEARCH_LIST =  "\(URL_PROD)return_customers"
     
 }

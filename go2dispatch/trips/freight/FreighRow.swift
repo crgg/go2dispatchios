@@ -25,10 +25,10 @@ struct FreighRow: View {
                 TextTripView(texto: fb.BILL_STATUS ?? "", colorFont: colorFont)
             }
             HStack {
-              addressView(companyName: fb.ORIGNAME ?? "", address: fb.ADDRESS_ORIGIN ?? "", colorFont: colorFont,
+              AddressView(companyName: fb.ORIGNAME ?? "", address: fb.ADDRESS_ORIGIN ?? "", colorFont: colorFont,
                           titule : "Shipper")
                 Spacer()
-                addressView(companyName: fb.DESTNAME ?? "", address: fb.ADDRESS_DESTINE ?? "", colorFont: colorFont, titule: "Consignee" )
+                AddressView(companyName: fb.DESTNAME ?? "", address: fb.ADDRESS_DESTINE ?? "", colorFont: colorFont, titule: "Consignee" )
             }
             HStack {
                 details(titule: "Pallets", value: fb.PALLETS ?? "", colorFont: colorFont)
@@ -109,59 +109,7 @@ struct FreighRow: View {
         }
     }
     
-    struct addressView : View {
-      
-        let companyName : String
-        let address : String
-        let colorFont: Color
-        let titule : String
-        
-        var body: some View {
-            VStack(alignment: .leading) {
-                Text(titule)
-                    .foregroundColor(.green)
-                    .font(.caption)
-                TextTripView(texto: companyName , colorFont: colorFont).font(Font.body.bold())
-                TextTripView(texto: separate(address) , colorFont: colorFont)
-                TextTripView(texto: separate2(address) , colorFont: colorFont)
-            }
-            
-            
-        }
-        func separate (_ value : String) -> String {
-            guard value.contains(",") else {
-                print("don't have coma")
-                return ""
-            }
-            let index = value.firstIndex(of: ",") ?? value.endIndex
-
-            // substring
-            let firstpart = value[..<index]
-
-            // todo los substring se debe pasar a string para que aquiera las propiedades de string
-            return String(firstpart)
-        }
-        
-        func separate2 (_ value : String) -> String {
-            guard value.contains(",") else {
-                print("don't have coma")
-                return ""
-            }
-            
-            let index = value.firstIndex(of: ",")   ?? value.endIndex
-            
-
-            // substring
-                let index2 = value.index(index, offsetBy: 2)
-                let firstpart = value[index2..<value.endIndex]
-          
-
-            // todo los substring se debe pasar a string para que aquiera las propiedades de string
-            return String(firstpart)
-        }
-        
-        
-    }
+   
     
     func checkDocument(_ typeDoc : String) -> Bool {
         return (self.fb.fotos.first(where : { $0.typedocument == typeDoc }) != nil)
