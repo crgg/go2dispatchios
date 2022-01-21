@@ -13,16 +13,22 @@ class CustomerMV : ObservableObject {
     
     @Published var customers: [CustomerModel] = []
     @Published var messageError : String = ""
-    private let dataService : CustomerService
+    private let dataService : CustomerService = CustomerService()
     private var cancellables = Set<AnyCancellable>()
     
     @Published var searchText : String =  ""
     
     private var typeCustomer = ""
+     
     
-    init(typeCustomer: String) {
-        dataService  = CustomerService(typeCustomer: typeCustomer)
+    
+    init() {
+      
         addSubcribers()
+    }
+    
+    func getCustomer(typeCustomer : String) {
+        dataService.get(client_type: typeCustomer)
     }
     
     func addSubcribers() {

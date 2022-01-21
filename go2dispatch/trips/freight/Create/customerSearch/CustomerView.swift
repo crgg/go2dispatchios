@@ -12,9 +12,9 @@ struct CustomerView: View {
     @State var customer : String = ""
     var colorFont = Color.white
     @State var isEditing : Bool = false
-    var typeCustomer : String
+     var typeCustomer : String
     
-    @StateObject var vm =  CustomerMV(typeCustomer: "caller")
+    @StateObject var vm : CustomerMV = CustomerMV()
     @Binding var customerSelected : CustomerModel?
     
     
@@ -59,7 +59,9 @@ struct CustomerView: View {
             .padding(.top , 20)
            
         }
-    
+        .onAppear {
+            vm.getCustomer(typeCustomer: typeCustomer)
+        }
         
     }
  

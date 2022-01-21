@@ -21,10 +21,7 @@ class CustomerService : ObservableObject {
         
         
     }
-    init(typeCustomer : String) {
-        get(client_type: typeCustomer)
-        
-    }
+  
     
     
  
@@ -43,7 +40,8 @@ class CustomerService : ObservableObject {
         }
                 
         customerSubcription =  NetWorkingManager.donwload(url: url, jsonParam: jsonParam, method: .POST)
-            .decode(type: customerReceived.self, decoder: JSONDecoder())
+            .decode(type: customerReceived.self, decoder: JSONDecoder())       
+        
             .sink(receiveCompletion: NetWorkingManager.handleCompletion , receiveValue: { [weak self] (customerReceived) in 
                 self?.customerSubcription?.cancel()
                 self?.allCustomers =  customerReceived.data

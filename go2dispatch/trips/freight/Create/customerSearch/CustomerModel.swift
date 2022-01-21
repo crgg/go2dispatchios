@@ -38,5 +38,13 @@ struct CustomerModel : Codable, Identifiable {
     }
     
     
+    
 }
 
+enum typeCustomer : String {
+    case caller = "caller"
+    case shipper = "shipper"
+    case consignee = "consignee"
+    case pickup = "PICKUP"
+    
+}

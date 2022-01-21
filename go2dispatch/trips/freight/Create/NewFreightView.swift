@@ -22,6 +22,8 @@ struct NewFreightView: View {
     @State private var isEditing = false
     @State var customer : String = ""
     @State var customerSelected : CustomerModel?
+    @State var typeCustomer : typeCustomer = .caller
+    
     
 
      
@@ -66,16 +68,23 @@ struct NewFreightView: View {
                         rowView(texto:  (customerSelected != nil) ? customerSelected?.NAME ?? "" : "Select Customer", colorFont: colorFont)
                             .onTapGesture {
                                 openCustomer.toggle()
+                                typeCustomer =  .caller
                             }
                             .fullScreenCover(isPresented: $openCustomer) {
-                                CustomerView(typeCustomer: "caller",customerSelected: self.$customerSelected )
+                                CustomerView(typeCustomer: typeCustomer.rawValue,customerSelected: self.$customerSelected )
                             }
+                        
                         rowView(texto: "Bill To", colorFont: colorFont)
                             .onTapGesture {
-                                print("Bill to")
+                                openCustomer.toggle()
+                                typeCustomer =  .pickup
                             }
+                        
+                        
        
                         shipperOptionView
+                        
+                        deliveryOptionView
                          
                         DetailsOption
                         
@@ -129,6 +138,10 @@ struct NewFreightView: View {
      
         VStack {
             rowView(texto: "Shipper", colorFont: colorFont)
+                .onTapGesture {
+                    openCustomer.toggle()
+                    typeCustomer =  .consignee
+                }
             
             rowView(texto: "Pickup Dates", colorFont: colorFont)
             
