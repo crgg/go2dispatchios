@@ -51,7 +51,7 @@ public final class IRLPDFScanContent: NSObject, ObservableObject {
                 .compactMap({$0})
                 .first?.windows
                 .filter({$0.isKeyWindow}).first
-        guard let rootViewController = keyWindow?.rootViewController else {
+        guard (keyWindow?.rootViewController) != nil else {
             self.delegate?.scanContentDissmissed(caller: self)
             return
         }

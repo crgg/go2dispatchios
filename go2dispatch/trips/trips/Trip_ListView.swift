@@ -76,7 +76,9 @@ struct Trip_ListView: View {
                         )
                     }
                     
-                    ScrollView {
+                    
+                    
+                    List {
                         
                         ForEach (viewmodel.getSortedFiltered(query: query)) { trip in
                         
@@ -84,7 +86,8 @@ struct Trip_ListView: View {
                             .environmentObject(viewmodel)
                             .listRowInsets(EdgeInsets())
  
-                        }
+                        }.id(UUID())
+                            .buttonStyle(BorderlessButtonStyle())
                     
                 }.listStyle(PlainListStyle())
                     
@@ -98,7 +101,7 @@ struct Trip_ListView: View {
             
             UITableView.appearance().backgroundColor = UIColor(named: "Marine")
             print("Entramos a View")
-            viewmodel.getTrips()
+           // viewmodel.getTrips()
             //            self.showOverlay =  viewmodel.getIsNewMessage()
             
         }

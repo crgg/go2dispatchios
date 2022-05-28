@@ -230,10 +230,10 @@ class ChatsViewModel: ObservableObject  {
                     
                     if !dateString.isEmpty {
                         let  content_type = user_d.lastMessage?.type == .text ? contentType.text : contentType.image
-                        var whosendms = MessageType.received
+//                        var whosendms = MessageType.received
                         if let whosend = user_d.lastMessage?.user_of_chat {
                             if whosend == user_d.driverID {
-                                whosendms = MessageType.send
+//                                whosendms = MessageType.send
                                 
                             }
                         }
@@ -282,6 +282,7 @@ class ChatsViewModel: ObservableObject  {
     
     
     func getSortedFilteredChats(query : String) -> [Chat] {
+        print("😀 getSortedFilteredChats")
         let sortedChats = chats.sorted {
             guard let date1 = $0.messages.last?.date else { return false  }
             guard let date2 = $1.messages.last?.date else { return false }
@@ -308,7 +309,7 @@ class ChatsViewModel: ObservableObject  {
         }
     }
     
-    
+ 
     func sendMessage2(_ text: String, chat : Chat ,
                       handler: @escaping (_ status : Bool, _ result: Message?)->()) {
         var chatTemp = chat
@@ -503,7 +504,7 @@ class ChatsViewModel: ObservableObject  {
                         print("🤳 No received a text")
                         return
                     }
-                    guard let type = result.type else {
+                    guard result.type != nil else {
                         print("🤳 No received a type of send o received")
                         return
                     }
@@ -537,7 +538,7 @@ class ChatsViewModel: ObservableObject  {
                         type_content = .image
                         
                     }
-                    guard let mesage_id =  result.id  else {
+                    guard result.id != nil  else {
                         print("🤳 No tenemos un mensaje de id send the picture")
                         return
                     }
@@ -546,7 +547,7 @@ class ChatsViewModel: ObservableObject  {
                                           readed: false, date: dateFormat, userOwn: "", messageId: 0)
                     let send_at =  DAt(date: dateMessage, timezoneType: 3, timezone: Timezone.americaChicago)
                     
-                    let mess =  MessagesList(message: text, id: 0, sessionID: chat.session_id, type: 1, readAt: nil, sendAt: send_at , content: .text, trip: 0, uuid: nil, user: "", messageParse: message)
+                    _ =  MessagesList(message: text, id: 0, sessionID: chat.session_id, type: 1, readAt: nil, sendAt: send_at , content: .text, trip: 0, uuid: nil, user: "", messageParse: message)
                     
                   
                     

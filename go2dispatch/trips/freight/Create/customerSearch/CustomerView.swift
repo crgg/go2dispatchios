@@ -16,7 +16,7 @@ struct CustomerView: View {
     
     @StateObject var vm : CustomerMV = CustomerMV()
     @Binding var customerSelected : CustomerModel?
-    
+    let columns = [GridItem(.flexible(minimum: 10))]
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -34,22 +34,22 @@ struct CustomerView: View {
                 
                 
                 List {
-                    
-                    ForEach(vm.customers) {
-                        cust in
-                        Button {
-                            self.customerSelected  = cust
-                            self.presentationMode.wrappedValue.dismiss()
+//                    LazyVGrid(columns: columns, spacing: 0,
+//                              pinnedViews: [.sectionHeaders]) {
+                        ForEach(vm.customers) {
+                            cust in
+                            Button {
+                                self.customerSelected  = cust
+                                self.presentationMode.wrappedValue.dismiss()
+                                
+                                
+                            } label: {
+                                CustomerRowView(cust: cust)
+                                
+                            } .listRowInsets(.init(top:0, leading: 0, bottom: 0, trailing: 0) )
                             
-                            
-                        } label: {
-                            CustomerRowView(cust: cust)
-                               
-                        } .listRowInsets(.init(top:0, leading: 0, bottom: 0, trailing: 0) )
-                        
-                    }
-                    
-                    
+                        }
+//                    } 
                 }
                 .listStyle(PlainListStyle())
                 

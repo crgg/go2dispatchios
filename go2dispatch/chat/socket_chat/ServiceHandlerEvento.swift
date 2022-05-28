@@ -38,6 +38,7 @@ extension Service {
                                        "trip" : 0]
         socket?.emit("join", param3,"s")
         print("\(Service.logs_chat) join")
+        ChatDataManager.instance.updateAllReadSession(session_id: chat.session_id)
         
     }
     func outRooms(chat: Chat){

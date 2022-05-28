@@ -93,7 +93,36 @@ extension ChatDataManager {
     }
     
     
-    
+    func updateAllReadSession(session_id : Int) {
+        let context = PersistenceController.shared.container.viewContext
+        var resultado = [NSManagedObject] ()
+        let fetchrequest : NSFetchRequest<ChatMessages> = ChatMessages.fetchRequest()
+         
+        fetchrequest.predicate = NSPredicate(format: "session_id == %i", session_id)
+        do {
+            resultado = try context.fetch(fetchrequest)
+            let resultadata = resultado as! [ChatMessages]
+            
+            if resultadata.count > 0 {
+   
+                for x in 0 ..< resultadata.count {
+                    resultadata[x].read_at = true
+                      
+                      do {
+                        try context.save()
+                          
+                      } catch {
+                          
+                          print("Error: Update LocationBill")
+                      }
+                  }
+                
+                
+            }
+        } catch let error as NSError {
+            print("\(TAG) update ChatUsers \(error)")
+        }
+    }
     
     func updateReadedMessage(message_id : Int64) {
         let context = PersistenceController.shared.container.viewContext
@@ -146,6 +175,37 @@ extension ChatDataManager {
             print("\(TAG) update ChatUsers \(error)")
         }
     }
+    
+    func getMessageNoRead(session_id : Int ) -> (Bool, Int)  {
+        
+        print("getMessageNoRead \(session_id) ")
+        
+        let context = PersistenceController.shared.container.viewContext
+        
+        var result = [ChatMessages] ()
+        
+        
+        let fetchrequest : NSFetchRequest<ChatMessages> = ChatMessages.fetchRequest()
+        
+        fetchrequest.predicate = NSPredicate(format: "read_at == %@ && session_id == %i && type == %i", NSNumber(booleanLiteral: false), session_id, 0)
+            do {
+            result = try context.fetch(fetchrequest)
+            if result.count > 0 {
+                print("getMessageNoRead \(result.count) ")
+                return (true, result.count)
+            }
+            print("getMessageNoRead no found ")
+            return (false, 0)
+        } catch let error as NSError {
+            print("\(TAG) \(error)")
+            print("getMessageNoRead no found ")
+            return (false,0)
+        }
+        
+        
+    }
+    
+    
     
     func getMessages(session_id : Int64) -> (Bool, [ChatMessages]?) {
         

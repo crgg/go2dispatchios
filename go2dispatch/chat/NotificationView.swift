@@ -12,7 +12,8 @@ struct NotificationView: View {
     
     var body: some View {
         VStack {
-            Banner.init(data: Banner.BannerDataModel(title: viewModel.newMessageReceived.user_send, detail: viewModel.newMessageReceived.message, type: .info), show: $viewModel.isNewMessage )
+            
+            Banner.init(data: Banner.BannerDataModel(title: viewModel.newMessageReceived.user_send, detail: viewModel.newMessageReceived.message, type: .info, type_content: viewModel.newMessageReceived.type_content), show: $viewModel.isNewMessage )
         }
     }
 }

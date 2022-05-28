@@ -139,7 +139,7 @@ extension URLRequest {
                self.init(url: urlctm)
                self.setValue("application/json", forHTTPHeaderField: "Content-Type")
                self.setValue("application/json", forHTTPHeaderField: "Accept")
-               
+        self.setValue("Bearer \(UserDefaults.standard.getApiToken() ?? "")", forHTTPHeaderField:"Authorization" )
         
            }
     
@@ -150,8 +150,7 @@ extension URLRequest {
                self.setValue("application/json", forHTTPHeaderField: "Accept")
                self.setValue("Bearer \(apiToken)", forHTTPHeaderField:"Authorization" )
         
-           }
-    
+           } 
  
     
 }

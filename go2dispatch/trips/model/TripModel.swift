@@ -7,8 +7,14 @@
 
 import Foundation
 
-
-struct TripList : Identifiable {
+struct  TripListReceived : Codable {
+    let status : Bool
+    let data : [TripList]
+    
+}
+ 
+struct TripList : Identifiable  {
+   
     var id : Int {trip_number}
     var trip_number : Int
     var description : String?
@@ -20,7 +26,7 @@ struct TripList : Identifiable {
     var current_zone : String?
     var current_zone_desc : String?
     var expland : Bool = false
-    var freights : [Freight]
+    var freights : [Freight] = []
     
     
     enum CodingKeys : String, CodingKey {
@@ -59,11 +65,11 @@ extension TripList : Codable  {
       }
 }
 
-
 struct Freight :Identifiable, Codable {
-    var id : String = UUID().uuidString
+     
+    var id : Int   {DETAIL_LINE_ID}
     var CURR_ZONE_DESC : String?
-    var TRIP_NUMBER : Int
+    var TRIP_NUMBER : Int?
     var BILL_NUMBER: String
     var LEG_SEQUENCE : String
     var START_CITY :  String
@@ -91,7 +97,7 @@ struct Freight :Identifiable, Codable {
     var DESTPC :  String?
     var TEMP_CONTROLLED :  String?
     var TEMPERATURE :  String?
-    var ISSURVEY : Bool
+    var ISSURVEY : Bool?
     var fotos : [fotos]
     var CALLNAME      : String?
     var CALLADDR1    : String?

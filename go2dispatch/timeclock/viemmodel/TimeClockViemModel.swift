@@ -56,6 +56,7 @@ class TimeClockViewModel : ObservableObject {
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.messageError =  e
+                        self.isError = true
                     }
                     return
                 }

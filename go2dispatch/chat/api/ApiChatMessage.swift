@@ -26,12 +26,12 @@ extension ApiChat {
             print(" MarkAllReaded error session id is 0")
             return
         }
-        guard let username = UserDefaults.standard.getUserData()?.user.username  else {
+        guard (UserDefaults.standard.getUserData()?.user.username) != nil  else {
             print(" falta el user id")
             return
         }
         
-        let urlString = "\(ApiConfig.URL_CHAT)/message/readatByMessageId"
+        let urlString = "\(ApiConfig.URL_CHAT)message/readatByMessageId"
       
         guard let url = URL(string: urlString) else {
             print("error the url conform")
@@ -106,7 +106,7 @@ extension ApiChat {
             return
         }
         
-        let urlString = "\(ApiConfig.URL_CHAT)/message/readat"
+        let urlString = "\(ApiConfig.URL_CHAT)message/readat"
       
         guard let url = URL(string: urlString) else {
             print("error the url conform")
@@ -163,7 +163,12 @@ extension ApiChat {
                 
             
             
-            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+            print("""
+                markAllReaded Fetch failed: \(error?.localizedDescription ?? "Unknown error")
+                parameters : \(param)
+                url string : \(urlString)
+             """
+                     )
            
             
         }.resume()
@@ -296,7 +301,7 @@ extension ApiChat {
             return
 
         }
-        guard let username = UserDefaults.standard.getUserData()?.user.username else {
+        guard (UserDefaults.standard.getUserData()?.user.username) != nil else {
             handler(false, "Error username pleae log out the app", [] )
             return
         }

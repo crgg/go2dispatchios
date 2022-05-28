@@ -23,24 +23,66 @@ struct New_messag_received : Decodable{
     init() {
         
     }
+    
+    
     init(_ dict : [String : Any]) {
+    
+        var message : [String : Any] = [:]
+        if let message1 = dict["message"] as? [String: Any] {
+            message = message1
+        }
+    
+        
         if let uuided =  dict["UUID"] as? String {
             self.uuid = UUID(uuidString: uuided)
+        } else {
+            if let uuid1 = message["uuid"] as? String {
+                self.uuid =  UUID(uuidString: uuid1)
+                
+            }
         }
+        
+        
+        
         if let dated = dict["date"] as? String {
             self.date  = dated
+        } else {
+            if let dated = message["created_at"] as? String {
+                self.date = dated
+            }
         }
+        
+        
         if let contented = dict["content"] as? String {
             self.content = contented
             if contented == "image" {
                 self.type_content = .image
+            }
+        } else {
+            if let contented = dict["type_content"] as? String {
+                switch(contented) {
+                case "image":
+                    self.type_content = .image
+                case "text" :
+                    self.type_content = .text
+                case "video" :
+                    self.type_content = .video
+                default:
+                    self.type_content = .text
+                }
             }
         }
         
         
         if let message = dict["message"] as? String {
             self.message = message
+        } else {
+            if let msg = message["content"] as? String {
+                self.message =  msg
+            }
         }
+        
+        
         if let sessionId =  dict["session_id"] as? Int {
             self.session_id =  sessionId
         } else {
@@ -53,10 +95,22 @@ struct New_messag_received : Decodable{
             
         if let trip = dict["trip"] as? Int {
             self.trip =  trip
+        } else {
+            if let trip = message["trip_number"] as? Int {
+                self.trip =  trip
+                 
+            }
         }
+        
+        
         if let user_send = dict["user_send"] as? String{
             self.user_send = user_send
+        } else {
+            if let toUser = dict["user_id"] as? String {
+                self.user_send = toUser
+            }
         }
+        
         if let whered =  dict["where"] as? String {
             self.where_coming = whered
         }

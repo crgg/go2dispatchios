@@ -98,7 +98,9 @@ class ApiTimeClock {
                 handler(false, err.localizedDescription, nil, nil)
             }
             
-            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+            print("Failed HistoryTimeClock url : \(url.path) string:  \(error?.localizedDescription ?? "Unknown error")")
+            
+            
             handler(false, error?.localizedDescription ?? "Unknown error", nil, nil)
             
         }.resume()

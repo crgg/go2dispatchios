@@ -6,8 +6,8 @@ struct Banner: View {
        var title:String
        var detail:String
        var type: BannerType
+       var type_content : TypeEnum
    }
-   
    enum BannerType {
        case info
        case warning
@@ -49,8 +49,9 @@ struct Banner: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(data.title)
                             .bold()
-                        Text(data.detail)
+                        Text(data.type_content == .image ?   "🖼 Photo"  :  data.detail )
                             .font(Font.system(size: 15, weight: Font.Weight.light, design: Font.Design.default))
+                        
                     }
                     Spacer()
                 }
@@ -70,6 +71,7 @@ struct Banner: View {
             }.onAppear(perform: {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     withAnimation {
+                        print("🌴 close the banner")
                         self.show = false
                     }
                 }
@@ -133,7 +135,7 @@ struct OverlayDemo: View {
                         showToastOverlay = true
                     }
                 }
-        }.overlay(overlayView: Banner.init(data: Banner.BannerDataModel(title: "Title", detail: "your message", type: .success), show: $showOverlay)
+        }.overlay(overlayView: Banner.init(data: Banner.BannerDataModel(title: "Title", detail: "your message", type: .success, type_content: .text), show: $showOverlay)
                   , show: $showOverlay)
         .overlay(overlayView: Toast.init(dataModel: Toast.ToastDataModel.init(title: "toast message", image: "checkmark"), show: $showToastOverlay)
         , show: $showToastOverlay)

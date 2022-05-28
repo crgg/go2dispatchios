@@ -95,7 +95,7 @@ extension ChatsViewModel : ServiceChatProtocol {
     
  
     func newMessage(newMessageReceived : New_messag_received) {
-        isNewMessage = true
+        isNewMessage =  true
          
         // Verificar si existe en nuestra lista
         let isExist = chats.contains(where: {$0.person.driver_id == newMessageReceived.user_send})
@@ -149,8 +149,19 @@ extension ChatsViewModel : ServiceChatProtocol {
         }
         DispatchQueue.main.async {
             if let row = self.chats.firstIndex(where: {$0.person.driver_id == newMessageReceived.user_send}) {
+                switch(newMessageReceived.type_content) {
+                case .image:
+                    self.chats[row].messages[0].content_type = .image
+                case .text:
+                    self.chats[row].messages[0].content_type = .text
+                case .video:
+                    self.chats[row].messages[0].content_type = .video
+                }
+                
+               
                 self.chats[row].messages[0].text = newMessageReceived.message
                 self.chats[row].hasUnreadMessage =  true
+                
             }
         }
     }

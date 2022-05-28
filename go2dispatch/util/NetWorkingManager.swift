@@ -25,8 +25,21 @@ enum NetworkingError : LocalizedError {
         }
     }
 }
-
+ 
 class NetWorkingManager {
+    
+    
+    static func get(url: URL, method: Methods)-> AnyPublisher<Data, Error> {
+
+        var request = URLRequest(url, apiToken: UserDefaults.standard.getDeviceToken() )
+        request.httpMethod = method.rawValue
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .subscribe(on: DispatchQueue.global(qos: .default))
+            .tryMap({try  handleURLResponse(output: $0, url: url)})
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+        
+    }
     
     static func donwload(url: URL, jsonParam : Data, method : Methods ) -> AnyPublisher<Data, Error>  {
         

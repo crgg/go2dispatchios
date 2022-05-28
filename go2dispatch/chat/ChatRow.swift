@@ -25,6 +25,8 @@ extension String {
 
 struct ChatRow: View {
     let chat: Chat
+    @EnvironmentObject var viewModel : ChatsViewModel
+    
     var body: some View {
         
         ZStack {
@@ -95,10 +97,24 @@ struct ChatRow: View {
                         }
                         
                     }
-                    Circle()
-                        .foregroundColor(chat.hasUnreadMessage ? .blue : .clear)
-                        .frame(width: 18, height: 18)
+                    
+                    if chat.hasUnreadMessage {
+                        let d = ChatDataManager.instance.getMessageNoRead(session_id: chat.session_id)
+                        ZStack {
+                            Circle()
+                                .fill(.blue)
+                            Text(String(d.1))
+                                .foregroundColor(.white)
+                                .font(.caption)
+                            
+                        }
+                        .frame(width: 25, height: 25)
                         .frame(maxWidth:.infinity, alignment: .trailing)
+                    }
+//                    Circle()
+//                        .foregroundColor(chat.hasUnreadMessage ? .blue : .clear)
+//                        .frame(width: 18, height: 18)
+//
                 }
             }
             .frame(height: 80)

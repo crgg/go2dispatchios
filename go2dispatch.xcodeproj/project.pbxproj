@@ -68,6 +68,8 @@
 		9B3E12F3278E107400D55A5A /* BillNumberVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E12F2278E107400D55A5A /* BillNumberVM.swift */; };
 		9B3E12F7278E178100D55A5A /* FreighRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E12F6278E178100D55A5A /* FreighRow.swift */; };
 		9B3E12FA278E2F6000D55A5A /* NewFreightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E12F9278E2F6000D55A5A /* NewFreightView.swift */; };
+		9B444B5C283472C800739FF0 /* TripServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B444B5B283472C800739FF0 /* TripServices.swift */; };
+		9B444B5E283474A600739FF0 /* TripApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B444B5D283474A600739FF0 /* TripApi.swift */; };
 		9B4A7B842767ADB200922D46 /* ParseDatosOfSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4A7B832767ADB200922D46 /* ParseDatosOfSocket.swift */; };
 		9B4A7B88276828A100922D46 /* UtilDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4A7B87276828A000922D46 /* UtilDate.swift */; };
 		9B74F3A82730DF5100457043 /* MultimodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B74F3A72730DF5100457043 /* MultimodeView.swift */; };
@@ -78,6 +80,9 @@
 		9B75F9482789268300B0B79B /* ShowDocuments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B75F9472789268300B0B79B /* ShowDocuments.swift */; };
 		9B75F94A27892EE800B0B79B /* PdfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B75F94927892EE800B0B79B /* PdfViewModel.swift */; };
 		9B7FBB7E271E6254004629A7 /* AlertToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7FBB7D271E6254004629A7 /* AlertToast.swift */; };
+		9B84C12C28418E2600662AC2 /* TrailersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B84C12B28418E2600662AC2 /* TrailersView.swift */; };
+		9B84C12E28418EBE00662AC2 /* TrailerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B84C12D28418EBE00662AC2 /* TrailerRow.swift */; };
+		9B84C13028418F1400662AC2 /* TrailerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B84C12F28418F1400662AC2 /* TrailerViewModel.swift */; };
 		9B90B4D82761632F001E6801 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B90B4D72761632F001E6801 /* NotificationView.swift */; };
 		9B90B4DB2762B161001E6801 /* Trip_ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B90B4DA2762B15F001E6801 /* Trip_ListView.swift */; };
 		9B90B4DE2762B1DA001E6801 /* TripModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B90B4DD2762B1DA001E6801 /* TripModel.swift */; };
@@ -117,6 +122,8 @@
 		9BBE74C627055565009F85D2 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE74C527055565009F85D2 /* SearchBar.swift */; };
 		9BBE74C827061901009F85D2 /* ChatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE74C727061901009F85D2 /* ChatsViewModel.swift */; };
 		9BBE74CA27064591009F85D2 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE74C927064590009F85D2 /* ChatView.swift */; };
+		9BCBEB5F28405022001FA329 /* TrailerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCBEB5E28405022001FA329 /* TrailerService.swift */; };
+		9BCBEB61284051A7001FA329 /* TrailerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCBEB60284051A6001FA329 /* TrailerModel.swift */; };
 		9BCFF034275831F6002CFBD5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9BCFF033275831F6002CFBD5 /* SDWebImage */; };
 		9BDE04D72748ACD3008AF5DC /* IRLVNDocumentCameraScanAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE04D62748ACD3008AF5DC /* IRLVNDocumentCameraScanAdditions.swift */; };
 		9BDE04D92748ADBE008AF5DC /* IRLPDFScanContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE04D82748ADBE008AF5DC /* IRLPDFScanContent.swift */; };
@@ -204,6 +211,8 @@
 		9B3E12F2278E107400D55A5A /* BillNumberVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillNumberVM.swift; sourceTree = "<group>"; };
 		9B3E12F6278E178100D55A5A /* FreighRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreighRow.swift; sourceTree = "<group>"; };
 		9B3E12F9278E2F6000D55A5A /* NewFreightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFreightView.swift; sourceTree = "<group>"; };
+		9B444B5B283472C800739FF0 /* TripServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripServices.swift; sourceTree = "<group>"; };
+		9B444B5D283474A600739FF0 /* TripApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripApi.swift; sourceTree = "<group>"; };
 		9B4A7B832767ADB200922D46 /* ParseDatosOfSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseDatosOfSocket.swift; sourceTree = "<group>"; };
 		9B4A7B87276828A000922D46 /* UtilDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilDate.swift; sourceTree = "<group>"; };
 		9B74F3A72730DF5100457043 /* MultimodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimodeView.swift; sourceTree = "<group>"; };
@@ -214,6 +223,9 @@
 		9B75F9472789268300B0B79B /* ShowDocuments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDocuments.swift; sourceTree = "<group>"; };
 		9B75F94927892EE800B0B79B /* PdfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewModel.swift; sourceTree = "<group>"; };
 		9B7FBB7D271E6254004629A7 /* AlertToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertToast.swift; sourceTree = "<group>"; };
+		9B84C12B28418E2600662AC2 /* TrailersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailersView.swift; sourceTree = "<group>"; };
+		9B84C12D28418EBE00662AC2 /* TrailerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerRow.swift; sourceTree = "<group>"; };
+		9B84C12F28418F1400662AC2 /* TrailerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerViewModel.swift; sourceTree = "<group>"; };
 		9B90B4D72761632F001E6801 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		9B90B4DA2762B15F001E6801 /* Trip_ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip_ListView.swift; sourceTree = "<group>"; };
 		9B90B4DD2762B1DA001E6801 /* TripModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModel.swift; sourceTree = "<group>"; };
@@ -251,6 +263,8 @@
 		9BBE74C527055565009F85D2 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		9BBE74C727061901009F85D2 /* ChatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewModel.swift; sourceTree = "<group>"; };
 		9BBE74C927064590009F85D2 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		9BCBEB5E28405022001FA329 /* TrailerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerService.swift; sourceTree = "<group>"; };
+		9BCBEB60284051A6001FA329 /* TrailerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerModel.swift; sourceTree = "<group>"; };
 		9BDE04D62748ACD3008AF5DC /* IRLVNDocumentCameraScanAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRLVNDocumentCameraScanAdditions.swift; sourceTree = "<group>"; };
 		9BDE04D82748ADBE008AF5DC /* IRLPDFScanContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRLPDFScanContent.swift; sourceTree = "<group>"; };
 		9BDE04DA2748ADFB008AF5DC /* IRLPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRLPDFView.swift; sourceTree = "<group>"; };
@@ -439,6 +453,11 @@
 		9B3E12E2278D05AD00D55A5A /* trailer */ = {
 			isa = PBXGroup;
 			children = (
+				9BCBEB5E28405022001FA329 /* TrailerService.swift */,
+				9BCBEB60284051A6001FA329 /* TrailerModel.swift */,
+				9B84C12B28418E2600662AC2 /* TrailersView.swift */,
+				9B84C12D28418EBE00662AC2 /* TrailerRow.swift */,
+				9B84C12F28418F1400662AC2 /* TrailerViewModel.swift */,
 			);
 			path = trailer;
 			sourceTree = "<group>";
@@ -487,6 +506,26 @@
 				9B396BD527963F940021A36D /* NewFreightMV.swift */,
 			);
 			path = Create;
+			sourceTree = "<group>";
+		};
+		9B444B592834728200739FF0 /* trips */ = {
+			isa = PBXGroup;
+			children = (
+				9B444B5A2834729600739FF0 /* service_trip */,
+				9B90B4DA2762B15F001E6801 /* Trip_ListView.swift */,
+				9B90B4DF2762BECA001E6801 /* TripListViewModel.swift */,
+				9BB02F7527861BB000B88BCF /* TripRow.swift */,
+			);
+			path = trips;
+			sourceTree = "<group>";
+		};
+		9B444B5A2834729600739FF0 /* service_trip */ = {
+			isa = PBXGroup;
+			children = (
+				9B444B5B283472C800739FF0 /* TripServices.swift */,
+				9B444B5D283474A600739FF0 /* TripApi.swift */,
+			);
+			path = service_trip;
 			sourceTree = "<group>";
 		};
 		9B4A7B822767AD8D00922D46 /* socket_chat */ = {
@@ -569,6 +608,7 @@
 		9B90B4D92762B141001E6801 /* trips */ = {
 			isa = PBXGroup;
 			children = (
+				9B444B592834728200739FF0 /* trips */,
 				9B3E12EF278D1A6900D55A5A /* filter */,
 				9B3E12E3278D05B400D55A5A /* freight */,
 				9B3E12E2278D05AD00D55A5A /* trailer */,
@@ -578,9 +618,6 @@
 				9B75F9452789262C00B0B79B /* pdfView */,
 				9B25C76A2787A886007B2497 /* helper */,
 				9B90B4DC2762B1C8001E6801 /* model */,
-				9B90B4DA2762B15F001E6801 /* Trip_ListView.swift */,
-				9B90B4DF2762BECA001E6801 /* TripListViewModel.swift */,
-				9BB02F7527861BB000B88BCF /* TripRow.swift */,
 				9B75F93D2788D93300B0B79B /* BlurView.swift */,
 			);
 			path = trips;
@@ -868,11 +905,14 @@
 				9B1BEC252707C77A00370896 /* Persistence.swift in Sources */,
 				9B1BEC322710981700370896 /* NewChatView.swift in Sources */,
 				9B3E12FA278E2F6000D55A5A /* NewFreightView.swift in Sources */,
+				9B84C12E28418EBE00662AC2 /* TrailerRow.swift in Sources */,
 				9BBE6441278FD54F00D0E029 /* CustomerMV.swift in Sources */,
 				9B13AE9E277BE7760080D560 /* BubbleSend.swift in Sources */,
 				9B3E12F3278E107400D55A5A /* BillNumberVM.swift in Sources */,
 				9BDE04DB2748ADFB008AF5DC /* IRLPDFView.swift in Sources */,
+				9B84C13028418F1400662AC2 /* TrailerViewModel.swift in Sources */,
 				9B74F3AB2731CDD800457043 /* ChatDataManager.swift in Sources */,
+				9B444B5C283472C800739FF0 /* TripServices.swift in Sources */,
 				9B4A7B88276828A100922D46 /* UtilDate.swift in Sources */,
 				9BBE74C827061901009F85D2 /* ChatsViewModel.swift in Sources */,
 				9B2C9AAD26D7DBAC00D80185 /* EditProfileView.swift in Sources */,
@@ -914,6 +954,7 @@
 				9BDE04E12748AED4008AF5DC /* IRLPDFScanContent+VNDocumentCameraViewControllerDelegate.swift in Sources */,
 				9B3E12EA278D060900D55A5A /* DriverViewModel.swift in Sources */,
 				9B2C9AAB26D7407500D80185 /* ProfilView.swift in Sources */,
+				9BCBEB5F28405022001FA329 /* TrailerService.swift in Sources */,
 				9B198E99277A3B3100DC79E5 /* PhotoModelFileManager.swift in Sources */,
 				9BB878ED272B3CA400B7D95B /* TimeClockViemModel.swift in Sources */,
 				9B2C9A9126D6BAF500D80185 /* ChatRooms.swift in Sources */,
@@ -926,6 +967,7 @@
 				9B2C9A9726D6CE8800D80185 /* ViewModel.swift in Sources */,
 				9B75F9402789097E00B0B79B /* PDFKitRepresentedView.swift in Sources */,
 				9B2C9A9F26D6E70D00D80185 /* GameView.swift in Sources */,
+				9B444B5E283474A600739FF0 /* TripApi.swift in Sources */,
 				9BBE643E278FC5C800D0E029 /* CustomerView.swift in Sources */,
 				9BB878F5272B5EA600B7D95B /* CurentGps.swift in Sources */,
 				9B90B4EC2763085C001E6801 /* ChatsViewModelMessage.swift in Sources */,
@@ -943,6 +985,7 @@
 				9B13AEA7277F7EE30080D560 /* UimageExtensions.swift in Sources */,
 				9BB02F7627861BB100B88BCF /* TripRow.swift in Sources */,
 				9BBE74CA27064591009F85D2 /* ChatView.swift in Sources */,
+				9B84C12C28418E2600662AC2 /* TrailersView.swift in Sources */,
 				9B950EC0277A088500145738 /* ChatAllUserService.swift in Sources */,
 				9B3E12E6278D05E200D55A5A /* DriversView.swift in Sources */,
 				9B2C9AA726D73C4D00D80185 /* FavoritesView.swift in Sources */,
@@ -966,6 +1009,7 @@
 				9B13AE9C277BDE390080D560 /* ChatBubble.swift in Sources */,
 				9B2C9AA526D72CFF00D80185 /* SearchGame.swift in Sources */,
 				9B13AEA2277CA9390080D560 /* ChatHeader.swift in Sources */,
+				9BCBEB61284051A7001FA329 /* TrailerModel.swift in Sources */,
 				9B213DD2276D5A0C006CC10E /* ChatsView+ServiceProtocol.swift in Sources */,
 				9B90B4E62762FB6B001E6801 /* Chata_data_Messaage.swift in Sources */,
 				9B213DD9277510EF006CC10E /* CameraCaptureViewController.swift in Sources */,
@@ -1028,6 +1072,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				"GCC_WARN_64_TO_32_BIT_CONVERSION[arch=*64]" = YES_ERROR;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -1083,6 +1128,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				"GCC_WARN_64_TO_32_BIT_CONVERSION[arch=*64]" = YES_ERROR;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -1106,18 +1152,18 @@
 				CODE_SIGN_ENTITLEMENTS = go2dispatch/go2dispatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"go2dispatch/Preview Content\"";
-				DEVELOPMENT_TEAM = E5Y3U35KBZ;
+				DEVELOPMENT_TEAM = KY27JXRET2;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = go2dispatch/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.gotologistics.go2dispatch;
+				PRODUCT_BUNDLE_IDENTIFIER = bus.gotologistics.go2dispatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1129,18 +1175,18 @@
 				CODE_SIGN_ENTITLEMENTS = go2dispatch/go2dispatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"go2dispatch/Preview Content\"";
-				DEVELOPMENT_TEAM = E5Y3U35KBZ;
+				DEVELOPMENT_TEAM = KY27JXRET2;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = go2dispatch/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.gotologistics.go2dispatch;
+				PRODUCT_BUNDLE_IDENTIFIER = bus.gotologistics.go2dispatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

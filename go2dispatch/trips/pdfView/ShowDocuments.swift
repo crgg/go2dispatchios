@@ -18,12 +18,12 @@ struct ShowDocuments: View {
         VStack(alignment: .leading) {
          
             ScrollView  {
-                ForEach(0..<fotos.count) { i  in
+                ForEach(fotos, id:\.id) { i  in
                     
                     GeometryReader{
                         proxy in
                     
-                        PDFKitView(url: fotos[i].avatar, key: String(fotos[i].id))
+                        PDFKitView(url: i.avatar, key: String(i.id))
                     }
                 }
             }

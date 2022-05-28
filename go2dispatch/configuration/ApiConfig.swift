@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+import Alamofire
 class ApiConfig {
     
 //    public static let URL_DEMO : String =  "http://apptest.goto-logistics.com/driverapi/api/"
@@ -59,10 +59,17 @@ class ApiConfig {
     public static let message_media : String  = "\(URL_CHAT)message/media"
     
     // customers
+    public static let TRIP_LIST_BY_TERMINAL = "\(URL_PROD)trip_list_by_terminal/"
     
     
-    
+    // trailer
+    public static let TRAILER_LIST = "\(URL_PROD)trailers_active_list"
     
     public static let RETURN_SEARCH_LIST =  "\(URL_PROD)return_customers"
+    
+    
+    static let headers : HTTPHeaders =   [ "Authorization" : "Bearer \(UserDefaults.standard.getApiToken() ?? "")",
+                         "Content-Type" : "application/json",
+                         "Accept" : "application/json"] 
     
 }

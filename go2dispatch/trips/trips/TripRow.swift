@@ -54,7 +54,6 @@ struct TripRow: View {
                                 .font(.system(size: 25, weight: .bold))
                                 .foregroundColor(colorFont)
                         }
-                    }.foregroundColor(.white)
                         .actionSheet(isPresented: $ShowMenuAction) {
                             ActionSheet(
                                 title: Text("Trip # \(String(trip.trip_number))"),
@@ -68,29 +67,30 @@ struct TripRow: View {
                                     },
                                     .default(Text(optionMenuAction(texto:
                                                                     "Assign Driver", value: trip.driver_id ?? ""))
-                                                .foregroundColor(.green)
+                                        .foregroundColor(.green)
                                             ) {
                                                 openDriver.toggle()
-                                        
-                                    },
+                                                
+                                            },
                                     .default(Text(optionMenuAction(texto:
                                                                     "Assign Truck", value: trip.truck_id ?? ""))
-                                                .foregroundColor(.green)
+                                        .foregroundColor(.green)
                                             ) {
-                                        
-                                    },
+                                                
+                                            },
                                     .default(Text(optionMenuAction(texto:
                                                                     "Assign Trailer", value: trip.trailer_id ?? ""))
-                                                .foregroundColor(.green)
+                                        .foregroundColor(.green)
                                             ) {
-                                        
-                                    },
+                                                
+                                            },
                                     .destructive(Text("Cancel")) {
-                                            
-                                     }
+                                        
+                                    }
                                 ]
                             )
                         }
+                    }.foregroundColor(.white)
 
                         
 //                        .confirmationDialog("Trip # \(trip.TRIP_NUMBER)", isPresented: $ShowMenuAction, titleVisibility: .visible) {
@@ -139,22 +139,49 @@ struct TripRow: View {
                     // action
                     Spacer()
           
-                    Button(action: {
-                        rotation = trip.expland ? -90 : 0
+                    
+                    Button {
+//                        rotation = trip.expland ? -90 : 0
                          viewModel.explanded(trip.trip_number, expland:  !trip.expland)
-                         
-                    }) {
-                        Text("Freights")
-                            .font(.caption)
-                        Image("ic_explain")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(colorFont)
-                            .rotationEffect(.degrees(rotation))
                         
+                    } label: {
+                        Text("Freights")
+                            .font(.system(size: 15))
+                            .padding(6)
+                            .foregroundColor(.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius:  25)
+                                                   .stroke(Color.white, lineWidth: 1)
+                            )
+//                        Image("ic_explain")
+//                            .resizable()
+//                            .frame(width: 20, height: 20)
+//                            .foregroundColor(colorFont)
+//                            .rotationEffect(.degrees(rotation))
                     }
+                    .background(trip.expland ? Color.blue : Color.clear)
+                    .cornerRadius(25)
+                   
+                     
+                    
+                     
+                    
+//                    Button(action: {
+//                        rotation = trip.expland ? -90 : 0
+//                         viewModel.explanded(trip.trip_number, expland:  !trip.expland)
+//
+//                    }) {
+//                        Text("Freights")
+//                            .font(.caption)
+//                        Image("ic_explain")
+//                            .resizable()
+//                            .frame(width: 20, height: 20)
+//                            .foregroundColor(colorFont)
+//                            .rotationEffect(.degrees(rotation))
+//
+//                    }
                 }
-                Divider().background(colorFont)
+//                Divider().background(colorFont)
                 if trip.expland {
                     if  trip.freights.count > 0 {
                         FreigthView(freights: trip.freights)

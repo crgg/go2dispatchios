@@ -47,7 +47,7 @@ struct TimeClockView: View {
                     .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .background(viewmodel.colorButton)
                     .mask(Circle())
-                    .alert(isPresented: $isError) {
+                    .alert(isPresented: $viewmodel.isError) {
                         Alert(title: Text("Error"), message: Text(viewmodel.messageError), dismissButton: .default(Text("OK")))
                         
                     }
@@ -61,6 +61,7 @@ struct TimeClockView: View {
                         .clipped()
                     Text(viewmodel.clockInLocationLabel).font(.caption).foregroundColor(textColor)
                 }
+ 
                 Text("OverView")
                     .frame(maxWidth : .infinity, alignment: .center)
                     .font(.headline).foregroundColor(textColor)
@@ -101,7 +102,6 @@ struct TimeClockView: View {
                     .listStyle(GroupedListStyle())
                     
                 
-                
             }.padding(.horizontal, 10.0)
                 .frame(maxWidth : .infinity)
                 .onAppear {
@@ -109,10 +109,12 @@ struct TimeClockView: View {
                     viewmodel.getHistory()
                     UITableView.appearance().backgroundColor = UIColor(named: "Marine")
                 }
+                
         }
         .navigationBarTitle("") //this must be empty
            .navigationBarHidden(true)
            .navigationBarBackButtonHidden(true)
+           
        
     }
     

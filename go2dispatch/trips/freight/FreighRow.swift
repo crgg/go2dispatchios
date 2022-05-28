@@ -122,6 +122,6 @@ struct FreighRow: View {
 
 struct FreighRow_Previews: PreviewProvider {
     static var previews: some View {
-        FreighRow(fb: TripList.sampleTrips[0].freights[0])
+        FreighRow(fb: TripList.sampleTrips[0].freights[0]).background(Color.black)
     }
 }

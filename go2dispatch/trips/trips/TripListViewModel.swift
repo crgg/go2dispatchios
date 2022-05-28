@@ -6,11 +6,35 @@
 //
 
 import Foundation
+import Combine
+import SwiftUI
+
 class TripListViewModel : ObservableObject {
     @Published var tripsList = [TripList]()
-    
+    private var cancellables = Set<AnyCancellable>()
     @Published var currentFotos : [fotos] = []
     @Published var currentFreight : Freight =  TripList.sampleTrips[0].freights[0]
+    private let tripServices  = TripServices()
+    
+    init() {
+        
+        addObservable()
+        tripServices.get("NLTERM")
+    }
+    
+    private func addObservable() {
+        tripServices.$allTrips
+            .map { (trips ) -> [TripList]  in
+                return trips
+            }
+            .sink {
+                [weak self ] (returndata) in
+                self?.tripsList = returndata
+                
+            }
+            .store(in: &cancellables)
+            
+    }
     
     func setCurrentFreight(_ freight: Freight) {
         self.currentFreight =  freight
@@ -47,7 +71,7 @@ class TripListViewModel : ObservableObject {
         return (photos.first(where : { $0.typedocument == typeDoc }) != nil)
     }
     
-    func getTrips() {
+    func getTrips()  {
         tripsList = TripList.sampleTrips
     }
     

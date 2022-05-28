@@ -34,6 +34,7 @@ struct ChatRooms: View {
                         viewmodel.setElCurrentChat(chat:  chat)
                     } label: {
                         ChatRow(chat: chat)
+                            .environmentObject(viewmodel)
                     }
 
                     
@@ -100,7 +101,7 @@ struct ChatRooms: View {
             
         }
            
-           .navigationBarHidden(true)
+       
            
         
 //           .navigationBarBackButtonHidden(true)

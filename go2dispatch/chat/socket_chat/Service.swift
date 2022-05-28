@@ -181,6 +181,25 @@ final class Service : ObservableObject {
             }
            print(" \(Service.logs_chat) read the message")
         }
+ 
+        
+        socket?.on("newIdMessage") { data, ack in
+            if let dict = data[0] as? [String : Any] {
+                if let data =  dict["data"] as? [String : Any]  {
+                       
+                        let newMessage =   New_messag_received(data)
+                        self.callback?.newMessage(newMessageReceived: newMessage)
+                        return
+                }
+                
+                  let newMessage =   New_messag_received(dict)
+                    self.callback?.newMessage(newMessageReceived: newMessage)
+                    
+                
+                
+            }
+        }
+       
         
 
         
@@ -237,8 +256,13 @@ final class Service : ObservableObject {
                     
                     let contentType : MessageType = result.type == 0 ?  .received : .send
                     
+                    // pass date to string
+                    var dateReceived  = Date()
+                    if let d = result.date  {
+                        dateReceived = UtilDate.parseDate(dateString: d) ?? Date()
+                    }
                     
-                    var m = Message(result.message ?? "", type: contentType, date: UtilDate.parseDate(dateString: result.date!)!   , content_type: ctype, userOwn: result.user_send ?? "", messageId: result.id ?? 0)
+                    var m = Message(result.message ?? "", type: contentType, date: dateReceived  , content_type: ctype, userOwn: result.user_send ?? "", messageId: result.id ?? 0)
                     m.readed = false
                     
                     self.currenChat.messages[0] = m
@@ -250,7 +274,7 @@ final class Service : ObservableObject {
                     
                     let paramav : [String : Any] = ["session_id" : result.session_id ?? 0,
                                                     "message" : result.message ?? "",
-                                                    "user" : result.user_send ,
+                                                    "user" : result.user_send ?? "",
                                                     "wherefrom" : "WEB",
                                                     "uuid" : result.uuid.uuidString,
                                                     "message_id" : self.currenChat.session_id]

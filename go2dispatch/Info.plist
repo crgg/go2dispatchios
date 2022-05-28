@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Please allow to record audio</string>
-	<key>NSCameraUsageDescription</key>
-	<string>This app requires to access your photo library  or camera to show image on profile and send via chat</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -24,6 +20,21 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires to access your photo library  or camera to show image on profile and send via chat</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>this app uses your Microphone to allow Voice over IP communication with the Program Admin system</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>this app uses your Microphone to allow Voice over IP communication with the Program Admin system</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>this app uses your Microphone to allow Voice over IP communication with the Program Admin system</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Please allow to record audio</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -50,16 +61,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>this app uses your Microphone to allow Voice over IP communication with the Program Admin system</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>this app uses your Microphone to allow Voice over IP communication with the Program Admin system</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>this app uses your Microphone to allow Voice over IP communication with the Program Admin system</string>
 </dict>
 </plist>

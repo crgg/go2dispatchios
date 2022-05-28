@@ -1,88 +1,86 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Alamofire",
-        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
-        "state": {
-          "branch": "master",
-          "revision": "f82c23a8a7ef8dc1a49a8bfc6a96883e79121864",
-          "version": null
-        }
-      },
-      {
-        "package": "iPhoneNumberField",
-        "repositoryURL": "https://github.com/MojtabaHs/iPhoneNumberField.git",
-        "state": {
-          "branch": null,
-          "revision": "a6b5fcc6c9b085285932fe4fe754086ab92409cb",
-          "version": "0.6.1"
-        }
-      },
-      {
-        "package": "Kingfisher",
-        "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
-        "state": {
-          "branch": null,
-          "revision": "d06df9adf50ed8cde5786d935836a5f445f780ba",
-          "version": "6.3.1"
-        }
-      },
-      {
-        "package": "PhoneNumberKit",
-        "repositoryURL": "https://github.com/marmelroy/PhoneNumberKit",
-        "state": {
-          "branch": null,
-          "revision": "1ef0431b971f69c48ca5eb4cdba07f2c5da54c35",
-          "version": "3.3.3"
-        }
-      },
-      {
-        "package": "SDWebImage",
-        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
-        "state": {
-          "branch": null,
-          "revision": "a72df4849408da7e5d3c1b586797b7c601c41d1b",
-          "version": "5.12.1"
-        }
-      },
-      {
-        "package": "SocketIO",
-        "repositoryURL": "https://github.com/socketio/socket.io-client-swift.git",
-        "state": {
-          "branch": null,
-          "revision": "36db2ff0ebc7239187f9b382fd318e122da71caa",
-          "version": "15.2.0"
-        }
-      },
-      {
-        "package": "Starscream",
-        "repositoryURL": "https://github.com/daltoniam/Starscream",
-        "state": {
-          "branch": null,
-          "revision": "e6b65c6d9077ea48b4a7bdda8994a1d3c6969c8d",
-          "version": "3.1.1"
-        }
-      },
-      {
-        "package": "swift-nio-zlib-support",
-        "repositoryURL": "https://github.com/apple/swift-nio-zlib-support.git",
-        "state": {
-          "branch": null,
-          "revision": "37760e9a52030bb9011972c5213c3350fa9d41fd",
-          "version": "1.0.0"
-        }
-      },
-      {
-        "package": "SwiftLocation",
-        "repositoryURL": "https://github.com/malcommac/SwiftLocation.git",
-        "state": {
-          "branch": null,
-          "revision": "f8ec8e97095eb3a5312370ad94b921768217625f",
-          "version": "5.1.0"
-        }
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "8a9e280b160bbe82b725596d5934572be17389fe"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "iphonenumberfield",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MojtabaHs/iPhoneNumberField.git",
+      "state" : {
+        "revision" : "a6b5fcc6c9b085285932fe4fe754086ab92409cb",
+        "version" : "0.6.1"
+      }
+    },
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
+      "state" : {
+        "revision" : "d06df9adf50ed8cde5786d935836a5f445f780ba",
+        "version" : "6.3.1"
+      }
+    },
+    {
+      "identity" : "phonenumberkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/marmelroy/PhoneNumberKit",
+      "state" : {
+        "revision" : "d4c094934237b23344cf948dd999c431feb8da06",
+        "version" : "3.4.1"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "2e63d0061da449ad0ed130768d05dceb1496de44",
+        "version" : "5.12.5"
+      }
+    },
+    {
+      "identity" : "socket.io-client-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/socketio/socket.io-client-swift.git",
+      "state" : {
+        "revision" : "36db2ff0ebc7239187f9b382fd318e122da71caa",
+        "version" : "15.2.0"
+      }
+    },
+    {
+      "identity" : "starscream",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/daltoniam/Starscream",
+      "state" : {
+        "revision" : "e6b65c6d9077ea48b4a7bdda8994a1d3c6969c8d",
+        "version" : "3.1.1"
+      }
+    },
+    {
+      "identity" : "swift-nio-zlib-support",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-nio-zlib-support.git",
+      "state" : {
+        "revision" : "37760e9a52030bb9011972c5213c3350fa9d41fd",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "swiftlocation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/malcommac/SwiftLocation.git",
+      "state" : {
+        "revision" : "f8ec8e97095eb3a5312370ad94b921768217625f",
+        "version" : "5.1.0"
+      }
+    }
+  ],
+  "version" : 2
 }
