@@ -9,17 +9,34 @@ import Foundation
 import Combine
 import SwiftUI
 
+
+enum TypeDeassign {
+    
+    case trailer(trip: TripList)
+    case driver(trip : TripList)
+    case truck(trip : TripList)
+    case equip(trip : TripList)
+    
+}
+
 class TripListViewModel : ObservableObject {
     @Published var tripsList = [TripList]()
     private var cancellables = Set<AnyCancellable>()
     @Published var currentFotos : [fotos] = []
     @Published var currentFreight : Freight =  TripList.sampleTrips[0].freights[0]
+    @Published var typeDeassign : TypeDeassign?
+    
     private let tripServices  = TripServices()
     
     init() {
         
         addObservable()
         tripServices.get("NLTERM")
+    }
+    
+    public func updateTrip(trip: TripList) {
+        let t = tripsList.map{ $0.trip_number == trip.trip_number ? trip : $0   }
+        self.tripsList = t
     }
     
     private func addObservable() {
@@ -73,6 +90,37 @@ class TripListViewModel : ObservableObject {
     
     func getTrips()  {
         tripsList = TripList.sampleTrips
+    }
+    
+    func deassign() {
+        switch self.typeDeassign {
+        case .trailer(trip: let trip1):
+            print("deassign trailer")
+        case .none:
+            print("none")
+        case .some(.driver(trip: let trip)):
+            print("deassing driver")
+        case .some(.truck(trip: let trip)):
+            print("deassing truck")
+        case .some(.equip(trip: let trip)):
+            print("deassing equip")
+        }
+        
+    }
+    
+    func deassignType() -> String {
+        switch self.typeDeassign {
+        case .trailer(trip: let trip):
+            return "Trailer \(trip.trailer_id ?? "") of \(String(trip.trip_number))"
+        case .none:
+            return ""
+        case .some(.driver(trip: let trip)):
+            return "Driver \(trip.driver_id ?? "")"
+        case .some(.truck(trip: let trip)):
+            return "Truck \(trip.trailer_id ?? "")"
+        case .some(.equip(trip: _)):
+            return "equip"
+        }
     }
     
     

@@ -20,7 +20,7 @@ struct Trip_ListView: View {
     @State var ShowMenuAction2 : Bool = false
     @State var openNewFreight : Bool = false
     
-    
+    @State  var isDeassign : Bool = false
     
     @State var selectTab : String = "YOUR"
     
@@ -75,6 +75,7 @@ struct Trip_ListView: View {
                             ]
                         )
                     }
+                 
                     
                     
                     
@@ -82,7 +83,7 @@ struct Trip_ListView: View {
                         
                         ForEach (viewmodel.getSortedFiltered(query: query)) { trip in
                         
-                        TripRow(trip: trip, showFreights : $showFreights)
+                            TripRow(trip: trip, showFreights : $showFreights, isDeassign: $isDeassign)
                             .environmentObject(viewmodel)
                             .listRowInsets(EdgeInsets())
  
@@ -92,10 +93,22 @@ struct Trip_ListView: View {
                 }.listStyle(PlainListStyle())
                     
             
-        }  .fullScreenCover(isPresented: $openNewFreight) {
-            NewFreightView(freight: TripList.sampleTrips[0].freights[0])
         }
-          
+                
+                .fullScreenCover(isPresented: $openNewFreight) {
+            NewFreightView(freight: TripList.sampleTrips[0].freights[0])
+        }   .alert(isPresented: $isDeassign) {
+            Alert(
+                title: Text("Deassign \(viewmodel.deassignType())"),
+                message: Text("Do you want Deassign"),
+                primaryButton: .destructive(Text("Deassign")) {
+                    viewmodel.deassign()
+                    
+                } ,
+                secondaryButton: .cancel()
+            )
+
+        }
                 
                 .onAppear {
             
@@ -107,8 +120,8 @@ struct Trip_ListView: View {
         }
         
     
-    }
-     
+            }
+        
 
 }
     

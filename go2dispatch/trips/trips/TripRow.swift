@@ -20,12 +20,13 @@ struct TripRow: View {
     @State private var ShowMenuAction = false
     
     @State private var openDriver = false
+    @State private var openTrailerSelected = false
     
     @State private var openFreightAssign = false
     
     @Binding  var showFreights : Bool
-    
-    
+    @Binding  var isDeassign : Bool  
+ 
     @State var openFreight = false
     var body: some View {
         ZStack {
@@ -79,10 +80,16 @@ struct TripRow: View {
                                                 
                                             },
                                     .default(Text(optionMenuAction(texto:
-                                                                    "Assign Trailer", value: trip.trailer_id ?? ""))
+                                                                    "\(trip.trailer_id != nil ? "Deassign" : "Assign") Trailer", value: trip.trailer_id ?? ""))
                                         .foregroundColor(.green)
                                             ) {
-                                                
+                                                if trip.trailer_id != nil {
+                                                    viewModel.typeDeassign = .trailer(trip: trip)
+                                                    self.isDeassign.toggle()
+//                                                    return
+                                                } else {
+                                                    openTrailerSelected.toggle()
+                                                }
                                             },
                                     .destructive(Text("Cancel")) {
                                         
@@ -90,8 +97,10 @@ struct TripRow: View {
                                 ]
                             )
                         }
-                    }.foregroundColor(.white)
 
+                    }
+                    .foregroundColor(.white)
+                     
                         
 //                        .confirmationDialog("Trip # \(trip.TRIP_NUMBER)", isPresented: $ShowMenuAction, titleVisibility: .visible) {
 //
@@ -193,6 +202,9 @@ struct TripRow: View {
                 
             }.padding(.horizontal, 5)
                 .padding(.vertical,5)
+                
+
+                
                
         }
         .fullScreenCover(isPresented: $openDriver) {
@@ -201,10 +213,14 @@ struct TripRow: View {
         .fullScreenCover(isPresented: $openFreightAssign) {
             BillNumberView(trip: trip)
         }
+        .fullScreenCover(isPresented: $openTrailerSelected) {
+            TrailersView(trip: trip).environmentObject(viewModel)
+        }
 
             
     }
     
+ 
     private func optionMenuAction (texto : String, value : String)-> String{
         
         if value.isEmpty {
@@ -227,7 +243,7 @@ struct TripRow: View {
 struct TripRow_Previews: PreviewProvider {
     static var previews: some View {
         TripRow(trip: TripList.sampleTrips[0],
-                showFreights: .constant(false)   )
+                showFreights: .constant(false), isDeassign: .constant(false)   )
                .environmentObject(TripListViewModel())
     }
     

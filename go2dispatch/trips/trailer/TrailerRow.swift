@@ -18,7 +18,7 @@ import SwiftUI
 
 struct TrailerRow: View {
     
-    var trip : TripList
+    var trailer : TrailerModel
     @EnvironmentObject var viewModel : TrailerViewModel
     let widthIcon : CGFloat = 20
     let heightIcon : CGFloat = 15
@@ -33,7 +33,7 @@ struct TrailerRow: View {
                 HStack (spacing: 2) {
                     VStack {
                         
-                        Text(String(trip.trip_number))
+                        Text(String(trailer.trailerID))
                             .padding(.vertical, 2)
                             .padding(.horizontal, 5)
                             .foregroundColor(colorFont)
@@ -41,10 +41,10 @@ struct TrailerRow: View {
                             .font(.title2)
                     }
                     Spacer()
-                    standarView(texto: trip.status, colorFont: colorFont, titulo: "class", align: .trailing)
+                    standarView(texto: trailer.datumCLASS ?? "", colorFont: colorFont, titulo: "class", align: .trailing)
 
                     Spacer()
-                    standarView(texto: trip.status, colorFont: colorFont, titulo: "Status", align: .trailing)
+                    standarView(texto: trailer.status , colorFont: colorFont, titulo: "Status", align: .trailing)
                     
                     Spacer()
          
@@ -57,12 +57,12 @@ struct TrailerRow: View {
                 
                 HStack {
    
-                    standarView(texto: trip.current_zone_desc ?? "" , colorFont: colorFont, titulo: "📍", align: .leading)
+                    standarView(texto: trailer.currentZoneDesc ?? "" , colorFont: colorFont, titulo: "📍", align: .leading)
                      
                     Spacer()
-                    standarView(texto: "NLTER", colorFont: colorFont, titulo: "Zone", align: .trailing)
+                    standarView(texto: trailer.zone ?? "", colorFont: colorFont, titulo: "Zone", align: .trailing)
                     Spacer()
-                    standarView(texto: "742025", colorFont: colorFont, titulo: "C.Trip", align: .trailing)
+                    standarView(texto: trailer.currentTrip ?? "", colorFont: colorFont, titulo: "C.Trip", align: .trailing)
           
 
       
@@ -108,8 +108,8 @@ struct TrailerRow: View {
 
 struct TrailerRow_Previews: PreviewProvider {
     static var previews: some View {
-        TrailerRow(trip: TripList.sampleTrips[0])
+        TrailerRow(trailer: TrailerModel.sampleTrailer[0])
                .environmentObject(TripListViewModel())
     }
-    
+
 }

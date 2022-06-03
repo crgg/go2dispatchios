@@ -65,8 +65,10 @@ class ApiConfig {
     // trailer
     public static let TRAILER_LIST = "\(URL_PROD)trailers_active_list"
     
-    public static let RETURN_SEARCH_LIST =  "\(URL_PROD)return_customers"
     
+    
+    public static let RETURN_SEARCH_LIST =  "\(URL_PROD)return_customers"
+    public static let ASSIGN_TRAILER =  "\(URL_PROD)atach_trailer_to_trip"
     
     static let headers : HTTPHeaders =   [ "Authorization" : "Bearer \(UserDefaults.standard.getApiToken() ?? "")",
                          "Content-Type" : "application/json",
